@@ -31,6 +31,7 @@ var env = process.env.NODE_ENV || 'development';
 module.exports = function (app, passport) {
 
   // Compression middleware (should be placed before express.static)
+  // Compress the files by gzip - by applesstt
   app.use(compression({
     threshold: 512
   }));
@@ -44,6 +45,9 @@ module.exports = function (app, passport) {
     log = {
       stream: {
         write: function (message, encoding) {
+          // winston is a node log frameset, by nodejitsu.
+          // the same frameset like Bunyan
+          // by applesstt
           winston.info(message);
         }
       }
@@ -54,6 +58,7 @@ module.exports = function (app, passport) {
 
   // Don't log during tests
   // Logging middleware
+  // morgan is a logger frameset - by applesstt
   if (env !== 'test') app.use(morgan(log));
 
   // Swig templating engine settings
@@ -78,6 +83,9 @@ module.exports = function (app, passport) {
   // bodyParser should be above methodOverride
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
+
+  // multer for set and check the type or size of the upload file
+  // - by applesstt
   app.use(multer());
   app.use(methodOverride(function (req, res) {
     if (req.body && typeof req.body === 'object' && '_method' in req.body) {

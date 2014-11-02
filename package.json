@@ -1,6 +1,6 @@
 {
-  "name": "nodejs-express-mongoose-demo",
-  "description": "A demo app illustrating the usage of express, mongoose, passportjs, swig and other modules in nodejs",
+  "name": "desk",
+  "description": "desk",
   "keywords": [
     "express",
     "mongoose",
@@ -10,10 +10,10 @@
   ],
   "version": "4.0.0",
   "private": false,
-  "author": "Madhusudhan Srinivasa <madhums8@gmail.com> (http://madhums.github.com)",
+  "author": "Applesstt <applesstt@gmail.com> (https://github.com/applesstt)",
   "repository": {
     "type": "git",
-    "url": "https://github.com/madhums/node-express-mongoose-demo.git"
+    "url": "https://github.com/applesstt/desk.git"
   },
   "engines": {
     "node": "0.11.13"
