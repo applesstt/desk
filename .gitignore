@@ -1,4 +1,7 @@
-node_modules
-dist
-public/lib
+node_modules/
+.monitor
+config/env/env.json
+Makefile
+.DS_Store
+public/lib/
 .idea/
