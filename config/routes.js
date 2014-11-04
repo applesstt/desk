@@ -117,6 +117,8 @@ module.exports = function (app, passport) {
   app.use(function (err, req, res, next) {
     // treat as 404
     if (err.message
+      // ~(-1) = 0; // ~(-1) === -(-1) - 1
+      // - by applesstt
       && (~err.message.indexOf('not found')
       || (~err.message.indexOf('Cast to ObjectId failed')))) {
       return next();
