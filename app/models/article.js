@@ -140,6 +140,8 @@ ArticleSchema.methods = {
    */
 
   removeComment: function (commentId, cb) {
+    // mongoose will set _id to subArrays, you can set as id and get by _id
+    // - by applesstt
     var index = utils.indexof(this.comments, { id: commentId });
     if (~index) this.comments.splice(index, 1);
     else return cb('not found');
