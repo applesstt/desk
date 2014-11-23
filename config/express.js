@@ -19,7 +19,9 @@ var mongoStore = require('connect-mongo')(session);
 var flash = require('connect-flash');
 var winston = require('winston');
 var helpers = require('view-helpers');
+var connectAssets = require('connect-assets');
 var config = require('config');
+var path = require('path');
 var pkg = require('../package.json');
 
 var env = process.env.NODE_ENV || 'development';
@@ -69,9 +71,12 @@ module.exports = function (app, passport) {
   }
 
   // set views path, template engine and default layout
-  app.engine('html', swig.renderFile);
+  //app.engine('html', swig.renderFile);
   app.set('views', config.root + '/app/views');
-  app.set('view engine', 'html');
+  app.set('view engine', 'jade');
+  app.use(connectAssets({
+    paths: [path.join(config.root + '/public')]
+  }));
 
   // expose package.json to views
   app.use(function (req, res, next) {
