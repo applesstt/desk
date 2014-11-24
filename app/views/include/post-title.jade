@@ -1,11 +1,11 @@
 - var titleEncode = encodeURIComponent(article.title)
 h1
-  a.pjax-main.post-title(href='/u/#{article.name}/#{article.createAt}/#{titleEncode}') #{article.title}
+  a.pjax-main.post-title(href='/u/#{article.user.name}/#{titleEncode}') #{article.title}
 .row
   .col-md-6.text-left.post-short-info
-    a(href='/u/#{article.name}')
-      img.avatar-min(src='/avatar/#{article.name}')
-      |  #{article.name}
+    a(href='/u/#{article.user.name}')
+      img.avatar-min(src='/avatar/#{article.user.name}')
+      |  #{article.user.name}
     - if(article.filter)
       include filters
       - each filter in filters
@@ -14,13 +14,13 @@ h1
     span.label.label-danger 炫富大赛
   time.col-md-6.text-right.text-muted.post-time
     .glyphicon.glyphicon-time
-    |  #{article.createAt}
-- if(user && user.name == article.name)
+    |  #{article.createdAt}
+- if(user && user.name == article.user.name)
   .post-btns
-    a(href='/edit/#{article.name}/#{article.createAt}/#{titleEncode}')
+    a(href='/edit/#{article.user.name}/#{titleEncode}')
       span.glyphicon.glyphicon-edit
       |  编辑
     |&nbsp;&nbsp;
-    a(href='/remove/#{article.name}/#{article.createAt}/#{titleEncode}')
+    a(href='/remove/#{article.user.name}/#{titleEncode}')
       span.glyphicon.glyphicon-trash
       |  删除
