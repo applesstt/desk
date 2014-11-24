@@ -1,0 +1,8 @@
+.text-center
+  ul.pager
+    - if(!isFirst)
+      li.previous
+        a(href = '?page=#{page - 1}') ← 上一页
+    - if(!isLast)
+      li.next
+        a(href = '?page=#{page + 1}') 下一页 →

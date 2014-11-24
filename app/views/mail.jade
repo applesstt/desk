@@ -1,0 +1,12 @@
+extends layout/layout
+
+block content
+  h1= title
+  form(method = 'post', enctype = 'multipart/form-data')
+    div 发送到：
+      input(name = 'toMail')
+    div 标题：
+      input(name = 'title')
+    div 邮件内容：
+      textarea(name = 'text')
+    input(type = 'submit') 发送邮件

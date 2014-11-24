@@ -1,0 +1,15 @@
+- if(typeof post.comments !== 'undefined' && post.comments.length > 0)
+  .panel
+    - for(var i = 0; i < post.comments.length; i++)
+      .panel-body
+        p
+          a(href = '#{post.comments[i]["website"]}')= post.comments[i]['name']
+        p #{post.comments[i]['content']}
+- if(user)
+  form(method = 'post', enctype = 'multipart/form-data')
+    input(name = 'name', id='user-name', value = '#{user.name}', type = 'hidden')
+    input(name = 'email', id='user-email', value = '#{user.email}', type = 'hidden')
+    .form-group
+      textarea.form-control(name = 'content', placeholder='评论')
+    .form-group
+      input.btn.btn-primary(type = 'submit', value = '发布')

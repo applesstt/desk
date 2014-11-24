@@ -1,7 +1,7 @@
-extends ../layouts/default
+extends ../layout/layout-base
 
-block content
-  p #{title}
+block content-main
+  include ../include/posts
 //
   {% block main %}
     <h1>{{ title }}</h1>

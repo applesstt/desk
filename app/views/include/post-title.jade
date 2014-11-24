@@ -1,0 +1,26 @@
+- var titleEncode = encodeURIComponent(article.title)
+h1
+  a.pjax-main.post-title(href='/u/#{article.name}/#{article.createAt}/#{titleEncode}') #{article.title}
+.row
+  .col-md-6.text-left.post-short-info
+    a(href='/u/#{article.name}')
+      img.avatar-min(src='/avatar/#{article.name}')
+      |  #{article.name}
+    - if(article.filter)
+      include filters
+      - each filter in filters
+        - if(filter.key == article.filter)
+          a.label.label-success(href='/?filter=#{article.filter}') #{filter.name}
+    span.label.label-danger 炫富大赛
+  time.col-md-6.text-right.text-muted.post-time
+    .glyphicon.glyphicon-time
+    |  #{article.createAt}
+- if(user && user.name == article.name)
+  .post-btns
+    a(href='/edit/#{article.name}/#{article.createAt}/#{titleEncode}')
+      span.glyphicon.glyphicon-edit
+      |  编辑
+    |&nbsp;&nbsp;
+    a(href='/remove/#{article.name}/#{article.createAt}/#{titleEncode}')
+      span.glyphicon.glyphicon-trash
+      |  删除

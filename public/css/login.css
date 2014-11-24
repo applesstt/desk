@@ -1,0 +1,11 @@
+#main {
+  width: inherit;
+  background-color: #160625;
+}
+.login-form {
+  padding-top: 30px;
+}
+.login-form p,
+.login-form h3 {
+  margin-bottom: 30px;
+}

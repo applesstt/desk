@@ -1,0 +1,67 @@
+body {
+  background: #36424e url(../img/demo1/bg.png) repeat 0 0;
+}
+header {
+  background-color: #dcb788;
+  height: 50px;
+  margin-bottom: 20px;
+}
+.logo {
+  float: left;
+  font-size: 32px;
+  line-height: 50px;
+  color: #ffffff;
+  font-weight: bold;
+}
+.account-box {
+  float: right;
+}
+.account-box a {
+  display: block;
+  float: left;
+  line-height: 50px;
+  margin-left: 10px;
+  color: #ffffff;
+}
+.main, .nav {
+  border: 3px solid #dcb788;
+  border-radius: 5px;
+  background-color: #ffffff;
+  padding: 15px;
+}
+.content {
+
+}
+.content-info {}
+.user-image {}
+.content-title {}
+.send-time {
+  color: #666666;
+}
+
+.content-item-list {}
+.content-item {
+  margin-top: 20px;
+}
+.content-item p {
+  font-size: 16px;
+}
+.content-item img {
+  display: block;
+  margin-top: 20px;
+  max-width: 100%;
+}
+
+.good-image {
+  width: 310px;
+  max-width: 100%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.good-link {
+  font-size: 16px;
+  margin-top: 10px;
+  display: block;
+}

@@ -1,0 +1,26 @@
+#wysihtml5-editor-toolbar
+  header
+    ul.commands
+      - each command in [{command:'bold'},{command:'italic'},{command:'insertUnorderedList'},{command:'insertOrderedList'},{command:'createLink'},{command:'insertImage'},{command:'formatBlock',value:'h1'},{command:'formatBlock',value:'h2'}]
+        - if(command.value)
+          li.command(data-wysihtml5-command=command.command,data-wysihtml5-command-value=command.value)
+        - else
+          li.command(data-wysihtml5-command=command.command)
+      li.action(data-wysihtml5-action = 'change_view')
+  .bg-info(data-wysihtml5-dialog = 'createLink', style = 'display: none;')
+    label
+      input.form-control(data-wysihtml5-dialog-field = 'href', value = 'http://')
+    a.btn.btn-success.btn-xs(data-wysihtml5-dialog-action = 'save') 确定
+    a.btn.btn-default.btn-xs(data-wysihtml5-dialog-action = 'cancel') 取消
+  #insertImage.bg-info.row(data-wysihtml5-dialog = 'insertImage', style = 'display: none;')
+    .col-md-3
+      .upload-image-wrap
+        a.upload-image-btn.btn.btn-primary 上传本地图片
+        input#upload-image(name='upload-image', type='file', value='上传图片')
+    .col-md-9
+      label
+        input#image_path.form-control(data-wysihtml5-dialog-field = 'src', value = 'http://')
+      a#insertImageSave.btn.btn-success.btn-xs(data-wysihtml5-dialog-action = 'save') 确定
+      a.btn.btn-default.btn-xs(data-wysihtml5-dialog-action = 'cancel') 取消
+  section
+    textarea(id = 'wysihtml5-editor', name = 'post', spellcheck = 'false', wrap = 'off', placeholder = '写内容...') #{post.post}

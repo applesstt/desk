@@ -1,0 +1,17 @@
+extends ../layout/layout
+
+block css_content
+  link(rel='stylesheet', href='/css/admin.css')
+
+block content
+  .users-box
+    table.table
+      thead
+        tr
+          th 姓名
+          th 邮箱
+      tbody
+        - each userItem in users
+          tr
+            td #{userItem.name}
+            td #{userItem.email}

@@ -1,0 +1,128 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    title= title
+    link(rel='stylesheet', media='screen', href='http://cdn.staticfile.org/twitter-bootstrap/3.1.1/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/css/bootstrap-apl.css')
+    //put other css files in css_content
+    block css_content
+  body
+    nav.navbar.navbar-default.navbar-apl(role='navigation')
+      .container
+        .navbar-header
+          button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-ex1-collapse')
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a#logo.navbar-brand(href='/')
+            span 败
+            | 家党
+        .collapse.navbar-collapse.navbar-ex1-collapse
+          ul.nav.navbar-nav.navbar-right.navbar-nav-apl
+            include ../include/filters
+            - each filterItem in filters
+              - var selLi = filterItem.key == filter ? 'active' : ''
+              li(class=selLi)
+                a(href='/?filter=#{filterItem.key}')
+                  .glyphicon(class=filterItem.icon)
+                  |  #{filterItem.name}
+            - var starSel = (filter && filter == 'star') ? 'active' : ''
+            li(class=starSel)
+              a(href='/star')
+                .glyphicon.glyphicon-user
+                |  败家之星
+            if user
+              li
+                a(href='/post')
+                  .glyphicon.glyphicon-plus
+                  |  分享
+              li
+                a.navbar-nav-user(href='/u/#{user.name}', title='#{user.name}')
+                  .avatar-min-wrap
+                    img.avatar-min(src='/avatar/#{user.name}')
+                    //.user-msg-alert 1
+              li
+                a.tooltip-link(href='/person', data-toggle='tooltip',data-placement='bottom',title='设置')
+                  .glyphicon.glyphicon-cog
+              li
+                a.tooltip-link(href='/logout', data-toggle='tooltip',data-placement='bottom',title='退出'):.glyphicon.glyphicon-log-out
+            else
+              li
+                a(href='/login', data-toggle='tooltip',data-placement='bottom')
+                  .glyphicon.glyphicon-log-out
+                  |  登录
+              //li
+                a(href='/reg') 注册
+    .subheader
+      .container.clearfix
+        .inspired
+          .glyphicon.glyphicon-leaf
+          |  Embrace and Drive Change
+        .search-box
+          script.
+            var search = function() {
+              s = document.getElementById('searchbox');
+              if (s.value != "") {
+                window.open('http://www.google.com/search?q=site:applesstt.com%20' + s.value, "_blank");
+              }
+              return false;
+            }
+          form(onsubmit='return search()')
+            button.search-btn(type='submit')
+              .glyphicon.glyphicon-search
+            input#searchbox.search-field(type='text', placeholder='Search')
+    - if((success && success.length > 0) || (error && error.length > 0))
+      .container.alert.alert-success.alert-dismissable.top-alert
+        button.close(data-dismiss="alert",aria-hidden="true") ×
+        | #{(success && success.length > 0) ? success : error}
+
+    #main.container
+      block content
+
+    footer.footer-apl
+      .footer-about
+        .container
+          .row
+            .col-md-4
+              h3
+                .glyphicon.glyphicon-headphones
+                |  About
+              .footer-text [败家党]是由一群热爱生活的人组成的社区，希望我们分享的用品能够丰富生活乐趣、增加你的幸福感。目前网站不开放注册，有兴趣一同参与网站内容建设，请邮件联系，我会在第一时间回复你。 -- applesstt
+              .footer-email applesstt@gmail.com
+      .inspired
+        .container
+          .glyphicon.glyphicon-heart
+          |  Inspired by
+          a.footer-power(href='http://github.com/applesstt') applesstt
+    script(src='http://cdn.staticfile.org/jquery/1.11.0/jquery.min.js')
+    script(src='http://cdn.staticfile.org/twitter-bootstrap/3.1.1/js/bootstrap.min.js')
+    script(src='http://cdn.staticfile.org/jquery.pjax/1.8.0/jquery.pjax.min.js')
+    script(src='/js/common.js')
+    script.
+      $(function() {
+        // error: $('a.pjax').pjax('#main', {fragment:'#main'})
+        //$(document).pjax('a.pjax-main', '#main', {fragment: '#main'});
+        $(document).pjax('a.pjax-main', '#main', {fragment: '#main'});
+      });
+    //put other js files in js_content
+    block js_content
+    - if(env !== 'development')
+      script.
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-49935671-1']);
+      if user
+        input#analytics-user-id(type='hidden', value='#{user.name}')
+        script.
+          var analyticsUserId = $('#analytics-user-id').val();
+          _gaq.push(['_setCustomVar', 1, 'UserId', analyticsUserId, 2]);
+      script.
+        _gaq.push(['_trackPageview']);
+        (function() {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
