@@ -32,7 +32,7 @@ exports.create = function (req, res) {
   user.provider = 'local';
   user.save(function (err) {
     if (err) {
-      return res.render('users/signup', {
+      return res.render('signup', {
         error: utils.errors(err.errors),
         user: user,
         title: 'Sign up'
@@ -82,7 +82,7 @@ exports.login = function (req, res) {
  */
 
 exports.signup = function (req, res) {
-  res.render('users/signup', {
+  res.render('signup', {
     title: 'Sign up'
   });
 };
