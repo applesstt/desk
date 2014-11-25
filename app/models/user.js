@@ -20,7 +20,7 @@ var oAuthTypes = [
  */
 
 var UserSchema = new Schema({
-  username: { type: String, default: '' },
+  name: { type: String, default: '' },
   email: { type: String, default: '' },
   provider: { type: String, default: '' },
   hashed_password: { type: String, default: '' },
@@ -56,9 +56,9 @@ var validatePresenceOf = function (value) {
 
 // the below 5 validations only apply if you are signing up traditionally
 
-UserSchema.path('username').validate(function (username) {
+UserSchema.path('name').validate(function (name) {
   if (this.skipValidation()) return true;
-  return username.length;
+  return name.length;
 }, 'Name cannot be blank');
 
 UserSchema.path('email').validate(function (email) {
@@ -172,7 +172,7 @@ UserSchema.statics = {
    */
 
   load: function (options, cb) {
-    options.select = options.select || 'username email';
+    options.select = options.select || 'name email';
     this.findOne(options.criteria)
       .select(options.select)
       .exec(cb);
