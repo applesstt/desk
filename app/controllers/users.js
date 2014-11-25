@@ -72,7 +72,7 @@ exports.authCallback = login;
  */
 
 exports.login = function (req, res) {
-  res.render('users/login', {
+  res.render('login', {
     title: 'Login'
   });
 };
@@ -83,8 +83,7 @@ exports.login = function (req, res) {
 
 exports.signup = function (req, res) {
   res.render('users/signup', {
-    title: 'Sign up',
-    user: new User()
+    title: 'Sign up'
   });
 };
 

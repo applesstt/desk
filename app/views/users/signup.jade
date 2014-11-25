@@ -1,14 +1,15 @@
-extends layout/layout
+extends ../layout/layout
 
 block content
-  form.col-md-4.col-md-offset-4(method = 'post')
+  form.col-md-4.col-md-offset-4(method = 'post', action = '/users')
+    input(type = 'hidden', name = '_csrf', value = '#{csrf_token}')
+    p
+      input.form-control(name = 'email', placeholder='请输入邮箱')
     p
       input.form-control(name = 'name', placeholder='请输入用户名')
     p
       input.form-control(type = 'password', name = 'password', placeholder='请输入密码')
     p
       input.form-control(type = 'password', name = 'repeat_password', placeholder='再次输入密码')
-    p
-      input.form-control(name = 'email', placeholder='请输入邮箱')
     p
       button.btn.btn-lg.btn-success.btn-block(type = 'submit') 注册

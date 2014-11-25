@@ -22,7 +22,6 @@ var oAuthTypes = [
 var UserSchema = new Schema({
   name: { type: String, default: '' },
   email: { type: String, default: '' },
-  username: { type: String, default: '' },
   provider: { type: String, default: '' },
   hashed_password: { type: String, default: '' },
   salt: { type: String, default: '' },
@@ -79,10 +78,6 @@ UserSchema.path('email').validate(function (email, fn) {
   } else fn(true);
 }, 'Email already exists');
 
-UserSchema.path('username').validate(function (username) {
-  if (this.skipValidation()) return true;
-  return username.length;
-}, 'Username cannot be blank');
 
 UserSchema.path('hashed_password').validate(function (hashed_password) {
   if (this.skipValidation()) return true;
@@ -177,7 +172,7 @@ UserSchema.statics = {
    */
 
   load: function (options, cb) {
-    options.select = options.select || 'name username';
+    options.select = options.select || 'name';
     this.findOne(options.criteria)
       .select(options.select)
       .exec(cb);
