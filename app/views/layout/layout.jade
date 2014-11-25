@@ -35,15 +35,15 @@ html
               a(href='/star')
                 .glyphicon.glyphicon-user
                 |  败家之星
-            if user
+            if req.isAuthenticated()
               li
-                a(href='/post')
+                a(href='/articles/new')
                   .glyphicon.glyphicon-plus
                   |  分享
               li
-                a.navbar-nav-user(href='/u/#{user.name}', title='#{user.name}')
+                a.navbar-nav-user(href='/u/#{req.user.name}', title='#{req.user.name}')
                   .avatar-min-wrap
-                    img.avatar-min(src='/avatar/#{user.name}')
+                    img.avatar-min(src='/avatar/#{req.user.name}')
                     //.user-msg-alert 1
               li
                 a.tooltip-link(href='/person', data-toggle='tooltip',data-placement='bottom',title='设置')
