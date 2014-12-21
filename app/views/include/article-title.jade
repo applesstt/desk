@@ -14,7 +14,7 @@ h1
     span.label.label-danger 炫富大赛
   time.col-md-6.text-right.text-muted.post-time
     .glyphicon.glyphicon-time
-    |  #{article.createdAt}
+    |  #{article.fromNow}
 - if(user && user.name == article.user.name)
   .post-btns
     a(href='/edit/#{article.user.name}/#{titleEncode}')

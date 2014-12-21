@@ -50,6 +50,13 @@ var ArticleSchema = new Schema({
 });
 
 /**
+ * virtual
+ */
+ArticleSchema.virtual('fromNow').get(function() {
+  return utils.fromNow(this.createdAt);
+});
+
+/**
  * Validations
  */
 
