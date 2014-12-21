@@ -38,7 +38,8 @@ module.exports = function (app, passport) {
       failureRedirect: '/login',
       failureFlash: 'Invalid email or password.'
     }), users.session);
-  app.get('/users/:userId', users.show);
+  app.get('/users/:userName', users.show);
+
   app.get('/auth/facebook',
     passport.authenticate('facebook', {
       scope: [ 'email', 'user_about_me'],
@@ -88,7 +89,7 @@ module.exports = function (app, passport) {
       failureRedirect: '/login'
     }), users.authCallback);
 
-  app.param('userId', users.load);
+  app.param('userName', users.load);
 
   // article routes
   app.param('id', articles.load);

@@ -1,7 +1,7 @@
 .aside-avatar
   include user-avatar
 .aside-user-info-box
-  a.aside-user-info(href='javascript:{}')
+  a.aside-user-info(href='/users/#{author.name}')
     .glyphicon.glyphicon-user
     |  #{author.name}
   - if(author.city && author.city !== '')
@@ -12,7 +12,7 @@
     .glyphicon.glyphicon-envelope
     |  #{author.email}
   - if(author.website && author.website !== '')
-    a.aside-user-info(href='javascript:{}')
+    a.aside-user-info(href='/users/#{author.name}')
       .glyphicon.glyphicon-link
       |  #{author.website}
   - if(author.des && author.des !== '')

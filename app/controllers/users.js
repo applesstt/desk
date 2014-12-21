@@ -5,6 +5,7 @@
 
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
+var Article = mongoose.model('Article');
 var utils = require('../../lib/utils');
 var config = require('../../config/config');
 var send = require('send');
@@ -13,13 +14,13 @@ var send = require('send');
  * Load
  */
 
-exports.load = function (req, res, next, id) {
+exports.load = function (req, res, next, name) {
   var options = {
-    criteria: { _id : id }
+    criteria: { name : name }
   };
   User.load(options, function (err, user) {
     if (err) return next(err);
-    if (!user) return next(new Error('Failed to load User ' + id));
+    if (!user) return next(new Error('Failed to load User ' + name));
     req.profile = user;
     next();
   });
@@ -55,9 +56,25 @@ exports.create = function (req, res) {
 
 exports.show = function (req, res) {
   var user = req.profile;
-  res.render('users/show', {
-    title: user.name,
-    user: user
+  var page = (req.param('page') > 0 ? req.param('page') : 1) - 1;
+  var perPage = 30;
+  var options = {
+    perPage: perPage,
+    page: page,
+    'user.name': user.name
+  };
+
+  Article.list(options, function (err, articles) {
+    if (err) return res.render('500');
+    Article.count().exec(function (err, count) {
+      res.render('user', {
+        title: user.name,
+        author: user,
+        articles: articles,
+        page: page + 1,
+        pages: Math.ceil(count / perPage)
+      });
+    });
   });
 };
 
