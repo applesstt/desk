@@ -9,6 +9,7 @@ var config = require('config');
 
 var imagerConfig = require(config.root + '/config/imager.js');
 var utils = require('../../lib/utils');
+var jsdom = require('jsdom');
 
 var Schema = mongoose.Schema;
 
@@ -54,6 +55,21 @@ var ArticleSchema = new Schema({
  */
 ArticleSchema.virtual('fromNow').get(function() {
   return utils.fromNow(this.createdAt);
+});
+
+
+ArticleSchema.virtual('brief').set(function() {
+  jsdom.env(
+    this.body,
+    [utils.root + "/public/lib/jquery/dist/jquery.min.js"],
+    function (errors, window) {
+      if(errors) {
+        return callback(errors);
+      }
+      this.brief.img = window.$('img').attr('src');
+      this.brief.text = window.$(window.document).text();
+    }
+  )
 });
 
 /**

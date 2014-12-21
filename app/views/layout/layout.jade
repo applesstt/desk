@@ -43,10 +43,10 @@ html
                     .glyphicon.glyphicon-plus
                     |  分享
                 li
-                  a.navbar-nav-user(href='/u/#{req.user.name}', title='#{req.user.name}')
+                  a.navbar-nav-user(href='/users/#{req.user.name}', title='#{req.user.name}')
                     .avatar-min-wrap
                       img.avatar-min(src='/avatar/#{req.user.name}')
-                      //.user-msg-alert 1
+                      .user-msg-alert 1
                 li
                   a.tooltip-link(href='/person', data-toggle='tooltip',data-placement='bottom',title='设置')
                     .glyphicon.glyphicon-cog

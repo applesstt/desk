@@ -14,13 +14,13 @@ var send = require('send');
  * Load
  */
 
-exports.load = function (req, res, next, name) {
+exports.load = function (req, res, next, userName) {
   var options = {
-    criteria: { name : name }
+    criteria: { name : userName }
   };
   User.load(options, function (err, user) {
     if (err) return next(err);
-    if (!user) return next(new Error('Failed to load User ' + name));
+    if (!user) return next(new Error('Failed to load User ' + userName));
     req.profile = user;
     next();
   });
