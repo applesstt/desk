@@ -1,6 +1,6 @@
 extends ../layout/layout-person
 
-block css_content
+append css_content
   link(rel='stylesheet', href='/vendor/Jcrop/css/jquery.Jcrop.css')
 block content-main
   form#upload-form.form-horizontal(role='form', method='post', enctype='multipart/form-data')
@@ -36,7 +36,7 @@ block content-main
       input#person-des.form-control(name='des', value='#{user.des}', placeholder='一句话介绍')
     .form-group
       button.btn.btn-success(type='submit') 保存
-block js_content
+append js_content
   script(src='/vendor/ajaxForm/jquery.form.js')
   script(src='/vendor/Jcrop/js/jquery.Jcrop.js')
   script(src='/js/personSet.js')

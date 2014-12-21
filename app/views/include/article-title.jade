@@ -16,7 +16,7 @@ header
     time.col-md-6.text-right.text-muted.post-time
       .glyphicon.glyphicon-time
       |  #{article.fromNow}
-  - if(user && user.name == article.user.name)
+  - if(req.isAuthenticated() && user.name == article.user.name)
     .post-btns
       a(href='/edit/#{article.user.name}/#{titleEncode}')
         span.glyphicon.glyphicon-edit
