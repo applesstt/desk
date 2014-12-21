@@ -6,6 +6,8 @@
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
 var utils = require('../../lib/utils');
+var config = require('../../config/config');
+var send = require('send');
 
 /**
  * Load
@@ -57,6 +59,18 @@ exports.show = function (req, res) {
     title: user.name,
     user: user
   });
+};
+
+/**
+ * Show avatar
+ */
+exports.avatar = function(req, res) {
+  var _defaultAvatar = config.root + '/public/img/default_avatar.png';
+  send(req, config.root + '/public/avatar/' + req.params.name + '.png')
+    .on('error', function() {
+      send(req, _defaultAvatar).pipe(res);
+    })
+    .pipe(res);
 };
 
 exports.signin = function (req, res) {};
