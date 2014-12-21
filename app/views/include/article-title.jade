@@ -1,26 +1,27 @@
 - var titleEncode = encodeURIComponent(article.title)
-h1
-  a.pjax-main.post-title(href='/u/#{article.user.name}/#{titleEncode}') #{article.title}
-.row
-  .col-md-6.text-left.post-short-info
-    a(href='/u/#{article.user.name}')
-      img.avatar-min(src='/avatar/#{article.user.name}')
-      |  #{article.user.name}
-    - if(article.filter)
-      include filters
-      - each filter in filters
-        - if(filter.key == article.filter)
-          a.label.label-success(href='/?filter=#{article.filter}') #{filter.name}
-    span.label.label-danger 炫富大赛
-  time.col-md-6.text-right.text-muted.post-time
-    .glyphicon.glyphicon-time
-    |  #{article.fromNow}
-- if(user && user.name == article.user.name)
-  .post-btns
-    a(href='/edit/#{article.user.name}/#{titleEncode}')
-      span.glyphicon.glyphicon-edit
-      |  编辑
-    |&nbsp;&nbsp;
-    a(href='/remove/#{article.user.name}/#{titleEncode}')
-      span.glyphicon.glyphicon-trash
-      |  删除
+header
+  h1
+    a.pjax-main.post-title(href='/u/#{article.user.name}/#{titleEncode}') #{article.title}
+  .row
+    .col-md-6.text-left.post-short-info
+      a(href='/u/#{article.user.name}')
+        img.avatar-min(src='/avatar/#{article.user.name}')
+        |  #{article.user.name}
+      - if(article.filter)
+        include filters
+        - each filter in filters
+          - if(filter.key == article.filter)
+            a.label.label-success(href='/?filter=#{article.filter}') #{filter.name}
+      span.label.label-danger 炫富大赛
+    time.col-md-6.text-right.text-muted.post-time
+      .glyphicon.glyphicon-time
+      |  #{article.fromNow}
+  - if(user && user.name == article.user.name)
+    .post-btns
+      a(href='/edit/#{article.user.name}/#{titleEncode}')
+        span.glyphicon.glyphicon-edit
+        |  编辑
+      |&nbsp;&nbsp;
+      a(href='/remove/#{article.user.name}/#{titleEncode}')
+        span.glyphicon.glyphicon-trash
+        |  删除
