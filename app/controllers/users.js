@@ -61,9 +61,10 @@ exports.show = function (req, res) {
   var options = {
     perPage: perPage,
     page: page,
-    'user.name': user.name
+    criteria: {
+      user: user._id
+    }
   };
-
   Article.list(options, function (err, articles) {
     if (err) return res.render('500');
     Article.count().exec(function (err, count) {

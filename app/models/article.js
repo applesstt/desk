@@ -203,9 +203,8 @@ ArticleSchema.statics = {
 
   list: function (options, cb) {
     var criteria = options.criteria || {}
-
     this.find(criteria)
-      .populate('user', 'name username')
+      .populate('user', 'name')
       .sort({'createdAt': -1}) // sort by date
       .limit(options.perPage)
       .skip(options.perPage * options.page)
