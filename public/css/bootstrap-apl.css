@@ -518,3 +518,36 @@ a.post-buy {
   margin-right: auto;
   display: block;
 }
+
+@media screen and (max-width: 460px) {
+  #logo, #logo span {
+    font-size: 16px;
+    height: auto;
+    line-height: 50px;
+    padding-left: 10px;
+    color: #eeeeee;
+  }
+  #logo span {
+    width: auto;
+    position: static;
+    background-color: inherit;
+    -ms-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  .navbar-apl {
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+  .inspired {
+    display: none;
+  }
+  .search-box {
+    float: left;
+  }
+  #main {
+    padding-top: 0;
+  }
+}
