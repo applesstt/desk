@@ -76,12 +76,13 @@ exports.create = function (req, res) {
   article.save(function(err) {
     if (!err) {
       req.flash('success', 'Successfully created article!');
-      return res.redirect('/articles/'+article._id);
+      return res.redirect('/articles/' + article._id);
     }
     console.log(err);
     res.render('articles/new', {
       title: 'New Article',
       article: article,
+      author: req.user,
       errors: utils.errors(err.errors || err)
     });
   });
@@ -115,24 +116,22 @@ exports.edit = function (req, res) {
  * Update article
  */
 
-exports.update = function (req, res){
+exports.update = function(req, res) {
   var article = req.article;
-  var images = req.files.image
-    ? [req.files.image]
-    : undefined;
 
   // make sure no one changes the user
   delete req.body.user;
-  article = extend(article, req.body);
 
-  article.uploadAndSave(images, function (err) {
+  article = extend(article, req.body);
+  article.save(function(err) {
     if (!err) {
       return res.redirect('/articles/' + article._id);
     }
 
-    res.render('articles/edit', {
+    res.render('articles/new', {
       title: 'Edit Article',
       article: article,
+      author: req.user,
       errors: utils.errors(err.errors || err)
     });
   });

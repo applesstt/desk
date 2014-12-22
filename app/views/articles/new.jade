@@ -5,6 +5,8 @@ block content-main
   - var action = isNew ? '/articles' : '/articles/' + article._id
   form#post-form(role='form', method='post', action=action, enctype='multipart/form-data')
     input(type='hidden', name='_csrf', value='#{csrf_token}')
+    - if(!isNew)
+      input(type='hidden', name='_method',value='put')
     .bs-callout.bs-callout-danger
       h4 炫富大赛
     .form-group

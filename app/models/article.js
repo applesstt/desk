@@ -84,6 +84,26 @@ ArticleSchema.path('title').required(true, 'Article title cannot be blank');
 ArticleSchema.path('body').required(true, 'Article body cannot be blank');
 
 /**
+ * Pre-save hook
+ */
+ArticleSchema.pre('save', function(next) {
+  var self = this;
+  jsdom.env(
+    self.body,
+    [config.root + "/public/lib/jquery/dist/jquery.min.js"],
+    function(errors, window) {
+      if(errors) {
+        return next(errors);
+      }
+      self.brief.img = window.$('img').attr('src');
+      self.brief.text = window.$(window.document).text();
+      console.log('Success filter img and text on brief!');
+      next();
+    }
+  );
+});
+
+/**
  * Pre-remove hook
  */
 
