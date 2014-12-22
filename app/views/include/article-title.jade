@@ -16,9 +16,9 @@ header
     time.col-md-6.text-right.text-muted.post-time
       .glyphicon.glyphicon-time
       |  #{article.fromNow}
-  - if(req.isAuthenticated() && user && user.name == article.user.name)
+  - if(req.isAuthenticated() && req.user && req.user.name == article.user.name)
     .post-btns
-      a(href='/edit/#{article.user.name}/#{titleEncode}')
+      a(href='/articles/#{article._id}/edit')
         span.glyphicon.glyphicon-edit
         |  编辑
       |&nbsp;&nbsp;

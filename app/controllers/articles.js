@@ -104,9 +104,10 @@ exports.create = function (req, res) {
  */
 
 exports.edit = function (req, res) {
-  res.render('articles/edit', {
+  res.render('articles/new', {
     title: 'Edit ' + req.article.title,
-    article: req.article
+    article: req.article,
+    author: req.user
   });
 };
 
