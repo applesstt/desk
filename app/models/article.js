@@ -43,6 +43,10 @@ var ArticleSchema = new Schema({
     createdAt: { type : Date, default : Date.now }
   }],
   tags: {type: [], get: getTags, set: setTags},
+  brief: {
+    img: {type: String, default: '', trim: true},
+    text: {type: String, default: '', trim: true}
+  },
   image: {
     cdnUri: String,
     files: []
@@ -58,7 +62,7 @@ ArticleSchema.virtual('fromNow').get(function() {
 });
 
 
-ArticleSchema.virtual('brief').set(function() {
+/*ArticleSchema.virtual('brief').set(function() {
   jsdom.env(
     this.body,
     [utils.root + "/public/lib/jquery/dist/jquery.min.js"],
@@ -70,7 +74,7 @@ ArticleSchema.virtual('brief').set(function() {
       this.brief.text = window.$(window.document).text();
     }
   )
-});
+});*/
 
 /**
  * Validations

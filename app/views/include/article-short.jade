@@ -1,7 +1,7 @@
 include article-title
 .post-short
   .post-short-right
-    - if(typeof article.brief.img !== 'undefined' && article.brief.img !== '')
+    - if(typeof article.brief !== 'undefined' && typeof article.brief.img !== 'undefined' && article.brief.img !== '')
       img(src='#{article.brief.img}')
     a.post-buy.text-muted(href='javascript:{}')
       span.glyphicon.glyphicon-shopping-cart
