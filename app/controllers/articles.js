@@ -68,12 +68,12 @@ exports.new = function (req, res){
 
 exports.create = function (req, res) {
   var article = new Article(req.body);
-  var images = req.files.image
+  /*var images = req.files.image
     ? [req.files.image]
-    : undefined;
+    : undefined;*/
 
   article.user = req.user;
-  article.uploadAndSave(images, function (err) {
+  article.save(function(err) {
     if (!err) {
       req.flash('success', 'Successfully created article!');
       return res.redirect('/articles/'+article._id);
@@ -85,6 +85,18 @@ exports.create = function (req, res) {
       errors: utils.errors(err.errors || err)
     });
   });
+  /*article.uploadAndSave(images, function (err) {
+    if (!err) {
+      req.flash('success', 'Successfully created article!');
+      return res.redirect('/articles/'+article._id);
+    }
+    console.log(err);
+    res.render('articles/new', {
+      title: 'New Article',
+      article: article,
+      errors: utils.errors(err.errors || err)
+    });
+  })*/;
 };
 
 /**
