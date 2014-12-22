@@ -1,7 +1,7 @@
 - var titleEncode = encodeURIComponent(article.title)
 header
   h1
-    a.pjax-main.post-title(href='/users/#{article.user.name}/#{titleEncode}') #{article.title}
+    a.pjax-main.post-title(href='/articles/#{article._id}') #{article.title}
   .row
     .col-md-6.text-left.post-short-info
       a(href='/users/#{article.user.name}')

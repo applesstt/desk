@@ -128,9 +128,10 @@ exports.update = function (req, res){
  */
 
 exports.show = function (req, res){
-  res.render('articles/show', {
+  res.render('article', {
     title: req.article.title,
-    article: req.article
+    article: req.article,
+    author: req.article.user
   });
 };
 
