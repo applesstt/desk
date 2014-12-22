@@ -2,28 +2,3 @@ extends ../layout/layout-base
 
 block content-main
   include ../include/articles
-//
-  {% block main %}
-    <h1>{{ title }}</h1>
-  {% endblock %}
-
-  {% block content %}
-    {% if (articles.length) %}
-      {% for article in articles %}
-        {% include 'article.html' %}
-      {% endfor %}
-
-      {% if (pages > 1) %}
-        <ul class="pagination">
-          {% autoescape false %}
-            {{ createPagination(pages, page) }}
-          {% endautoescape %}
-        </ul>
-      {% endif %}
-    {% else %}
-      <h4 class="muted">
-        No articles.&nbsp;
-        <a href="/articles/new">create one</a>
-      </h4>
-    {% endif %}
-  {% endblock %}

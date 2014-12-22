@@ -55,7 +55,9 @@ exports.index = function (req, res){
 exports.new = function (req, res){
   res.render('articles/new', {
     title: 'New Article',
-    article: new Article({})
+    article: new Article({}),
+    author: req.user,
+    isNew: true
   });
 };
 
@@ -128,7 +130,7 @@ exports.update = function (req, res){
  */
 
 exports.show = function (req, res){
-  res.render('article', {
+  res.render('articles/article', {
     title: req.article.title,
     article: req.article,
     author: req.article.user
