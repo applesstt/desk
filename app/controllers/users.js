@@ -35,7 +35,7 @@ exports.create = function (req, res) {
   user.provider = 'local';
   user.save(function (err) {
     if (err) {
-      return res.render('signup', {
+      return res.render('user/signup', {
         error: utils.errors(err.errors),
         user: user,
         title: 'Sign up'
@@ -68,7 +68,7 @@ exports.show = function (req, res) {
   Article.list(options, function (err, articles) {
     if (err) return res.render('500');
     Article.count().exec(function (err, count) {
-      res.render('user', {
+      res.render('user/show', {
         title: user.name,
         author: user,
         articles: articles,
@@ -104,7 +104,7 @@ exports.authCallback = login;
  */
 
 exports.login = function (req, res) {
-  res.render('login', {
+  res.render('user/login', {
     title: 'Login'
   });
 };
@@ -114,7 +114,7 @@ exports.login = function (req, res) {
  */
 
 exports.signup = function (req, res) {
-  res.render('signup', {
+  res.render('user/signup', {
     title: 'Sign up'
   });
 };
