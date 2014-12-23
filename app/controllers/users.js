@@ -9,6 +9,7 @@ var Article = mongoose.model('Article');
 var utils = require('../../lib/utils');
 var config = require('../../config/config');
 var send = require('send');
+var extend = require('util')._extend
 
 /**
  * Load
@@ -50,6 +51,21 @@ exports.create = function (req, res) {
   });
 };
 
+exports.update = function(req, res) {
+  var user = req.user;
+
+  // make sure no one changes the user
+  delete req.body.user;
+
+  user = extend(user, req.body);
+  user.save(function(err) {
+    if (!err) {
+      return res.redirect('/users/' + user.name);
+    }
+    res.redirect('/users/' + user.name + '/edit');
+  });
+};
+
 /**
  * to edit user page
  */
@@ -77,7 +93,7 @@ exports.show = function (req, res) {
   Article.list(options, function (err, articles) {
     if (err) return res.render('500');
     Article.count().exec(function (err, count) {
-      res.render('user/show', {
+      res.render('users/show', {
         title: user.name,
         author: user,
         articles: articles,
@@ -113,7 +129,7 @@ exports.authCallback = login;
  */
 
 exports.login = function (req, res) {
-  res.render('user/login', {
+  res.render('users/login', {
     title: 'Login'
   });
 };
@@ -123,7 +139,7 @@ exports.login = function (req, res) {
  */
 
 exports.signup = function (req, res) {
-  res.render('user/signup', {
+  res.render('users/signup', {
     title: 'Sign up'
   });
 };

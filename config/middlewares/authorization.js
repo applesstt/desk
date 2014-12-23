@@ -46,10 +46,10 @@ exports.comment = {
     // if the current user is comment owner or article owner
     // give them authority to delete
     if (req.user.id === req.comment.user.id || req.user.id === req.article.user.id) {
-      next()
+      next();
     } else {
-      req.flash('info', 'You are not authorized')
-      res.redirect('/articles/' + req.article.id)
+      req.flash('info', 'You are not authorized');
+      res.redirect('/articles/' + req.article.id);
     }
   }
-}
+};

@@ -19,6 +19,7 @@ var utils = require('../lib/utils');
 
 var articleAuth = [auth.requiresLogin, auth.article.hasAuthorization];
 var commentAuth = [auth.requiresLogin, auth.comment.hasAuthorization];
+var userAuth = [auth.requiresLogin, auth.user.hasAuthorization];
 
 /**
  * Expose routes
@@ -40,7 +41,10 @@ module.exports = function (app, passport) {
       failureFlash: 'Invalid email or password.'
     }), users.session);
   app.get('/users/:userName', users.show);
-  app.get('/users/:userName/edit', auth.requiresLogin, users.edit);
+
+  app.route('/users/:userName/edit').
+    get(users.edit).
+    put(userAuth, users.update);
 
   app.get('/auth/facebook',
     passport.authenticate('facebook', {
