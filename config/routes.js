@@ -11,6 +11,7 @@ var articles = require('articles');
 var comments = require('comments');
 var tags = require('tags');
 var auth = require('./middlewares/authorization');
+var utils = require('../lib/utils');
 
 /**
  * Route middlewares
@@ -100,6 +101,11 @@ module.exports = function (app, passport) {
   app.get('/articles/:id/edit', articleAuth, articles.edit);
   app.put('/articles/:id', articleAuth, articles.update);
   app.delete('/articles/:id', articleAuth, articles.destroy);
+
+  // upload image
+  app.route('/images').
+    post(auth.requiresLogin, utils.uploadImage).
+    put(auth.requiresLogin, utils.uploadImage);
 
   // home route
   app.get('/', articles.index);

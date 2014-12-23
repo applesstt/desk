@@ -29,8 +29,8 @@ $('.upload-image-btn').click(function() {
 
 $('#upload-image').change(function() {
   $('#post-form').ajaxSubmit({
-    url: '/uploadImage',
-    type: 'POST',
+    url: '/images',
+    type: 'post',
     dataType: 'json',
     success: function(result) {
       if(result) {
