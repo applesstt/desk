@@ -5,6 +5,7 @@ Makefile
 .DS_Store
 npm-debug.log
 public/lib/
+public/avatar/
 public/upload/images/
 app/old-views/
 .idea/

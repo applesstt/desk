@@ -35,9 +35,9 @@ var PersonSet = (function() {
 
   var _initCropImg = function() {
     $('#crop-image').click(function() {
-      $.ajax({
-        url: '/cropImage',
-        type: 'POST',
+      $('#upload-form').ajaxSubmit({
+        url: '/cropUserImage',
+        type: 'post',
         dataType: 'json',
         data: {
           srcImgPath: _srcImgPath,
@@ -45,9 +45,9 @@ var PersonSet = (function() {
           coords: _coords
         },
         success: function(result) {
-          var _avatarPath = 'http://' + location.host + result.base_path + result.image_name;
+          var userAvatar = $('#user-avatar-show').attr('src');
+          $('#user-avatar-show').attr('src', userAvatar + '?r=' + Math.random());
           $('#resize-user-img-dialog').modal('hide');
-          $('#user-avatar-show').attr('src', _avatarPath);
           $('#user-avatar').val(result.base_path + result.image_name);
         }
       })

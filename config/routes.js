@@ -108,6 +108,11 @@ module.exports = function (app, passport) {
     post(auth.requiresLogin, utils.uploadImage).
     put(auth.requiresLogin, utils.uploadImage);
 
+  // crop user image
+  app.route('/cropUserImage').
+    post(auth.requiresLogin, utils.cropUserImage).
+    put(auth.requiresLogin, utils.cropUserImage);
+
   // home route
   app.get('/', articles.index);
 
