@@ -4,11 +4,13 @@ append css_content
   link(rel='stylesheet', href='/vendor/Jcrop/css/jquery.Jcrop.css')
 block content-main
   form#upload-form.form-horizontal(role='form', method='post', enctype='multipart/form-data')
+    input(type='hidden', name='_csrf', value='#{csrf_token}')
+    input(type='hidden', name='_method',value='put')
     .form-group
       input.form-control(disabled=true, value='#{user.name}')
     .form-group
       .edit-user-img
-        img#user-avatar-show.avatar-middle(src='#{user.img}')
+        img#user-avatar-show.avatar-middle(src='/avatar/#{user.name}')
         input#user-avatar(type='hidden', name='img', value='#{user.img}')
         .edit-user-img-btn
           input(type='file', name='upload-image')

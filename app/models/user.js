@@ -23,6 +23,9 @@ var UserSchema = new Schema({
   name: { type: String, default: '' },
   email: { type: String, default: '' },
   provider: { type: String, default: '' },
+  city: { type: String, default: '' },
+  website: { type: String, default: '' },
+  des: { type: String, default: '' },
   hashed_password: { type: String, default: '' },
   salt: { type: String, default: '' },
   authToken: { type: String, default: '' },
@@ -172,7 +175,7 @@ UserSchema.statics = {
    */
 
   load: function (options, cb) {
-    options.select = options.select || 'name email';
+    options.select = options.select || 'name email city website des';
     this.findOne(options.criteria)
       .select(options.select)
       .exec(cb);

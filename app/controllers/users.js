@@ -35,7 +35,7 @@ exports.create = function (req, res) {
   user.provider = 'local';
   user.save(function (err) {
     if (err) {
-      return res.render('user/signup', {
+      return res.render('users/signup', {
         error: utils.errors(err.errors),
         user: user,
         title: 'Sign up'
@@ -47,6 +47,15 @@ exports.create = function (req, res) {
       if (err) return next(err);
       return res.redirect('/');
     });
+  });
+};
+
+/**
+ * to edit user page
+ */
+exports.edit = function(req, res) {
+  res.render('users/edit', {
+    user: req.profile
   });
 };
 

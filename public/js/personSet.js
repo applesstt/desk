@@ -12,8 +12,8 @@ var PersonSet = (function() {
     });
     $('.edit-user-img-btn input').change(function() {
       $('#upload-form').ajaxSubmit({
-        url: '/uploadImage',
-        type: 'POST',
+        url: '/images',
+        type: 'post',
         dataType: 'json',
         success: function(result) {
           if(result) {
