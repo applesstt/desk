@@ -18,10 +18,6 @@ header
       |  #{article.fromNow}
   - if(req.isAuthenticated() && req.user && req.user.name == article.user.name)
     .post-btns
-      a(href='/articles/#{article._id}/edit')
+      a.btn.btn-primary(href='/articles/#{article._id}/edit')
         span.glyphicon.glyphicon-edit
         |  编辑
-      |&nbsp;&nbsp;
-      a(href='/remove/#{article.user.name}/#{titleEncode}')
-        span.glyphicon.glyphicon-trash
-        |  删除

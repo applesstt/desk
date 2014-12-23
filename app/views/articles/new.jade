@@ -21,7 +21,15 @@ block content-main
     .form-group
       include ../include/post-wysihtml5
     .text-left
-      input#post-submit.btn.btn-success.btn-lg(type='submit', value='分享')
+      input#post-submit.btn.btn-primary.btn-lg(type='submit', value='发布这篇文章')
+      | &nbsp;&nbsp;
+      a.btn.btn-info.btn-lg(href='/articles') 取消
+  - if(!isNew)
+    p
+      form(role='form', method='post', action=action)
+        input(type='hidden', name='_csrf', value='#{csrf_token}')
+        input(type='hidden', name='_method',value='delete')
+        input.btn.btn-danger.btn-lg(type='submit', value='删除这个内容，请谨慎操作！')
 append js_content
   script(src='/vendor/wysihtml5/parser_rules/advanced.js')
   script(src='/vendor/wysihtml5/dist/wysihtml5-0.3.0.js')
