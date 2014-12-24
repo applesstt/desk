@@ -1,0 +1,71 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    title= title
+    link(rel='stylesheet', media='screen', href='http://cdn.staticfile.org/twitter-bootstrap/3.1.1/css/bootstrap.min.css')
+    //put other css files in css_content
+    block css_content
+  body
+    header
+      nav.navbar.navbar-default(role='navigation')
+        .container
+          .navbar-header
+            button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-ex1-collapse')
+              span.sr-only Toggle navigation
+              span.icon-bar
+              span.icon-bar
+              span.icon-bar
+            a.navbar-brand(href='/') 败家党
+          .collapse.navbar-collapse
+            ul.nav.navbar-nav.navbar-right
+              include ../include/filters
+              li
+                a(href='/star')
+                  .glyphicon.glyphicon-user
+                  |  败家之星
+              li
+                a(href='/articles/new')
+                  .glyphicon.glyphicon-plus
+                  |  分享
+              li
+                a.navbar-nav-user(href='/users/#{req.user.name}', title='#{req.user.name}') apple
+              li
+                a(href='/users/#{req.user.name}/edit', data-toggle='tooltip',data-placement='bottom',title='设置')
+                  .glyphicon.glyphicon-cog
+              li
+                a(href='/logout', data-toggle='tooltip',data-placement='bottom',title='退出'):.glyphicon.glyphicon-log-out
+      .container.clearfix
+        .glyphicon.glyphicon-leaf
+          |  Embrace and Drive Change
+        form(onsubmit='return search()')
+          button(type='submit')
+            .glyphicon.glyphicon-search
+          input.search-field(type='text', placeholder='Search')
+    - if((success && success.length > 0) || (error && error.length > 0))
+      .container.alert.alert-success.alert-dismissable
+        button.close(data-dismiss="alert",aria-hidden="true") ×
+        | #{(success && success.length > 0) ? success : error}
+
+    #main.container
+      block content
+
+    footer
+      aside
+        .container
+          .row
+            .col-md-4
+              h3
+                .glyphicon.glyphicon-headphones
+                |  About
+              h4 [败家党]是由一群热爱生活的人组成的社区，希望我们分享的用品能够丰富生活乐趣、增加你的幸福感。目前网站不开放注册，有兴趣一同参与网站内容建设，请邮件联系，我会在第一时间回复你。 -- applesstt
+              h4 applesstt@gmail.com
+      aside
+        .container
+          .glyphicon.glyphicon-heart
+          |  Inspired by
+          a(href='http://github.com/applesstt') applesstt
+    script(src='http://cdn.staticfile.org/jquery/1.11.0/jquery.min.js')
+    script(src='http://cdn.staticfile.org/twitter-bootstrap/3.1.1/js/bootstrap.min.js')
