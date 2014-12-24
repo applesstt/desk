@@ -125,6 +125,15 @@ exports.signin = function (req, res) {};
 exports.authCallback = login;
 
 /**
+ * demo page
+ */
+exports.demo = function(req, res) {
+  res.render('demo/index', {
+    title: 'demo'
+  });
+};
+
+/**
  * Show login form
  */
 
