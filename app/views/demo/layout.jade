@@ -6,66 +6,74 @@ html
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     title= title
     link(rel='stylesheet', media='screen', href='http://cdn.staticfile.org/twitter-bootstrap/3.1.1/css/bootstrap.min.css')
+    link(rel='stylesheet', media='screen', href='/css/bootstrap-desk.css')
+    //[if lt IE 9]>
+      <script src='http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js'></script>
+      <script src='http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js'></script><![endif]
     //put other css files in css_content
     block css_content
   body
-    header
-      nav.navbar.navbar-default(role='navigation')
-        .container
-          .navbar-header
-            button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-ex1-collapse')
-              span.sr-only Toggle navigation
-              span.icon-bar
-              span.icon-bar
-              span.icon-bar
-            a.navbar-brand(href='/') 败家党
-          .collapse.navbar-collapse
-            ul.nav.navbar-nav.navbar-right
-              include ../include/filters
-              li
-                a(href='/star')
-                  .glyphicon.glyphicon-user
-                  |  败家之星
-              li
-                a(href='/articles/new')
-                  .glyphicon.glyphicon-plus
-                  |  分享
-              li
-                a.navbar-nav-user(href='/users/#{req.user.name}', title='#{req.user.name}') apple
-              li
-                a(href='/users/#{req.user.name}/edit', data-toggle='tooltip',data-placement='bottom',title='设置')
-                  .glyphicon.glyphicon-cog
-              li
-                a(href='/logout', data-toggle='tooltip',data-placement='bottom',title='退出'):.glyphicon.glyphicon-log-out
-      .container.clearfix
-        .glyphicon.glyphicon-leaf
-          |  Embrace and Drive Change
-        form(onsubmit='return search()')
-          button(type='submit')
-            .glyphicon.glyphicon-search
-          input.search-field(type='text', placeholder='Search')
-    - if((success && success.length > 0) || (error && error.length > 0))
-      .container.alert.alert-success.alert-dismissable
-        button.close(data-dismiss="alert",aria-hidden="true") ×
-        | #{(success && success.length > 0) ? success : error}
+    header.navbar.navbar-inverse.navbar-fixed-top(role='navigation')
+      .container
+        .navbar-header
+          button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand.hidden-sm(href='/') 桌边兽
+        nav.collapse.navbar-collapse
+          ul.nav.navbar-nav
+            li
+              a(href='/star')
+                .glyphicon.glyphicon-user
+                |  败家之星
+            li
+              a(href='/articles/new')
+                .glyphicon.glyphicon-plus
+                |  分享
+          ul.nav.navbar-nav.navbar-right.hidden-em
+            li
+              .search-box
+                script.
+                  var search = function() {
+                    s = document.getElementById('s');
+                    if (s.value != "") {
+                      window.open('http://www.google.com/search?q=site:applesstt.com%20' + s.value, "_blank");
+                    }
+                    return false;
+                  }
+                form.search-form(onsubmit='return search();')
+                  input#s.search-field(type='text', placeholder='Search')
+                  button.search-btn(type='submit')
+                    .glyphicon.glyphicon-search
+            li
+              a(href='/users/#{req.user.name}', title='#{req.user.name}')
+                .avatar-min-wrap
+                  img.avatar-min(src='/avatar/#{req.user.name}')
+            li
+              a(href='/users/#{req.user.name}/edit', data-toggle='tooltip',data-placement='bottom',title='设置')
+                .glyphicon.glyphicon-cog
+            li
+              a(href='/logout', data-toggle='tooltip',data-placement='bottom',title='退出'):.glyphicon.glyphicon-log-out
 
     #main.container
       block content
 
     footer
-      aside
+      aside.footer-about
         .container
           .row
             .col-md-4
               h3
                 .glyphicon.glyphicon-headphones
                 |  About
-              h4 [败家党]是由一群热爱生活的人组成的社区，希望我们分享的用品能够丰富生活乐趣、增加你的幸福感。目前网站不开放注册，有兴趣一同参与网站内容建设，请邮件联系，我会在第一时间回复你。 -- applesstt
-              h4 applesstt@gmail.com
-      aside
+              .footer-text [败家党]是由一群热爱生活的人组成的社区，希望我们分享的用品能够丰富生活乐趣、增加你的幸福感。目前网站不开放注册，有兴趣一同参与网站内容建设，请邮件联系，我会在第一时间回复你。 -- applesstt
+              .footer-email applesstt@gmail.com
+      aside.footer-inspired
         .container
           .glyphicon.glyphicon-heart
           |  Inspired by
-          a(href='http://github.com/applesstt') applesstt
+          a.footer-power(href='http://github.com/applesstt') applesstt
     script(src='http://cdn.staticfile.org/jquery/1.11.0/jquery.min.js')
     script(src='http://cdn.staticfile.org/twitter-bootstrap/3.1.1/js/bootstrap.min.js')
