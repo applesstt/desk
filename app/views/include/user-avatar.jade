@@ -1,3 +1,4 @@
+- author = !author ? req.user : author
 a.circle-img(href='/users/#{author.name}')
   .img.circle-img-show
     img.avatar-max(src="/avatar/#{author.name}")
