@@ -34,7 +34,7 @@ html
                 .glyphicon.glyphicon-plus
                 |  分享
           ul.nav.navbar-nav.navbar-right.hidden-em
-            li
+            li.search-box-wrap
               .search-box
                 script.
                   var search = function() {
@@ -49,11 +49,11 @@ html
                   button.search-btn(type='submit')
                     .glyphicon.glyphicon-search
             li
-              a(href='/users/#{req.user.name}', title='#{req.user.name}')
+              a(href='/users/applesstt', title='applesstt')
                 .avatar-min-wrap
-                  img.avatar-min(src='/avatar/#{req.user.name}')
+                  img.avatar-min(src='/avatar/applesstt')
             li
-              a(href='/users/#{req.user.name}/edit', data-toggle='tooltip',data-placement='bottom',title='设置')
+              a(href='/users/applesstt/edit', data-toggle='tooltip',data-placement='bottom',title='设置')
                 .glyphicon.glyphicon-cog
             li
               a(href='/logout', data-toggle='tooltip',data-placement='bottom',title='退出'):.glyphicon.glyphicon-log-out

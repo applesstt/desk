@@ -61,6 +61,14 @@ header {
   margin-top: 4px;
   margin-bottom: 4px;
 }
+.nav>li.search-box-wrap {
+  display: none;
+}
+@media screen and (min-width: 768px) {
+  .nav>li.search-box-wrap {
+    display: block;
+  }
+}
 .search-box {
   padding-top: 7px;
   margin-right: 15px;
@@ -77,6 +85,7 @@ header {
   padding: 0 0 0 7px;
   border: 0;
   background: transparent;
+  display: inline-block;
 }
 .search-field:focus {
   outline: none;
@@ -87,6 +96,7 @@ header {
   border-left: 1px solid #ddd;
   color: #888;
   width: 27px;
+  display: inline-block;
 }
 .avatar-min-wrap {
   position: relative;
