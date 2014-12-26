@@ -34,7 +34,7 @@ $('#upload-image').change(function() {
     dataType: 'json',
     success: function(result) {
       if(result) {
-        var imagePath580 = 'http://' + location.host + result.base_path + '580_' + result.image;
+        var imagePath580 = 'http://' + location.host + result.base_path + result.image + '.580.png'
         $('#image_path').val(imagePath580);
         editor.currentView.element.focus();
         editor.composer.commands.state('insertImage');
