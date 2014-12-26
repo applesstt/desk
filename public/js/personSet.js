@@ -3,7 +3,7 @@ var PersonSet = (function() {
   var _coords = '', _srcImgPath = '', _srcImgName = '';
 
   var _setCoords = function(c) {
-    _coords = c.w + 'x' + c.h + '+' + c.x + '+' + c.y;
+    _coords = [c.w, c.h, c.x, c.y];
   }
 
   var _initUploadImg = function() {
@@ -17,7 +17,7 @@ var PersonSet = (function() {
         dataType: 'json',
         success: function(result) {
           if(result) {
-            _srcImgName = '200_' + result.image;
+            _srcImgName = result.image + '.200.png';
             _srcImgPath = result.base_path;
             var imagePath200 = 'http://' + location.host + _srcImgPath + _srcImgName;
             $('#image-200').attr('src', imagePath200).Jcrop({
