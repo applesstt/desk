@@ -95,7 +95,16 @@ ArticleSchema.pre('save', function(next) {
       if(errors) {
         return next(errors);
       }
-      self.brief.img = window.$('img').attr('src');
+      var imgPath = '';
+      window.$('img').each(function(index, img) {
+        var src = window.$(img).attr('src');
+        var lastStr = '.580.png';
+        if(src.lastIndexOf(lastStr) === (src.length - lastStr.length)) {
+          imgPath = src;
+          return false;
+        }
+      });
+      self.brief.img = imgPath;
       self.brief.text = window.$(window.document).text();
       console.log('Success filter img and text on brief!');
       next();
