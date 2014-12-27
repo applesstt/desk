@@ -4,8 +4,8 @@ header
     a.pjax-main.post-title(href='/articles/#{article._id}') #{article.title}
   .row
     .col-md-6.text-left.post-short-info
-      a(href='/users/#{article.user.name}')
-        img.avatar-min(src='/avatar/#{article.user.name}')
+      a(href='/users/#{article.user.email}')
+        img.avatar-min(src='/avatar/#{article.user.email}')
         |  #{article.user.name}
       - if(article.filter)
         include filters

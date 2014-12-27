@@ -15,9 +15,9 @@ var extend = require('util')._extend
  * Load
  */
 
-exports.load = function (req, res, next, userName) {
+exports.load = function (req, res, next, userEmail) {
   var options = {
-    criteria: { name : userName }
+    criteria: { email : userEmail }
   };
   User.load(options, function (err, user) {
     if (err) return next(err);
@@ -60,9 +60,9 @@ exports.update = function(req, res) {
   user = extend(user, req.body);
   user.save(function(err) {
     if (!err) {
-      return res.redirect('/users/' + user.name);
+      return res.redirect('/users/' + user.email);
     }
-    res.redirect('/users/' + user.name + '/edit');
+    res.redirect('/users/' + user.email + '/edit');
   });
 };
 
@@ -109,7 +109,7 @@ exports.show = function (req, res) {
  */
 exports.avatar = function(req, res) {
   var _defaultAvatar = config.root + '/public/img/default_avatar.png';
-  send(req, config.root + '/public/avatar/' + req.params.name + '.png')
+  send(req, config.root + '/public/avatar/' + req.params.email + '.png')
     .on('error', function() {
       send(req, _defaultAvatar).pipe(res);
     })

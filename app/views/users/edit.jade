@@ -10,7 +10,7 @@ block content-main
       input.form-control(disabled=true, value='#{user.name}')
     .form-group
       .edit-user-img
-        img#user-avatar-show.avatar-middle(src='/avatar/#{user.name}')
+        img#user-avatar-show.avatar-middle(src='/avatar/#{user.email}')
         input#user-avatar(type='hidden', name='img', value='#{user.img}')
         .edit-user-img-btn
           input(type='file', name='upload-image')

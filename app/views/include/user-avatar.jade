@@ -1,6 +1,6 @@
 - author = !author ? req.user : author
-a.circle-img(href='/users/#{author.name}')
+a.circle-img(href='/users/#{author.email}')
   .img.circle-img-show
-    img.avatar-max(src="/avatar/#{author.name}")
+    img.avatar-max(src="/avatar/#{author.email}")
   .circle-img-info
     .circle-img-info-text #{author.name}

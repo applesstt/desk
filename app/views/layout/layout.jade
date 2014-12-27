@@ -43,12 +43,12 @@ html
                     .glyphicon.glyphicon-plus
                     |  分享
                 li
-                  a.navbar-nav-user(href='/users/#{req.user.name}', title='#{req.user.name}')
+                  a.navbar-nav-user(href='/users/#{req.user.email}', title='#{req.user.name}')
                     .avatar-min-wrap
-                      img.avatar-min(src='/avatar/#{req.user.name}')
+                      img.avatar-min(src='/avatar/#{req.user.email}')
                       .user-msg-alert 1
                 li
-                  a.tooltip-link(href='/users/#{req.user.name}/edit', data-toggle='tooltip',data-placement='bottom',title='设置')
+                  a.tooltip-link(href='/users/#{req.user.email}/edit', data-toggle='tooltip',data-placement='bottom',title='设置')
                     .glyphicon.glyphicon-cog
                 li
                   a.tooltip-link(href='/logout', data-toggle='tooltip',data-placement='bottom',title='退出'):.glyphicon.glyphicon-log-out

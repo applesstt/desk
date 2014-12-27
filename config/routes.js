@@ -35,7 +35,7 @@ module.exports = function (app, passport) {
   // demo
   app.get('/demo', users.demo);
 
-  app.get('/avatar/:name', users.avatar);
+  app.get('/avatar/:email', users.avatar);
 
   app.post('/users', users.create);
   app.post('/users/session',
@@ -43,9 +43,9 @@ module.exports = function (app, passport) {
       failureRedirect: '/login',
       failureFlash: 'Invalid email or password.'
     }), users.session);
-  app.get('/users/:userName', users.show);
+  app.get('/users/:userEmail', users.show);
 
-  app.route('/users/:userName/edit').
+  app.route('/users/:userEmail/edit').
     get(users.edit).
     put(userAuth, users.update);
 
@@ -98,7 +98,7 @@ module.exports = function (app, passport) {
       failureRedirect: '/login'
     }), users.authCallback);
 
-  app.param('userName', users.load);
+  app.param('userEmail', users.load);
 
   // article routes
   app.param('id', articles.load);
