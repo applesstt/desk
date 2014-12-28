@@ -62,48 +62,8 @@ exports.new = function (req, res){
 };
 
 /**
- * Create an article
- * Upload an image
- */
-
-exports.create = function (req, res) {
-  var article = new Article(req.body);
-  /*var images = req.files.image
-    ? [req.files.image]
-    : undefined;*/
-
-  article.user = req.user;
-  article.save(function(err) {
-    if (!err) {
-      req.flash('success', 'Successfully created article!');
-      return res.redirect('/articles/' + article._id);
-    }
-    console.log(err);
-    res.render('articles/new', {
-      title: 'New Article',
-      article: article,
-      author: req.user,
-      errors: utils.errors(err.errors || err)
-    });
-  });
-  /*article.uploadAndSave(images, function (err) {
-    if (!err) {
-      req.flash('success', 'Successfully created article!');
-      return res.redirect('/articles/'+article._id);
-    }
-    console.log(err);
-    res.render('articles/new', {
-      title: 'New Article',
-      article: article,
-      errors: utils.errors(err.errors || err)
-    });
-  })*/;
-};
-
-/**
  * Edit an article
  */
-
 exports.edit = function (req, res) {
   res.render('articles/new', {
     title: 'Edit ' + req.article.title,
@@ -112,10 +72,40 @@ exports.edit = function (req, res) {
   });
 };
 
+var _validateAndSave = function(req, res, article, callback) {
+  article.validate(function(err) {
+    if(err) {
+      return callback(err);
+    }
+    article.save(function(err) {
+      if(err) {
+        return callback(err);
+      }
+      callback();
+    });
+  })
+};
+
+/**
+ * Create an article
+ */
+exports.create = function (req, res) {
+  var article = new Article(req.body);
+
+  article.user = req.user;
+
+  _validateAndSave(req, res, article, function(err) {
+    if(err) {
+      req.flash('error', err);
+      return res.redirect('/articles/new');
+    }
+    return res.redirect('/articles/' + article._id);
+  });
+};
+
 /**
  * Update article
  */
-
 exports.update = function(req, res) {
   var article = req.article;
 
@@ -123,18 +113,15 @@ exports.update = function(req, res) {
   delete req.body.user;
 
   article = extend(article, req.body);
-  article.save(function(err) {
-    if (!err) {
-      return res.redirect('/articles/' + article._id);
-    }
 
-    res.render('articles/new', {
-      title: 'Edit Article',
-      article: article,
-      author: req.user,
-      errors: utils.errors(err.errors || err)
-    });
+  _validateAndSave(req, res, article, function(err) {
+    if(err) {
+      req.flash('error', err);
+      return res.redirect('/articles/' + article._id + '/edit');
+    }
+    return res.redirect('/articles/' + article._id);
   });
+
 };
 
 /**
@@ -157,6 +144,6 @@ exports.destroy = function (req, res){
   var article = req.article;
   article.remove(function (err){
     req.flash('info', 'Deleted successfully');
-    res.redirect('/articles');
+    res.redirect('/users/' + req.user.email);
   });
 };

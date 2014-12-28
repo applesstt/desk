@@ -8,13 +8,12 @@ block content-main
     - if(!isNew)
       input(type='hidden', name='_method',value='put')
     .bs-callout.bs-callout-danger
-      h4 炫富大赛
-    .form-group
-      - each cate in [['pzsh','品质生活'],['ahsc','爱好收藏'],['kjk','科技控']]
-        - var checked = cate[0] === article.filter && true
+      include ../include/category-data
+      - each cate in categorys
+        - var checked = article.category === cate.id ? true : false;
         label.radio-inline
-          input(type='radio', checked=checked, name='filter', value='#{cate[0]}')
-          |  #{cate[1]}
+          input(type='radio', checked=checked, name='category', value='#{cate.id}')
+          |  #{cate.value}
     .form-group
       - var inputDisabled = isNew ? false : 'disabled'
       input.form-control(name='title', disabled=inputDisabled id='post_title', placeholder='标题', value='#{article["title"]}')

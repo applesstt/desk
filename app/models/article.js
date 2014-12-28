@@ -34,14 +34,15 @@ var setTags = function (tags) {
  */
 
 var ArticleSchema = new Schema({
-  title: {type : String, default : '', trim : true},
-  body: {type : String, default : '', trim : true},
-  user: {type : Schema.ObjectId, ref : 'User'},
+  title: {type: String, default: '', trim: true},
+  body: {type: String, default: '', trim: true},
+  user: {type: Schema.ObjectId, ref: 'User'},
   comments: [{
-    body: { type : String, default : '' },
-    user: { type : Schema.ObjectId, ref : 'User' },
-    createdAt: { type : Date, default : Date.now }
+    body: {type: String, default: ''},
+    user: {type: Schema.ObjectId, ref: 'User'},
+    createdAt: {type: Date, default: Date.now}
   }],
+  category: {type: String, default: '', trim: true},
   tags: {type: [], get: getTags, set: setTags},
   brief: {
     img: {type: String, default: '', trim: true},
@@ -51,7 +52,7 @@ var ArticleSchema = new Schema({
     cdnUri: String,
     files: []
   },
-  createdAt  : {type : Date, default : Date.now}
+  createdAt: {type: Date, default: Date.now}
 });
 
 /**
@@ -61,27 +62,13 @@ ArticleSchema.virtual('fromNow').get(function() {
   return utils.fromNow(this.createdAt);
 });
 
-
-/*ArticleSchema.virtual('brief').set(function() {
-  jsdom.env(
-    this.body,
-    [utils.root + "/public/lib/jquery/dist/jquery.min.js"],
-    function (errors, window) {
-      if(errors) {
-        return callback(errors);
-      }
-      this.brief.img = window.$('img').attr('src');
-      this.brief.text = window.$(window.document).text();
-    }
-  )
-});*/
-
 /**
  * Validations
  */
 
 ArticleSchema.path('title').required(true, 'Article title cannot be blank');
 ArticleSchema.path('body').required(true, 'Article body cannot be blank');
+ArticleSchema.path('category').required(true, 'Article category cannot be blank');
 
 /**
  * Pre-save hook
@@ -142,21 +129,11 @@ ArticleSchema.methods = {
    * @api private
    */
 
-  uploadAndSave: function (images, cb) {
-    if (!images || !images.length) return this.save(cb)
-
-    var imager = new Imager(imagerConfig, 'S3');
+  upAndSave: function(cb) {
     var self = this;
-
     this.validate(function (err) {
       if (err) return cb(err);
-      imager.upload(images, function (err, cdnUri, files) {
-        if (err) return cb(err);
-        if (files.length) {
-          self.image = { cdnUri : cdnUri, files : files };
-        }
-        self.save(cb);
-      }, 'article');
+      self.save(cb);
     });
   },
 
