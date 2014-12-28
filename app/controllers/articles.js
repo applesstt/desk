@@ -95,11 +95,16 @@ exports.create = function (req, res) {
   article.user = req.user;
 
   _validateAndSave(req, res, article, function(err) {
-    if(err) {
-      req.flash('error', err);
-      return res.redirect('/articles/new');
+    if(!err) {
+      return res.redirect('/articles/' + article._id);
     }
-    return res.redirect('/articles/' + article._id);
+    req.flash('error', err);
+    res.render('articles/new', {
+      title: 'New Article',
+      article: article,
+      author: req.user,
+      isNew: true
+    });
   });
 };
 
@@ -117,7 +122,11 @@ exports.update = function(req, res) {
   _validateAndSave(req, res, article, function(err) {
     if(err) {
       req.flash('error', err);
-      return res.redirect('/articles/' + article._id + '/edit');
+      return res.reder('articles/' + article._id + '/edit', {
+        title: 'Edit ' + article.title,
+        article: article,
+        author: req.user
+      });
     }
     return res.redirect('/articles/' + article._id);
   });
