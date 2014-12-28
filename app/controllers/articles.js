@@ -52,7 +52,7 @@ exports.index = function (req, res){
  * New article
  */
 
-exports.new = function (req, res){
+exports.new = function (req, res) {
   res.render('articles/new', {
     title: 'New Article',
     article: new Article({}),
@@ -75,10 +75,12 @@ exports.edit = function (req, res) {
 var _validateAndSave = function(req, res, article, callback) {
   article.validate(function(err) {
     if(err) {
+      req.flash('danger', err);
       return callback(err);
     }
     article.save(function(err) {
       if(err) {
+        req.flash('danger', err);
         return callback(err);
       }
       callback();
@@ -98,12 +100,12 @@ exports.create = function (req, res) {
     if(!err) {
       return res.redirect('/articles/' + article._id);
     }
-    req.flash('error', err);
     res.render('articles/new', {
       title: 'New Article',
       article: article,
       author: req.user,
-      isNew: true
+      isNew: true,
+      message: req.flash('danger')
     });
   });
 };
@@ -121,11 +123,11 @@ exports.update = function(req, res) {
 
   _validateAndSave(req, res, article, function(err) {
     if(err) {
-      req.flash('error', err);
       return res.reder('articles/' + article._id + '/edit', {
         title: 'Edit ' + article.title,
         article: article,
-        author: req.user
+        author: req.user,
+        message: req.flash('danger')
       });
     }
     return res.redirect('/articles/' + article._id);
@@ -152,7 +154,6 @@ exports.show = function (req, res){
 exports.destroy = function (req, res){
   var article = req.article;
   article.remove(function (err){
-    req.flash('info', 'Deleted successfully');
     res.redirect('/users/' + req.user.email);
   });
 };

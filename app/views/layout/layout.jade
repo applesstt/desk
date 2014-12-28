@@ -77,6 +77,10 @@ html
               button.search-btn(type='submit')
                 .glyphicon.glyphicon-search
               input#searchbox.search-field(type='text', placeholder='Search')
+    - if(typeof message !== 'undefined' && message.length > 0)
+      .container.alert.alert-dismissable.top-alert.alert-danger
+        button.close(data-dismiss='alert', aria-hidden='true') ×
+        | #{message}
     - if((success && success.length > 0) || (error && error.length > 0))
       .container.alert.alert-success.alert-dismissable.top-alert
         button.close(data-dismiss="alert",aria-hidden="true") ×

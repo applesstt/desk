@@ -34,6 +34,7 @@
     "csurf": "1.6.1",
     "express": "4.9.0",
     "express-session": "1.8.2",
+    "flash": "^1.1.0",
     "forever": "0.11.1",
     "gm": "^1.17.0",
     "imager": "0.2.7",
