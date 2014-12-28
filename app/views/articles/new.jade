@@ -9,11 +9,11 @@ block content-main
       input(type='hidden', name='_method',value='put')
     .bs-callout.bs-callout-danger
       include ../include/category-data
-      - each cate in categorys
-        - var checked = article.category === cate.id ? true : false;
+      - each cate, key in categorys
+        - var checked = article.category === cate ? true : false;
         label.radio-inline
-          input(type='radio', checked=checked, name='category', value='#{cate.id}')
-          |  #{cate.value}
+          input(type='radio', checked=checked, name='category', value='#{key}')
+          |  #{cate}
     .form-group
       - var inputDisabled = isNew ? false : 'disabled'
       input.form-control(name='title', disabled=inputDisabled id='post_title', placeholder='标题', value='#{article["title"]}')

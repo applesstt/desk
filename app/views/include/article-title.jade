@@ -12,7 +12,9 @@ header
         - each filter in filters
           - if(filter.key == article.filter)
             a.label.label-success(href='/?filter=#{article.filter}') #{filter.name}
-      span.label.label-info 炫富大赛
+      - if(article.category && article.category !== '')
+        include category-data
+        span.label.label-info #{categorys[article.category]}
     time.col-md-6.text-right.text-muted.post-time
       .glyphicon.glyphicon-time
       |  #{article.fromNow}

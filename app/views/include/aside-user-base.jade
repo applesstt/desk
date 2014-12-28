@@ -1,9 +1,10 @@
 .aside-avatar
   include user-avatar
 .aside-user-info-box
-  a.aside-user-info(href='/users/#{author.email}')
-    .glyphicon.glyphicon-user
-    |  #{author.name}
+  - if(author.name && author.name !== '')
+    a.aside-user-info(href='/users/#{author.email}')
+      .glyphicon.glyphicon-user
+      |  #{author.name}
   - if(author.city && author.city !== '')
     .aside-user-info
       .glyphicon.glyphicon-map-marker
@@ -12,7 +13,8 @@
     .glyphicon.glyphicon-envelope
     |  #{author.email}
   - if(author.website && author.website !== '')
-    a.aside-user-info(href='/users/#{author.email}')
+    - var website = author.website.indexOf('http') === 0 ? author.website : 'http://' + author.website
+    a.aside-user-info(href=website, target='_blank')
       .glyphicon.glyphicon-link
       |  #{author.website}
   - if(author.des && author.des !== '')
