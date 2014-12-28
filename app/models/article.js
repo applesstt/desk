@@ -198,7 +198,7 @@ ArticleSchema.statics = {
 
   load: function (id, cb) {
     this.findOne({ _id : id })
-      .populate('user', 'name email')
+      .populate('user', 'name email city website des')
       .populate('comments.user')
       .exec(cb);
   },
