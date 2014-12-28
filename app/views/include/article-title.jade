@@ -2,7 +2,9 @@
 header
   - if(article.category && article.category !== '')
     include category-data
-    span.label.label-info #{categorys[article.category]}
+    - each category in categorys
+      - if(category.id == article.category)
+        span.label.label-info #{category.value}
   h1.inline
     a.pjax-main.post-title(href='/articles/#{article._id}') #{article.title}
   .row

@@ -110,6 +110,8 @@ module.exports = function (app, passport) {
   app.put('/articles/:id', articleAuth, articles.update);
   app.delete('/articles/:id', articleAuth, articles.destroy);
 
+  app.get('/articles/categorys/:category', articles.index);
+
   // upload image
   app.route('/images').
     post(auth.requiresLogin, utils.uploadImage).

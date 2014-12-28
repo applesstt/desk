@@ -25,13 +25,13 @@ html
               | 家党
           .collapse.navbar-collapse.navbar-ex1-collapse
             ul.nav.navbar-nav.navbar-right.navbar-nav-apl
-              include ../include/filters
-              - each filterItem in filters
-                - var selLi = filterItem.key == filter ? 'active' : ''
+              include ../include/category-data
+              - each category in categorys
+                - var selLi = category.id == filter ? 'active' : ''
                 li(class=selLi)
-                  a(href='/?filter=#{filterItem.key}')
-                    .glyphicon(class=filterItem.icon)
-                    |  #{filterItem.name}
+                  a(href='/articles/categorys/#{category.id}')
+                    .glyphicon(class='glyphicon-#{category.icon}')
+                    |  #{category.value}
               - var starSel = (filter && filter == 'star') ? 'active' : ''
               li(class=starSel)
                 a(href='/star')

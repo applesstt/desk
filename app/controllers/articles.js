@@ -28,12 +28,18 @@ exports.load = function (req, res, next, id){
  */
 
 exports.index = function (req, res){
+  var category = req.param('category');
   var page = (req.param('page') > 0 ? req.param('page') : 1) - 1;
   var perPage = 30;
   var options = {
     perPage: perPage,
-    page: page
+    page: page,
+    criteria: {}
   };
+
+  if(typeof category !== 'undefined' && category !== '') {
+    options.criteria.category = category;
+  }
 
   Article.list(options, function (err, articles) {
     if (err) return res.render('500');
@@ -42,7 +48,8 @@ exports.index = function (req, res){
         title: 'Articles',
         articles: articles,
         page: page + 1,
-        pages: Math.ceil(count / perPage)
+        pages: Math.ceil(count / perPage),
+        filter: category
       });
     });
   });
