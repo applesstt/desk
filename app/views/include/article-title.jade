@@ -1,20 +1,15 @@
 - var titleEncode = encodeURIComponent(article.title)
 header
-  h1
+  - if(article.category && article.category !== '')
+    include category-data
+    span.label.label-info #{categorys[article.category]}
+  h1.inline
     a.pjax-main.post-title(href='/articles/#{article._id}') #{article.title}
   .row
     .col-md-6.text-left.post-short-info
       a(href='/users/#{article.user.email}')
         img.avatar-min(src='/avatar/#{article.user.email}')
         |  #{article.user.name}
-      - if(article.filter)
-        include filters
-        - each filter in filters
-          - if(filter.key == article.filter)
-            a.label.label-success(href='/?filter=#{article.filter}') #{filter.name}
-      - if(article.category && article.category !== '')
-        include category-data
-        span.label.label-info #{categorys[article.category]}
     time.col-md-6.text-right.text-muted.post-time
       .glyphicon.glyphicon-time
       |  #{article.fromNow}
