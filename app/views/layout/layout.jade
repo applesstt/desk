@@ -6,87 +6,85 @@ html
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     title= title
     link(rel='stylesheet', media='screen', href='http://cdn.staticfile.org/twitter-bootstrap/3.1.1/css/bootstrap.min.css')
-    link(rel='stylesheet', href='/css/bootstrap-apl.css')
+    link(rel='stylesheet', href='/css/bootstrap-desk.css')
+    //[if lt IE 9]>
+      <script src='http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js'></script>
+      <script src='http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js'></script><![endif]
     //put other css files in css_content
     block css_content
     script(src='http://libs.useso.com/js/modernizr/2.8.2/modernizr.min.js')
   body
-    header
-      nav.navbar.navbar-default.navbar-apl(role='navigation')
-        .container
-          .navbar-header
-            button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-ex1-collapse')
-              span.sr-only Toggle navigation
-              span.icon-bar
-              span.icon-bar
-              span.icon-bar
-            a#logo.navbar-brand(href='/')
-              span 败
-              | 家党
-          .collapse.navbar-collapse.navbar-ex1-collapse
-            ul.nav.navbar-nav.navbar-right.navbar-nav-apl
-              include ../include/category-data
-              - each category in categorys
-                - var selLi = category.id == filter ? 'active' : ''
-                li(class=selLi)
-                  a(href='/articles/categorys/#{category.id}')
-                    .glyphicon(class='glyphicon-#{category.icon}')
-                    |  #{category.value}
-              - var starSel = (filter && filter == 'star') ? 'active' : ''
-              li(class=starSel)
-                a(href='/star')
-                  .glyphicon.glyphicon-star
-                  |  败家之星
-              if req.isAuthenticated()
-                li
-                  a(href='/articles/new')
-                    .glyphicon.glyphicon-plus
-                    |  分享
-                li
-                  a.navbar-nav-user(href='/users/#{req.user.email}', title='#{req.user.name}')
-                    .avatar-min-wrap
-                      img.avatar-min(src='/avatar/#{req.user.email}')
-                      .user-msg-alert 1
-                li
-                  a.tooltip-link(href='/users/#{req.user.email}/edit', data-toggle='tooltip',data-placement='bottom',title='设置')
-                    .glyphicon.glyphicon-cog
-                li
-                  a.tooltip-link(href='/logout', data-toggle='tooltip',data-placement='bottom',title='退出'):.glyphicon.glyphicon-log-out
-              else
-                li
-                  a(href='/login', data-toggle='tooltip',data-placement='bottom')
-                    .glyphicon.glyphicon-log-out
-                    |  登录
-                //li
-                  a(href='/signup') 注册
-      .subheader
-        .container.clearfix
-          .inspired
-            .glyphicon.glyphicon-leaf
-            |  Embrace and Drive Change
-          .search-box
-            script.
-              var search = function() {
-                s = document.getElementById('searchbox');
-                if (s.value != "") {
-                  window.open('http://www.google.com/search?q=site:applesstt.com%20' + s.value, "_blank");
-                }
-                return false;
-              }
-            form(onsubmit='return search()')
-              button.search-btn(type='submit')
-                .glyphicon.glyphicon-search
-              input#searchbox.search-field(type='text', placeholder='Search')
+    header.navbar.navbar-inverse.navbar-fixed-top(role='navigation')
+      .container
+        .navbar-header
+          button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand.hidden-sm(href='/') 桌边
+            span 兽
+        nav.collapse.navbar-collapse
+          ul.nav.navbar-nav
+            include ../include/category-data
+            - each category in categorys
+              - var selLi = category.id == filter ? 'active' : ''
+              li(class=selLi)
+                a(href='/articles/categorys/#{category.id}')
+                  .glyphicon(class='glyphicon-#{category.icon}')
+                  |  #{category.value}
+            - var starSel = (filter && filter == 'star') ? 'active' : ''
+            li(class=starSel)
+              a(href='javascript:{}')
+                .glyphicon.glyphicon-star
+                |  败家之星
+            if req.isAuthenticated()
+              li
+                a(href='/articles/new')
+                  .glyphicon.glyphicon-plus
+                  |  分享
+          ul.nav.navbar-nav.navbar-right.hidden-em
+            li.search-box-wrap
+              .search-box
+                script.
+                  var search = function() {
+                    s = document.getElementById('s');
+                    if (s.value != "") {
+                      window.open('http://www.google.com/search?q=site:applesstt.com%20' + s.value, "_blank");
+                    }
+                    return false;
+                  }
+                form.search-form(onsubmit='return search();')
+                  input#s.search-field(type='text', placeholder='Search')
+                  button.search-btn(type='submit')
+                    .glyphicon.glyphicon-search
+            if req.isAuthenticated()
+              li
+                a(href='/users/#{req.user.email}', title='#{req.user.name}')
+                  .avatar-min-wrap
+                    img.avatar-min(src='/avatar/#{req.user.email}')
+              li
+                a.tooltip-link(href='/users/#{req.user.email}/edit', data-toggle='tooltip', data-placement='bottom', title='设置')
+                  .glyphicon.glyphicon-cog
+              li
+                a.tooltip-link(href='/logout', data-toggle='tooltip', data-placement='bottom', title='退出')
+                  .glyphicon.glyphicon-log-out
+            else
+              li
+                a(href='/login', data-toggle='tooltip',data-placement='bottom')
+                  .glyphicon.glyphicon-log-out
+                  |  登录
+              //li
+                a(href='/signup') 注册
 
-    - if(typeof message !== 'undefined' && message.length > 0)
-      .container.alert.alert-dismissable.top-alert.alert-danger
-        button.close(data-dismiss='alert', aria-hidden='true') ×
-        | #{message}
-
-    #main.container
+    #main.container(class=isHome?'home':'')
+      - if(typeof message !== 'undefined' && message.length > 0)
+        .alert.alert-dismissable.alert-danger
+          button.close(data-dismiss='alert', aria-hidden='true') ×
+          | #{message}
       block content
 
-    footer.footer-apl
+    footer
       aside.footer-about
         .container
           .row
@@ -96,7 +94,7 @@ html
                 |  About
               .footer-text [败家党]是由一群热爱生活的人组成的社区，希望我们分享的用品能够丰富生活乐趣、增加你的幸福感。目前网站不开放注册，有兴趣一同参与网站内容建设，请邮件联系，我会在第一时间回复你。 -- applesstt
               .footer-email applesstt@gmail.com
-      aside.inspired
+      aside.footer-inspired
         .container
           .glyphicon.glyphicon-heart
           |  Inspired by
