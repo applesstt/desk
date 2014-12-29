@@ -1,14 +1,6 @@
-- var star = 1
 .row
-  article.col-md-2
-    include index-star
-  article.col-md-2
-    include index-star
-  article.col-md-2
-    include index-star
-  article.col-md-2
-    include index-star
-  article.col-md-2
-    include index-star
-  article.col-md-2
-    include index-star
+  - for(var i = 0; i < users.length; i++)
+    - var user = users[i]
+    - if(i < 6)
+      article.col-md-2
+        include index-star

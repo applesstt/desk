@@ -179,6 +179,23 @@ UserSchema.statics = {
     this.findOne(options.criteria)
       .select(options.select)
       .exec(cb);
+  },
+
+  /**
+   * List users
+   *
+   * @param options
+   * @param cb
+   */
+
+  list: function (options, cb) {
+    var criteria = options.criteria || {};
+    var sort = options.sort || {};
+    this.find(criteria)
+      .sort(sort)
+      .limit(options.perPage)
+      .skip(options.perPage * options.page)
+      .exec(cb);
   }
 }
 

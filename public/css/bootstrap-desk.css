@@ -183,6 +183,27 @@ a.article-brief-title {
   overflow: hidden;
   display: block;
 }
+.upload-image-wrap {
+  position: relative;
+}
+#upload-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  visibility: hidden;
+}
+.post-short-right {
+  float: left;
+  width: 210px;
+  padding-right: 10px;
+}
+.post-short-right img {
+  width: 200px;
+  border: 1px solid #cccccc;
+  padding: 2px;
+  display: block;
+}
+
 /* star */
 .star-brief {
   padding: 0;
@@ -231,6 +252,18 @@ a.cate-brief {
 }
 
 /* article */
+.post-content {
+  font-size: 16px;
+  line-height: 1.8;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.post-content img {
+  max-width: 100%;
+}
+.post-btns {
+  margin-top: 20px;
+}
 .post-wrap {
   overflow: hidden;
 }
@@ -470,3 +503,35 @@ a.cate-brief {
   top: 15px;
 }
 
+/* user setting */
+.edit-user-img .avatar-middle {
+  display: block;
+  float: left;
+}
+.edit-user-img-btn {
+  display: block;
+  float: left;
+  margin-left: 20px;
+  margin-top: 30px;
+  position: relative;
+}
+.edit-user-img-btn a,
+.edit-user-img-btn input {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.edit-user-img-btn input {
+  width: 82px;
+  height: 34px;
+  display: block;
+}
+#resize-user-img-btn {
+  display: none;
+}
+.image-200-wrap {
+  width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}

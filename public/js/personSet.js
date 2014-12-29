@@ -17,7 +17,7 @@ var PersonSet = (function() {
         dataType: 'json',
         success: function(result) {
           if(result) {
-            _srcImgName = result.image + '.200.png';
+            _srcImgName = result.image + '.580.png.200.png';
             _srcImgPath = result.base_path;
             var imagePath200 = 'http://' + location.host + _srcImgPath + _srcImgName;
             $('#image-200').attr('src', imagePath200).Jcrop({
