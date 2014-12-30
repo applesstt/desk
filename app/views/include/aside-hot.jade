@@ -6,5 +6,6 @@
       - for(var i = 0; i < hotArticles.length; i++)
         - var hotArticle = hotArticles[i]
           .col-md-6.aside-widget-item-wrap
-            a.aside-widget-item(href='/articles/#{hotArticle._id}')
+            a.aside-widget-item(href='/articles/#{hotArticle._id}', title='#{hotArticle.title}')
               img(src='#{hotArticle.brief.img}.200.square.png')
+              .aside-widget-item-text #{hotArticle.title}

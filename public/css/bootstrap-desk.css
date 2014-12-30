@@ -495,6 +495,14 @@ a.cate-brief {
   padding: 15px 0 0;
   display: block;
 }
+.aside-widget-item img, .aside-widget-item-text {
+  display: block;
+}
+.aside-widget-item-text {
+  line-height: 30px;
+  height: 30px;
+  overflow: hidden;
+}
 .aside-widget-body img {
   max-width: 100%;
   min-width: 100%;
