@@ -83,7 +83,7 @@ exports.edit = function(req, res) {
 exports.show = function (req, res) {
   var user = req.profile;
   var page = (req.param('page') > 0 ? req.param('page') : 1) - 1;
-  var perPage = 30;
+  var perPage = 10;
   var options = {
     perPage: perPage,
     page: page,
