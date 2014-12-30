@@ -268,6 +268,7 @@ a.cate-brief {
   padding-bottom: 10020px;
   margin-bottom: -10000px;
   background-color: #fff;
+  border-radius: 4px;
 }
 .post-main {
   padding-top: 20px;
@@ -330,9 +331,6 @@ a.cate-brief {
 
 
 /* aside */
-.aside-avatar {
-  padding-top: 20px;
-}
 .circle-img {
   position: relative;
   width: 180px;
@@ -459,15 +457,22 @@ a.cate-brief {
   text-align: center;
   display: block;
 }
-.aside-user-info-box {
-  border-top: 1px solid #ced5db;
-  margin-top: 30px;
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-bottom: 20px;
+.aside-user {
+  margin-left: 20px;
+  margin-right: 20px;
+  padding: 20px 0 20px 220px;
+  position: relative;
+  border-bottom: 1px solid #ced5db;
+  min-height: 220px;
+}
+.aside-user .aside-avatar {
+  position: absolute;
+  left: 0;
+  top: 20px;
 }
 .aside-user-info {
-  padding-top: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   display: block;
 }
 

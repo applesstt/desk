@@ -6,7 +6,7 @@ header
       include category-data
       - each category in categorys
         - if(category.id == article.category)
-          span.label.label-info.title-category #{category.value}
+          span.label.title-category(class='label-#{category.color}') #{category.value}
   .article-title-brief
     a.article-title-brief-user(href='/users/#{article.user.email}')
       img.avatar-min(src='/avatar/#{article.user.email}')
