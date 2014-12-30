@@ -96,6 +96,7 @@ exports.new = function (req, res) {
     title: 'New Article',
     article: new Article({}),
     author: req.user,
+    hotArticles: req.hotArticles,
     isNew: true
   });
 };
@@ -107,6 +108,7 @@ exports.edit = function (req, res) {
   res.render('articles/new', {
     title: 'Edit ' + req.article.title,
     article: req.article,
+    hotArticles: req.hotArticles,
     author: req.user
   });
 };
@@ -143,6 +145,7 @@ exports.create = function (req, res) {
       title: 'New Article',
       article: article,
       author: req.user,
+      hotArticles: req.hotArticles,
       isNew: true,
       message: req.flash('danger')
     });

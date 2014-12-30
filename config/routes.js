@@ -104,10 +104,10 @@ module.exports = function (app, passport) {
   // article routes
   app.param('id', articles.load);
   app.get('/articles', articles.loadHotArticles, articles.index);
-  app.get('/articles/new', auth.requiresLogin, articles.new);
-  app.post('/articles', auth.requiresLogin, articles.create);
+  app.get('/articles/new', auth.requiresLogin, articles.loadHotArticles, articles.new);
+  app.post('/articles', auth.requiresLogin, articles.loadHotArticles, articles.create);
   app.get('/articles/:id', articles.loadHotArticles, articles.show);
-  app.get('/articles/:id/edit', articleAuth, articles.edit);
+  app.get('/articles/:id/edit', articleAuth, articles.loadHotArticles, articles.edit);
   app.put('/articles/:id', articleAuth, articles.update);
   app.delete('/articles/:id', articleAuth, articles.destroy);
 
