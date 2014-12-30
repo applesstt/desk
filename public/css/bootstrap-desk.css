@@ -462,7 +462,6 @@ a.cate-brief {
   margin-right: 20px;
   padding: 20px 0 20px 220px;
   position: relative;
-  border-bottom: 1px solid #ced5db;
   min-height: 220px;
 }
 .aside-user .aside-avatar {
@@ -477,44 +476,29 @@ a.cate-brief {
 }
 
 /* aside widget - will be delete */
-.aside-widget header {
-  border: 1px #ced5db solid;
-  background-image: -webkit-gradient(linear, left 0%, left 100%, from(#f6f5f5), to(#ebeaea));
-  background-image: -webkit-linear-gradient(top, #f6f5f5, 0%, #ebeaea, 100%);
-  background-image: -moz-linear-gradient(top, #f6f5f5 0%, #ebeaea 100%);
-  background-image: linear-gradient(to bottom, #f6f5f5 0%, #ebeaea 100%);
-  background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff6f5f5', endColorstr='#ffebeaea', GradientType=0);
-}
-.aside-widget header h3 {
-  font-size: 24px;
-  padding: 10px 20px 3px 20px;
-  margin-top: 0;
+.aside-widget header h1 {
+  font-size: 18px;
+  padding: 20px 0 10px;
+  margin: 0 15px;
   color: #48535f;
+  border-bottom: 1px #ced5db solid;
 }
 .aside-widget-body {
-  margin-top: 30px;
-  padding-left: 20px;
+  padding-left: 15px;
+  padding-right: 30px;
 }
-.aside-widget-list {
-  list-style: none;
+.aside-widget-item-wrap {
+  padding-left: 15px;
+  padding-right: 0;
 }
-.aside-widget-list li {
-  line-height: 23px;
-  margin-bottom: 14px;
-}
-.aside-widget-list li:before {
-  content: "";
-  border-color: transparent transparent transparent #757e88;
-  border-style: solid;
-  border-width: 3px 8px;
+.aside-widget-item {
+  padding: 15px 0 0;
   display: block;
-  width: 8px;
-  position: relative;
-  left: -20px;
-  top: 15px;
 }
-
+.aside-widget-body img {
+  max-width: 100%;
+  min-width: 100%;
+}
 /* user setting */
 .edit-user-img .avatar-middle {
   display: block;

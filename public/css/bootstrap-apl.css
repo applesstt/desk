@@ -272,6 +272,10 @@ a.footer-power {
 .post-title {
   color: #404b55;
 }
+.post-time {
+  font-size: 14px;
+  line-height: 14px;
+}
 .post-short-info > .label {
   margin-left: 5px;
 }
@@ -399,7 +403,7 @@ a.post-buy {
 
 .bs-callout {
   margin-bottom: 20px;
-  padding: 20px;
+  padding: 15px 20px 0px;
   border-left: 3px solid #eee;
 }
 .bs-callout-danger {

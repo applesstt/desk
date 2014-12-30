@@ -44,7 +44,7 @@ module.exports = function (app, passport) {
       failureRedirect: '/login',
       failureFlash: 'Invalid email or password.'
     }), users.session);
-  app.get('/users/:userEmail', users.show);
+  app.get('/users/:userEmail', articles.loadHotArticles, users.show);
 
   app.route('/users/:userEmail/edit').
     get(users.edit).
@@ -103,15 +103,15 @@ module.exports = function (app, passport) {
 
   // article routes
   app.param('id', articles.load);
-  app.get('/articles', articles.index);
+  app.get('/articles', articles.loadHotArticles, articles.index);
   app.get('/articles/new', auth.requiresLogin, articles.new);
   app.post('/articles', auth.requiresLogin, articles.create);
-  app.get('/articles/:id', articles.show);
+  app.get('/articles/:id', articles.loadHotArticles, articles.show);
   app.get('/articles/:id/edit', articleAuth, articles.edit);
   app.put('/articles/:id', articleAuth, articles.update);
   app.delete('/articles/:id', articleAuth, articles.destroy);
 
-  app.get('/articles/categorys/:category', articles.index);
+  app.get('/articles/categorys/:category', articles.loadHotArticles, articles.index);
 
   // upload image
   app.route('/images').

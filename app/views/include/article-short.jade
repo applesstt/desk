@@ -2,5 +2,5 @@ include article-title
 .post-short
   .post-short-right
     - if(typeof article.brief !== 'undefined' && typeof article.brief.img !== 'undefined' && article.brief.img !== '')
-      img(src='#{article.brief.img}')
+      img(src='#{article.brief.img}.200.square.png')
   | #{article.brief.text}

@@ -1,9 +1,10 @@
-aside.aside-widget
-  header
-    h3 热门主题
-  .aside-widget-body
-    ul.aside-widget-list
-      li
-        a(href='javascript:{}') 无与伦比的机械之美
-      li
-        a(href='javascript:{}') 北美电器 AB-PN4810 面包机
+- if(typeof hotArticles !== 'undefined' && hotArticles.length > 0)
+  aside.aside-widget
+    header
+      h1 猜你喜欢
+    .aside-widget-body.row
+      - for(var i = 0; i < hotArticles.length; i++)
+        - var hotArticle = hotArticles[i]
+          .col-md-6.aside-widget-item-wrap
+            a.aside-widget-item(href='/articles/#{hotArticle._id}')
+              img(src='#{hotArticle.brief.img}.200.square.png')

@@ -24,6 +24,37 @@ exports.load = function (req, res, next, id){
 };
 
 /**
+ * Load hot article list
+ */
+exports.loadHotArticles = function(req, res, next) {
+  var user = req.profile || null;
+  if(req.article) {
+    user = req.article.user;
+  }
+  var category = req.param('category');
+  var options = {
+    perPage: 10,
+    page: 0,
+    criteria: {
+      '$where': function() {
+        return this.brief.img !== '';
+      }
+    }
+  };
+  if(user) {
+    options.criteria.user = user._id;
+  }
+  if(typeof category !== 'undefined' && category !== '') {
+    options.criteria.category = category;
+  }
+  Article.list(options, function (err, articles) {
+    if (err) next(err);
+    req.hotArticles = articles;
+    next();
+  });
+}
+
+/**
  * List
  */
 
@@ -49,7 +80,8 @@ exports.index = function (req, res){
         articles: articles,
         page: page + 1,
         pages: Math.ceil(count / perPage),
-        filter: category
+        filter: category,
+        hotArticles: req.hotArticles
       });
     });
   });
@@ -150,7 +182,8 @@ exports.show = function (req, res){
   res.render('articles/article', {
     title: req.article.title,
     article: req.article,
-    author: req.article.user
+    author: req.article.user,
+    hotArticles: req.hotArticles
   });
 };
 

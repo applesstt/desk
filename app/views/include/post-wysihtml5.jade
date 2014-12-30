@@ -1,7 +1,7 @@
 #wysihtml5-editor-toolbar
   header
     ul.commands
-      - each command in [{command:'bold'},{command:'italic'},{command:'insertUnorderedList'},{command:'insertOrderedList'},{command:'createLink'},{command:'insertImage'},{command:'formatBlock',value:'h1'},{command:'formatBlock',value:'h2'}]
+      - each command in [{command:'bold'},{command:'insertUnorderedList'},{command:'insertOrderedList'},{command:'createLink'},{command:'insertImage'},{command:'formatBlock',value:'h1'},{command:'formatBlock',value:'h2'}]
         - if(command.value)
           li.command(data-wysihtml5-command=command.command,data-wysihtml5-command-value=command.value)
         - else

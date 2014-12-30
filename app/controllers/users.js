@@ -98,7 +98,8 @@ exports.show = function (req, res) {
         author: user,
         articles: articles,
         page: page + 1,
-        pages: Math.ceil(count / perPage)
+        pages: Math.ceil(count / perPage),
+        hotArticles: req.hotArticles
       });
     });
   });
