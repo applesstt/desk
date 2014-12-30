@@ -11,12 +11,13 @@ block content-main
       include ../include/category-data
       - each category in categorys
         - var checked = article.category === category.id ? true : false;
+        - checked = (isNew && category.id === 'good') ? true : checked;
         label.radio-inline
           input(type='radio', checked=checked, name='category', value='#{category.id}')
           |  #{category.value}
     .form-group
       - var inputDisabled = isNew ? false : 'disabled'
-      input.form-control(name='title', disabled=inputDisabled id='post_title', placeholder='标题', value='#{article["title"]}')
+      input.form-control(name='title', disabled=inputDisabled, id='post_title', placeholder='标题', value='#{article["title"]}', required)
     .form-group
       include ../include/post-wysihtml5
     .text-left
