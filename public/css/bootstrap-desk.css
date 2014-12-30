@@ -142,10 +142,6 @@ html, body {
   margin-top: 41px;
   padding-top: 20px;
   padding-bottom: 20px;
-  background-color: #fff;
-}
-#main.home {
-  background-color: transparent;
 }
 
 /* index */
@@ -255,14 +251,14 @@ a.cate-brief {
 .post-content {
   font-size: 16px;
   line-height: 1.8;
-  padding-top: 20px;
   padding-bottom: 20px;
 }
 .post-content img {
   max-width: 100%;
 }
-.post-btns {
-  margin-top: 20px;
+.post-content img[src$='.580.png'] {
+  display: block;
+  margin: 10px auto;
 }
 .post-wrap {
   overflow: hidden;
@@ -271,30 +267,35 @@ a.cate-brief {
   position: relative;
   padding-bottom: 10020px;
   margin-bottom: -10000px;
+  background-color: #fff;
 }
-.post-main:before {
-  border-left: 1px solid #ced5db;
-  height: 100%;
-  content: "";
-  position: absolute;
-  top: 0;
-  right: -16px;
-  width: 1px;
-}
-.aside-widget {
-  margin-top: 30px;
+.post-main {
+  padding-top: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 .post-title {
   color: #404b55;
+  position: relative;
+  display: block;
+  margin: 0 0 5px;
+  padding-right: 40px;
 }
-.post-btns {
-  margin-top: 20px;
+.title-category {
+  margin-left: 10px;
+  font-size: 12px;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
-.post-short {
-  margin-top: 20px;
-  line-height: 26px;
-  max-height: 260px;
-  overflow: hidden;
+.article-title-edit {
+  margin-left: 10px;
+}
+.post-time {
+  font-size: 14px;
+  line-height: 14px;
+  margin-left: 10px;
+  display: block;
 }
 .post-multy {
   padding-bottom: 20px;
@@ -308,10 +309,14 @@ a.cate-brief {
   margin-top: 10px;
   display: block;
 }
-.post-content {
-  font-size: 16px;
-  line-height: 1.8;
-  padding-top: 20px;
+.post-short {
+  max-height: 200px;
+  overflow: hidden;
+}
+.post-short, .post-content {
+  font-size: 14px;
+  line-height: 20px;
+  margin-top: 20px;
 }
 .bs-callout {
   margin-bottom: 20px;
@@ -326,7 +331,7 @@ a.cate-brief {
 
 /* aside */
 .aside-avatar {
-  margin-top: 20px;
+  padding-top: 20px;
 }
 .circle-img {
   position: relative;
@@ -467,9 +472,6 @@ a.cate-brief {
 }
 
 /* aside widget - will be delete */
-.aside-widget {
-  margin-top: 30px;
-}
 .aside-widget header {
   border: 1px #ced5db solid;
   background-image: -webkit-gradient(linear, left 0%, left 100%, from(#f6f5f5), to(#ebeaea));

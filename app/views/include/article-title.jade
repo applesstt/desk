@@ -1,22 +1,17 @@
 - var titleEncode = encodeURIComponent(article.title)
 header
-  - if(article.category && article.category !== '')
-    include category-data
-    - each category in categorys
-      - if(category.id == article.category)
-        span.label.label-info #{category.value}
-  h1.inline
-    a.pjax-main.post-title(href='/articles/#{article._id}') #{article.title}
-  .row
-    .col-md-6.text-left.post-short-info
-      a(href='/users/#{article.user.email}')
-        img.avatar-min(src='/avatar/#{article.user.email}')
-        |  #{article.user.name}
-    time.col-md-6.text-right.text-muted.post-time
-      .glyphicon.glyphicon-time
-      |  #{article.fromNow}
-  - if(req.isAuthenticated() && req.user && req.user.name == article.user.name)
-    .post-btns
-      a.btn.btn-primary(href='/articles/#{article._id}/edit')
+  .clearfix
+    a.h3.pjax-main.post-title(href='/articles/#{article._id}') #{article.title}
+      - if(article.category && article.category !== '')
+      include category-data
+      - each category in categorys
+        - if(category.id == article.category)
+          span.label.label-info.title-category #{category.value}
+  .article-title-brief
+    a.article-title-brief-user(href='/users/#{article.user.email}')
+      img.avatar-min(src='/avatar/#{article.user.email}')
+      |  #{article.user.name}
+    - if(req.isAuthenticated() && req.user && req.user.name == article.user.name)
+      a.btn.btn-xs.btn-primary.article-title-edit(href='/articles/#{article._id}/edit')
         span.glyphicon.glyphicon-edit
-        |  编辑
+        | 编辑

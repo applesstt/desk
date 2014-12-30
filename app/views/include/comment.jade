@@ -1,20 +1,21 @@
-- if(typeof article.comments !== 'undefined' && article.comments.length > 0)
-  - for(var i = 0; i < article.comments.length; i++)
-    .panel
-      .panel-body
-        form(method='post', action='/articles/#{article.id}/comments/#{article.comments[i]._id}')
-          input(type='hidden', name='_csrf', value='#{csrf_token}')
-          input(type='hidden', name='_method',value='delete')
-          a(href='/users/#{article.comments[i].user.email}')
-            img.avatar-min(src='/avatar/#{article.comments[i].user.email}')
-            |  #{article.comments[i].user.name}
-          - if(req.user.email === article.comments[i].user.email)
-            button.close(type='submit') ×
-        p #{article.comments[i]['body']}
-- if(req.isAuthenticated())
-  form(method='post', action='/articles/#{article.id}/comments', enctype='multipart/form-data')
-    input(type='hidden', name='_csrf', value='#{csrf_token}')
-    .form-group
-      textarea.form-control(name='body', placeholder='评论', rows=4)
-    .form-group
-      input.btn.btn-primary(type='submit', value='发表评论')
+p
+  - if(typeof article.comments !== 'undefined' && article.comments.length > 0)
+    - for(var i = 0; i < article.comments.length; i++)
+      .panel
+        .panel-body
+          form(method='post', action='/articles/#{article.id}/comments/#{article.comments[i]._id}')
+            input(type='hidden', name='_csrf', value='#{csrf_token}')
+            input(type='hidden', name='_method',value='delete')
+            a(href='/users/#{article.comments[i].user.email}')
+              img.avatar-min(src='/avatar/#{article.comments[i].user.email}')
+              |  #{article.comments[i].user.name}
+            - if(req.user.email === article.comments[i].user.email)
+              button.close(type='submit') ×
+          p #{article.comments[i]['body']}
+  - if(req.isAuthenticated())
+    form(method='post', action='/articles/#{article.id}/comments', enctype='multipart/form-data')
+      input(type='hidden', name='_csrf', value='#{csrf_token}')
+      .form-group
+        textarea.form-control(name='body', placeholder='评论', rows=4)
+      .form-group
+        input.btn.btn-primary(type='submit', value='发表评论')
