@@ -22,7 +22,7 @@ exports.user = {
     next();
   },
   hasAdminAuthorization: function(req, res, next) {
-    if(!req.user.isAdmin) {
+    if(!req.user.isAdmin && !req.user.isSuperAdmin) {
       req.flash('info', 'You are not authorized');
       return res.redirect('/users/' + req.user.email);
     }

@@ -63,6 +63,10 @@ html
                 a(href='/users/#{req.user.email}', title='#{req.user.name}')
                   .avatar-min-wrap
                     img.avatar-min(src='/avatar/#{req.user.email}')
+              if req.user.isSuperAdmin || req.user.isAdmin
+                - var adminUrl = req.user.isSuperAdmin ? '/superAdmin' : '/admin'
+                li
+                  a(href=adminUrl) 后台管理
               li
                 a.tooltip-link(href='/users/#{req.user.email}/edit', data-toggle='tooltip', data-placement='bottom', title='设置')
                   .glyphicon.glyphicon-cog

@@ -10,6 +10,7 @@ var home = require('home');
 var users = require('users');
 var articles = require('articles');
 var comments = require('comments');
+var admin = require('admin');
 var tags = require('tags');
 var auth = require('./middlewares/authorization');
 var utils = require('../lib/utils');
@@ -134,6 +135,10 @@ module.exports = function (app, passport) {
 
   // tag routes
   app.get('/tags/:tag', tags.index);
+
+  // admin routes
+  app.get('/superAdmin', auth.user.hasSuperAdminAuthorization, admin.superIndex);
+  app.get('/admin', auth.user.hasAdminAuthorization, admin.index);
 
 
   /**
