@@ -10,7 +10,7 @@ var utils = require('../../lib/utils');
 var extend = require('util')._extend;
 
 exports.superIndex = function(req, res) {
-
+  res.render('super/index');
 }
 
 exports.index = function(req, res) {
