@@ -16,10 +16,24 @@ exports.requiresLogin = function (req, res, next) {
 exports.user = {
   hasAuthorization: function (req, res, next) {
     if (req.profile.id != req.user.id) {
-      req.flash('info', 'You are not authorized')
-      return res.redirect('/users/' + req.profile.id)
+      req.flash('info', 'You are not authorized');
+      return res.redirect('/users/' + req.profile.email);
     }
-    next()
+    next();
+  },
+  hasAdminAuthorization: function(req, res, next) {
+    if(!req.user.isAdmin) {
+      req.flash('info', 'You are not authorized');
+      return res.redirect('/users/' + req.user.email);
+    }
+    next();
+  },
+  hasSuperAdminAuthorization: function(req, res, next) {
+    if(!req.user.isSuperAdmin) {
+      req.flash('info', 'You are not authorized');
+      return res.redirect('/users/' + req.user.email);
+    }
+    next();
   }
 }
 

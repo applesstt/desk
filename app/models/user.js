@@ -26,6 +26,8 @@ var UserSchema = new Schema({
   city: { type: String, default: '' },
   website: { type: String, default: '' },
   des: { type: String, default: '' },
+  isSuperAdmin: { type: Boolean, default: false },
+  isAdmin: { type: Boolean, default: false },
   hashed_password: { type: String, default: '' },
   salt: { type: String, default: '' },
   authToken: { type: String, default: '' },
@@ -175,7 +177,7 @@ UserSchema.statics = {
    */
 
   load: function (options, cb) {
-    options.select = options.select || 'name email city website des';
+    options.select = options.select || 'name email city website des isAdmin isSuperAdmin';
     this.findOne(options.criteria)
       .select(options.select)
       .exec(cb);
