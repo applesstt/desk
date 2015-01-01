@@ -7,11 +7,11 @@ block content-main
   .container-fluid
     .row
       .col-md-2
-        ul
-          li: a(href='#/users') 用户列表
-          li: a(href='#/admins') admin列表
-          li: a(href='/') 文章审核
-          li: a(href='/') 评论审核
+        .list-group
+          a#usersLink.list-group-item(href='#/') 用户列表
+          a#adminsLink.list-group-item(href='#/admins') 管理员列表
+          a#articlesLink.list-group-item(href='#/articles') 文章审核
+          a#commentsLink.list-group-item(href='#/comments') 评论审核
       .col-md-10
           div(ng-view)
 append js_content

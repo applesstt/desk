@@ -1,0 +1,11 @@
+#main {
+  background-color: #fff;
+}
+.admin-nav {
+  min-height: 400px;
+  padding-top: 20px;
+}
+.admin-links a {
+  display: block;
+  padding-bottom: 5px;
+}

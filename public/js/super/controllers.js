@@ -3,6 +3,7 @@
 /* Controllers */
 
 function UserCtrl($scope, $http) {
+
   /*$http.get('/api/posts').
     success(function(data, status, headers, config) {
       $scope.posts = data.posts;
@@ -17,4 +18,12 @@ function AdminCtrl($scope, $http, $location) {
         $location.path('/');
       });
   };*/
+}
+
+function ArticleCtrl($scope) {
+
+}
+
+function CommentCtrl($scope) {
+
 }
