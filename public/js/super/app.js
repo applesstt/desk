@@ -12,6 +12,14 @@ angular.module('superApp', ['ngRoute']).
         templateUrl: '/super/admins',
         controller: AdminCtrl
       }).
+      when('/homeArticles', {
+        templateUrl: '/super/home-articles',
+        controller: HomeArticlesCtrl
+      }).
+      when('/homeStars', {
+        templateUrl: '/super/home-stars',
+        controller: HomeStarsCtrl
+      }).
       when('/articles', {
         templateUrl: '/super/articles',
         controller: ArticleCtrl

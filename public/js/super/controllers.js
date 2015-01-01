@@ -20,6 +20,14 @@ function AdminCtrl($scope, $http, $location) {
   };*/
 }
 
+function HomeArticlesCtrl($scope) {
+
+}
+
+function HomeStarsCtrl($scope) {
+
+}
+
 function ArticleCtrl($scope) {
 
 }
