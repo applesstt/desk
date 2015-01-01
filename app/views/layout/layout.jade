@@ -64,7 +64,7 @@ html
                   .avatar-min-wrap
                     img.avatar-min(src='/avatar/#{req.user.email}')
               if req.user.isSuperAdmin || req.user.isAdmin
-                - var adminUrl = req.user.isSuperAdmin ? '/superAdmin' : '/admin'
+                - var adminUrl = req.user.isSuperAdmin ? '/super' : '/admin'
                 li
                   a(href=adminUrl) 后台管理
               li

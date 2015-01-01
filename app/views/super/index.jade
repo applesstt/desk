@@ -7,10 +7,16 @@ block content-main
   .container-fluid
     .row
       .col-md-2
+        ul
+          li: a(href='#/users') 用户列表
+          li: a(href='#/admins') admin列表
+          li: a(href='/') 文章审核
+          li: a(href='/') 评论审核
       .col-md-10
-
+          div(ng-view)
 append js_content
   script(src='/lib/angular/angular.min.js')
   script(src='/lib/angular-route/angular-route.min.js')
   script(src='/lib/angular-resource/angular-resource.min.js')
   script(src='/js/super/app.js')
+  script(src='/js/super/controllers.js')

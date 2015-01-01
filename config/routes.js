@@ -137,7 +137,9 @@ module.exports = function (app, passport) {
   app.get('/tags/:tag', tags.index);
 
   // admin routes
-  app.get('/superAdmin', auth.user.hasSuperAdminAuthorization, admin.superIndex);
+  app.get('/super', auth.user.hasSuperAdminAuthorization, admin.superIndex);
+  app.get('/super/:superSub', auth.user.hasSuperAdminAuthorization, admin.superSub);
+
   app.get('/admin', auth.user.hasAdminAuthorization, admin.index);
 
 
