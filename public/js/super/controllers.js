@@ -3,14 +3,17 @@
 /* Controllers */
 
 function UserCtrl($scope, $http) {
-
-  /*$http.get('/api/posts').
+  $http.get('/super/users').
     success(function(data, status, headers, config) {
-      $scope.posts = data.posts;
-    });*/
+      $scope.users = data.users;
+    });
 }
 
-function AdminCtrl($scope, $http, $location) {
+function AdminCtrl($scope, $http) {
+  $http.get('/super/admins').
+    success(function(data, status, headers, config) {
+      $scope.users = data.users;
+    });
   /*$scope.form = {};
   $scope.submitPost = function () {
     $http.post('/api/post', $scope.form).

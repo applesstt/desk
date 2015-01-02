@@ -5,27 +5,27 @@ angular.module('superApp', ['ngRoute']).
   config(['$routeProvider', function($routeProvider) {
     $routeProvider.
       when('/', {
-        templateUrl: '/super/users',
+        templateUrl: '/super/to-users',
         controller: UserCtrl
       }).
-      when('/admins', {
-        templateUrl: '/super/admins',
+      when('/toAdmins', {
+        templateUrl: '/super/to-admins',
         controller: AdminCtrl
       }).
-      when('/homeArticles', {
-        templateUrl: '/super/home-articles',
+      when('/toHomeArticles', {
+        templateUrl: '/super/to-home-articles',
         controller: HomeArticlesCtrl
       }).
-      when('/homeStars', {
-        templateUrl: '/super/home-stars',
+      when('/toHomeStars', {
+        templateUrl: '/super/to-home-stars',
         controller: HomeStarsCtrl
       }).
-      when('/articles', {
-        templateUrl: '/super/articles',
+      when('/toArticles', {
+        templateUrl: '/super/to-articles',
         controller: ArticleCtrl
       }).
-      when('/comments', {
-        templateUrl: '/super/comments',
+      when('/toComments', {
+        templateUrl: '/super/to-comments',
         controller: CommentCtrl
       }).
       otherwise({
