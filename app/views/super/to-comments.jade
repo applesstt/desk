@@ -2,19 +2,18 @@
   table.table.table-striped
     thead
       tr
-        th 评论
-        th 操作
+        th 评论列表
     tbody
-      tr
+      tr(ng-repeat='article in articles')
         td
-          p
-            img.avatar-min(src='/avatar/applesstt@163.com')
-            a(href='javascript:{}')   applesstt
-          p 评论了：testtesttesttesttesttesttesttesttest
-            br
-            | xxxxxx
-        td.admin-links
-          .row
-            a.col-md-6(href='javascript:{}') 通过
-          .row
-            a.col-md-6(href='javascript:{}') 未通过
+          include include/article-short
+          .panel(ng-repeat='comment in article.comments')
+            .panel-body.row
+              .col-md-10
+                img.avatar-min(ng-src='/avatar/{{comment.user.email}}')
+                a(href='javascript:{}')   {{comment.user.name}}
+                | : {{comment.body}}
+              .col-md-2
+                a(href='javascript:{}') 通过
+                | &nbsp;&nbsp;|&nbsp;&nbsp;
+                a(href='javascript:{}') 不通过

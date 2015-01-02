@@ -1,0 +1,6 @@
+p
+  a.h4(href='/articles/{{article._id}}', target='_blank') {{article.title}}
+  .post-short
+    .post-short-right
+      img(ng-if='hasBriefImg(article.brief.img)', ng-src='{{article.brief.img}}.200.square.png')
+    | {{article.brief.text}}

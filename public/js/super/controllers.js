@@ -34,6 +34,12 @@ function ArticleCtrl($scope, $http) {
   }
 }
 
-function CommentCtrl($scope) {
-
+function CommentCtrl($scope, $http) {
+  $http.get('/super/comments').
+    success(function(data, status, headers, config) {
+      $scope.articles = data.articles;
+    })
+  $scope.hasBriefImg = function(img) {
+    return img !== '' && true;
+  }
 }

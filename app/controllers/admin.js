@@ -72,3 +72,26 @@ exports.getArticles = function(req, res) {
     })
   });
 }
+
+exports.getComments = function(req, res) {
+  var page = (req.param('page') > 0 ? req.param('page') : 1) - 1;
+  var perPage = 20;
+  var options = {
+    page: page,
+    perPage: perPage,
+    criteria: {
+      '$where': function() {
+        return this.comments.length > 0 && true;
+      }
+    }
+  };
+  Article.listAll(options, function(err, articles) {
+    Article.count().exec(function(err, count) {
+      res.send({
+        articles: articles,
+        page: page + 1,
+        pages: Math.ceil(count / perPage)
+      })
+    })
+  });
+}
