@@ -24,22 +24,18 @@ function HomeStarsCtrl($scope) {
 
 }
 
-function ArticleCtrl($scope, $http) {
+function ArticleCtrl($scope, $http, superFactory) {
   $http.get('/super/articles').
     success(function(data, status, headers, config) {
       $scope.articles = data.articles;
     });
-  $scope.hasBriefImg = function(img) {
-    return img !== '' && true;
-  }
+  $scope.hasBriefImg = superFactory.hasBriefImg;
 }
 
-function CommentCtrl($scope, $http) {
+function CommentCtrl($scope, $http, superFactory) {
   $http.get('/super/comments').
     success(function(data, status, headers, config) {
       $scope.articles = data.articles;
     })
-  $scope.hasBriefImg = function(img) {
-    return img !== '' && true;
-  }
+  $scope.hasBriefImg = superFactory.hasBriefImg;
 }

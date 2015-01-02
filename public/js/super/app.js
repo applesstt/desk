@@ -31,4 +31,11 @@ angular.module('superApp', ['ngRoute']).
       otherwise({
         redirectTo: '/'
       });
-  }]);
+  }]).
+  factory('superFactory', function() {
+    var service = {};
+    service.hasBriefImg = function(img) {
+      return img !== '' && true;
+    };
+    return service;
+  });
