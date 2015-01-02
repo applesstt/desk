@@ -14,13 +14,6 @@ function AdminCtrl($scope, $http) {
     success(function(data, status, headers, config) {
       $scope.users = data.users;
     });
-  /*$scope.form = {};
-  $scope.submitPost = function () {
-    $http.post('/api/post', $scope.form).
-      success(function(data) {
-        $location.path('/');
-      });
-  };*/
 }
 
 function HomeArticlesCtrl($scope) {
@@ -31,8 +24,11 @@ function HomeStarsCtrl($scope) {
 
 }
 
-function ArticleCtrl($scope) {
-
+function ArticleCtrl($scope, $http) {
+  $http.get('/super/articles').
+    success(function(data, status, headers, config) {
+      $scope.articles = data.articles;
+    });
 }
 
 function CommentCtrl($scope) {

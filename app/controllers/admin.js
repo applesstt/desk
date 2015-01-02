@@ -54,3 +54,21 @@ exports.getAdmins = function(req, res) {
   };
   _fetchUsers(req, res, options);
 }
+
+exports.getArticles = function(req, res) {
+  var page = (req.param('page') > 0 ? req.param('page') : 1) - 1;
+  var perPage = 20;
+  var options = {
+    page: page,
+    perPage: perPage
+  };
+  Article.list(options, function(err, articles) {
+    Article.count().exec(function(err, count) {
+      res.send({
+        articles: articles,
+        page: page + 1,
+        pages: Math.ceil(count / perPage)
+      })
+    })
+  });
+}

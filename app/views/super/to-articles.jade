@@ -5,12 +5,13 @@
         th 文章
         th 操作
     tbody
-      tr
+      tr(ng-repeat='article in articles')
         td
           p
-            img.avatar-min(src='/avatar/applesstt@163.com')
-            a(href='javascript:{}')   applesstt
-          p testtesttesttesttesttesttesttesttest
+            img.avatar-min(src='/avatar/{{article.user.email}}')
+            a(href='javascript:{}')   {{article.user.name}}
+          p
+            a(href='javascript:{}') {{article.title}}
         td.admin-links
           .row
             a.col-md-6(href='javascript:{}') 通过

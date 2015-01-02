@@ -141,6 +141,7 @@ module.exports = function (app, passport) {
   app.get('/super', admin.superIndex);
   app.get('/super/users', admin.getUsers);
   app.get('/super/admins', admin.getAdmins);
+  app.get('/super/articles', admin.getArticles);
   app.get('/super/:superSub', admin.superSub);
 
   app.get('/admin', auth.user.hasAdminAuthorization, admin.index);
