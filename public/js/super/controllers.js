@@ -29,6 +29,9 @@ function ArticleCtrl($scope, $http) {
     success(function(data, status, headers, config) {
       $scope.articles = data.articles;
     });
+  $scope.hasBriefImg = function(img) {
+    return img !== '' && true;
+  }
 }
 
 function CommentCtrl($scope) {

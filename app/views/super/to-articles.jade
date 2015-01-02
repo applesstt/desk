@@ -2,19 +2,22 @@
   table.table.table-striped
     thead
       tr
+        th 作者
         th 文章
         th 操作
     tbody
       tr(ng-repeat='article in articles')
+        td.col-md-2
+          img.avatar-min(src='/avatar/{{article.user.email}}')
+          a(href='javascript:{}')   {{article.user.name}}
         td
           p
-            img.avatar-min(src='/avatar/{{article.user.email}}')
-            a(href='javascript:{}')   {{article.user.name}}
-          p
-            a(href='javascript:{}') {{article.title}}
-        td.admin-links
-          .row
-            a.col-md-6(href='javascript:{}') 通过
-            a.col-md-6(href='javascript:{}') 编辑文章
-          .row
-            a.col-md-6(href='javascript:{}') 未通过
+            a.h4(href='javascript:{}') {{article.title}}
+            .post-short
+              .post-short-right
+                img(ng-if='hasBriefImg(article.brief.img)', src='{{article.brief.img}}.200.square.png')
+              | {{article.brief.text}}
+        td.admin-links.col-md-2
+          a(href='javascript:{}') 通过
+          a(href='javascript:{}') 未通过
+          a(href='javascript:{}') 编辑文章
