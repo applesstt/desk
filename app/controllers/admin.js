@@ -24,7 +24,7 @@ exports.index = function(req, res) {
 
 var _fetchUsers = function(req, res, options) {
   var page = (req.param('page') > 0 ? req.param('page') : 1) - 1;
-  var perPage = 20;
+  var perPage = req.param('perPage') > 0 ? req.param('perPage') : 10;
   options.page = page;
   options.perPage = perPage;
 
@@ -32,7 +32,9 @@ var _fetchUsers = function(req, res, options) {
     User.count().exec(function(err, count) {
       res.send({
         users: users,
+        count: count,
         page: page + 1,
+        perPage: perPage,
         pages: Math.ceil(count / perPage)
       })
     })
@@ -57,7 +59,7 @@ exports.getAdmins = function(req, res) {
 
 exports.getArticles = function(req, res) {
   var page = (req.param('page') > 0 ? req.param('page') : 1) - 1;
-  var perPage = 20;
+  var perPage = req.param('perPage') > 0 ? req.param('perPage') : 10;
   var options = {
     page: page,
     perPage: perPage
@@ -66,7 +68,9 @@ exports.getArticles = function(req, res) {
     Article.count().exec(function(err, count) {
       res.send({
         articles: articles,
+        count: count,
         page: page + 1,
+        perPage: perPage,
         pages: Math.ceil(count / perPage)
       })
     })
@@ -75,7 +79,7 @@ exports.getArticles = function(req, res) {
 
 exports.getComments = function(req, res) {
   var page = (req.param('page') > 0 ? req.param('page') : 1) - 1;
-  var perPage = 20;
+  var perPage = req.param('perPage') > 0 ? req.param('perPage') : 10;
   var options = {
     page: page,
     perPage: perPage,
@@ -89,7 +93,9 @@ exports.getComments = function(req, res) {
     Article.count().exec(function(err, count) {
       res.send({
         articles: articles,
+        count: count,
         page: page + 1,
+        perPage: perPage,
         pages: Math.ceil(count / perPage)
       })
     })

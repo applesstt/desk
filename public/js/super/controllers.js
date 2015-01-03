@@ -2,11 +2,18 @@
 
 /* Controllers */
 
-function UserCtrl($scope, $http) {
-  $http.get('/super/users').
-    success(function(data, status, headers, config) {
-      $scope.users = data.users;
+function UserCtrl($scope, SuperUser, $log) {
+  $scope.wrapUsers = SuperUser.get({});
+
+  $scope.maxSize = 5;
+
+  $scope.pageChanged = function() {
+    $scope.wrapUsers = SuperUser.get({
+      page: $scope.wrapUsers.page,
+      perPage: $scope.wrapUsers.perPage
     });
+  }
+
 }
 
 function AdminCtrl($scope, $http) {

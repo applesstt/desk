@@ -6,7 +6,7 @@
         th 文章列表
         th 操作
     tbody
-      tr(ng-repeat='user in users')
+      tr(ng-repeat='user in wrapUsers.users')
         td
           .row
             .col-md-2
@@ -28,3 +28,4 @@
           .row
             a.col-md-6(href='javascript:{}') 设置为明星用户
             a.col-md-6(href='javascript:{}') 删除该用户
+  pagination.pagination-sm(total-items='wrapUsers.count', ng-model='wrapUsers.page', ng-change='pageChanged()', max-size='maxSize', boundary-links='true', rotate='false', items-per-page='wrapUsers.perPage')
