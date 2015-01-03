@@ -8,12 +8,12 @@ block content-main
     .row
       .col-md-2
         .list-group
-          a#usersLink.list-group-item(href='#/') 用户管理
-          a#adminsLink.list-group-item(href='#/toAdmins') 普通管理员管理
-          a#adminsLink.list-group-item(href='#/toHomeArticles') 首页展示文章
-          a#adminsLink.list-group-item(href='#/toHomeStars') 首页展示明星
-          a#articlesLink.list-group-item(href='#/toArticles') 文章审核
-          a#commentsLink.list-group-item(href='#/toComments') 评论审核
+          a#usersLink.list-group-item(href='#/', ng-class='{active: navUsersSel}') 用户管理
+          a#adminsLink.list-group-item(href='#/toAdmins', ng-class='{active: navAdminsSel}') 普通管理员管理
+          a#adminsLink.list-group-item(href='#/toHomeArticles', ng-class='{active: navHomeArticlesSel}') 首页展示文章
+          a#adminsLink.list-group-item(href='#/toHomeStars', ng-class='{active: navHomeStarsSel}') 首页展示明星
+          a#articlesLink.list-group-item(href='#/toArticles', ng-class='{active: navArticlesSel}') 文章审核
+          a#commentsLink.list-group-item(href='#/toComments', ng-class='{active: navCommentsSel}') 评论审核
       .col-md-10
           div(ng-view)
 append js_content

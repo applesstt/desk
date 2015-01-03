@@ -23,30 +23,42 @@ var _userArticles = function(scope, resource) {
     })
   }
 }
+
+var _toggleRootNav = function(rootScope, name) {
+  var navs = ['Users', 'Admins', 'HomeArticles', 'HomeStars', 'Articles', 'Comments'];
+  for(var i = 0; i < navs.length; i++) {
+    var fullName = 'nav' + navs[i] + 'Sel';
+    rootScope[fullName] = (name === navs[i] && true);
+  }
+}
 /* Controllers */
 
-function UserCtrl($scope, SuperUsers, SuperArticles) {
+function UserCtrl($scope, $rootScope, SuperUsers, SuperArticles) {
   _basePaginations($scope, SuperUsers, _userArticles($scope, SuperArticles));
+  _toggleRootNav($rootScope, 'Users');
 }
 
-function AdminCtrl($scope, SuperAdmins, SuperArticles) {
+function AdminCtrl($scope, $rootScope, SuperAdmins, SuperArticles) {
   _basePaginations($scope, SuperAdmins, _userArticles($scope, SuperArticles));
+  _toggleRootNav($rootScope, 'Admins');
 }
 
-function HomeArticlesCtrl($scope) {
-
+function HomeArticlesCtrl($scope, $rootScope) {
+  _toggleRootNav($rootScope, 'HomeArticles');
 }
 
-function HomeStarsCtrl($scope) {
-
+function HomeStarsCtrl($scope, $rootScope) {
+  _toggleRootNav($rootScope, 'HomeStars');
 }
 
-function ArticleCtrl($scope, SuperArticles, superFactory) {
+function ArticleCtrl($scope, $rootScope, SuperArticles, superFactory) {
   _basePaginations($scope, SuperArticles);
   $scope.hasBriefImg = superFactory.hasBriefImg;
+  _toggleRootNav($rootScope, 'Articles');
 }
 
-function CommentCtrl($scope, SuperComments, superFactory) {
+function CommentCtrl($scope, $rootScope, SuperComments, superFactory) {
   _basePaginations($scope, SuperComments);
   $scope.hasBriefImg = superFactory.hasBriefImg;
+  _toggleRootNav($rootScope, 'Comments');
 }
