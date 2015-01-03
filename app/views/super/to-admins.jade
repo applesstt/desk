@@ -6,7 +6,7 @@
         th 文章列表
         th 操作
     tbody
-      tr(ng-repeat='user in users')
+      tr(ng-repeat='user in wrapData.users')
         td
           .row
             .col-md-2
@@ -29,3 +29,4 @@
           .row
             a.col-md-6(href='javascript:{}') 编辑备注信息
             a.col-md-6(href='javascript:{}') 设置管理权限
+  include include/pagination

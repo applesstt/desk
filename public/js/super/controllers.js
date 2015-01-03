@@ -2,7 +2,7 @@
 
 /* Controllers */
 
-function UserCtrl($scope, SuperUsers, $log) {
+function UserCtrl($scope, SuperUsers) {
   $scope.wrapData = SuperUsers.get({});
 
   $scope.maxSize = 5;
@@ -16,11 +16,15 @@ function UserCtrl($scope, SuperUsers, $log) {
 
 }
 
-function AdminCtrl($scope, $http) {
-  $http.get('/super/admins').
-    success(function(data, status, headers, config) {
-      $scope.users = data.users;
-    });
+function AdminCtrl($scope, SuperAdmins) {
+  $scope.wrapData = SuperAdmins.get({});
+  $scope.maxSize = 5;
+  $scope.pageChanged = function() {
+    $scope.wrapData = SuperAdmins.get({
+      page: $scope.wrapData.page,
+      perPage: $scope.wrapData.perPage
+    })
+  }
 }
 
 function HomeArticlesCtrl($scope) {

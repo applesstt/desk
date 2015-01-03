@@ -1,7 +1,7 @@
 'use strict';
 
 // Declare app level module which depends on filters, and services
-angular.module('superApp', ['ngRoute', 'ui.bootstrap', 'superUsersServices']).
+angular.module('superApp', ['ngRoute', 'ui.bootstrap', 'superUsersServices', 'superAdminsServices']).
   config(['$routeProvider', function($routeProvider) {
     $routeProvider.
       when('/', {
