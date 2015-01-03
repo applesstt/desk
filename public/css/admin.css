@@ -6,3 +6,6 @@
   display: block;
   padding-bottom: 5px;
 }
+.admin-pagination {
+  float: right;
+}

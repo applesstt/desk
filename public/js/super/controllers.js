@@ -2,15 +2,15 @@
 
 /* Controllers */
 
-function UserCtrl($scope, SuperUser, $log) {
-  $scope.wrapUsers = SuperUser.get({});
+function UserCtrl($scope, SuperUsers, $log) {
+  $scope.wrapData = SuperUsers.get({});
 
   $scope.maxSize = 5;
 
   $scope.pageChanged = function() {
-    $scope.wrapUsers = SuperUser.get({
-      page: $scope.wrapUsers.page,
-      perPage: $scope.wrapUsers.perPage
+    $scope.wrapData = SuperUsers.get({
+      page: $scope.wrapData.page,
+      perPage: $scope.wrapData.perPage
     });
   }
 
