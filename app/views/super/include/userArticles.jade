@@ -1,0 +1,4 @@
+.admin-links(ng-hide='!user.wrapData.count')
+  p 共发布 {{user.wrapData.count}} 篇文章
+  div(ng-repeat='article in user.wrapData.articles')
+    a(href='/articles/{{article._id}}', target='_blank') {{article.title}}

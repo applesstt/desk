@@ -7,7 +7,7 @@
         th 操作
     tbody
       tr(ng-repeat='user in wrapData.users')
-        td
+        td.col-md-3
           .row
             .col-md-2
               img.avatar-min(ng-src='/avatar/{{user.email}}')
@@ -17,12 +17,9 @@
               p 城市：{{user.city}}
               p 网址：{{user.website}}
               p 备注：自用小号
-        td.admin-links 最近操作
-          .text-success xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-          .text-success xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-          .text-success xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-          .text-success xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-        td.admin-links
+        td
+          include include/userArticles
+        td.admin-links.col-md-4
           .row
             a.col-md-6(href='javascript:{}') 提升为超级管理员
             a.col-md-6(href='javascript:{}') 降为普通用户

@@ -7,7 +7,7 @@
         th 操作
     tbody
       tr(ng-repeat='user in wrapData.users')
-        td
+        td.col-md-3
           .row
             .col-md-2
               img.avatar-min(ng-src='/avatar/{{user.email}}')
@@ -16,12 +16,9 @@
               p 邮箱：{{user.email}}
               p 城市：{{user.city}}
               p 网址：{{user.website}}
-        td.admin-links 共发布 5 篇文章
-          a(href='javascript:{}') xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-          a(href='javascript:{}') xxxxxx
-          a(href='javascript:{}') xxxxxx
-          a(href='javascript:{}') xxxxxx
-        td.admin-links
+        td
+          include include/userArticles
+        td.admin-links.col-md-4
           .row
             a.col-md-6(href='javascript:{}') 提升为管理员
             a.col-md-6(href='javascript:{}') 提升为超级管理员

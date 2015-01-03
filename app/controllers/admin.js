@@ -62,10 +62,16 @@ exports.getArticles = function(req, res) {
   var perPage = req.param('perPage') > 0 ? req.param('perPage') : 10;
   var options = {
     page: page,
-    perPage: perPage
+    perPage: perPage,
+    criteria: {}
   };
+  console.log(req.param('userId'));
+  var userId = req.param('userId');
+  if(typeof userId !== 'undefined' && userId !== '') {
+    options.criteria.user = req.param('userId');
+  }
   Article.list(options, function(err, articles) {
-    Article.count().exec(function(err, count) {
+    Article.count(options.criteria, function(err, count) {
       res.send({
         articles: articles,
         count: count,
