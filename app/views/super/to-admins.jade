@@ -8,17 +8,9 @@
     tbody
       tr(ng-repeat='user in wrapData.users')
         td.col-md-3
-          .row
-            .col-md-2
-              img.avatar-min(ng-src='/avatar/{{user.email}}')
-            .col-md-10
-              p 姓名：{{user.name}}
-              p 邮箱：{{user.email}}
-              p 城市：{{user.city}}
-              p 网址：{{user.website}}
-              p 备注：自用小号
+          include include/user-detail
         td
-          include include/userArticles
+          include include/user-articles
         td.admin-links.col-md-4
           .row
             a.col-md-6(href='javascript:{}') 提升为超级管理员
