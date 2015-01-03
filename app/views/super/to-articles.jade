@@ -6,7 +6,7 @@
         th 文章
         th 操作
     tbody
-      tr(ng-repeat='article in articles')
+      tr(ng-repeat='article in wrapData.articles')
         td.col-md-2
           img.avatar-min(ng-src='/avatar/{{article.user.email}}')
           a(href='javascript:{}')   {{article.user.name}}
@@ -16,3 +16,4 @@
           a(href='javascript:{}') 通过
           a(href='javascript:{}') 未通过
           a(href='javascript:{}') 编辑文章
+  include include/pagination

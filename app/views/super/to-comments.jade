@@ -4,7 +4,7 @@
       tr
         th 评论列表
     tbody
-      tr(ng-repeat='article in articles')
+      tr(ng-repeat='article in wrapData.articles')
         td
           include include/article-short
           .panel(ng-repeat='comment in article.comments')
@@ -17,3 +17,4 @@
                 a(href='javascript:{}') 通过
                 | &nbsp;&nbsp;|&nbsp;&nbsp;
                 a(href='javascript:{}') 不通过
+  include include/pagination

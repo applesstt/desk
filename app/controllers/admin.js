@@ -29,7 +29,7 @@ var _fetchUsers = function(req, res, options) {
   options.perPage = perPage;
 
   User.list(options, function(err, users) {
-    User.count().exec(function(err, count) {
+    User.count(options.criteria, function(err, count) {
       res.send({
         users: users,
         count: count,
@@ -80,24 +80,25 @@ exports.getArticles = function(req, res) {
 exports.getComments = function(req, res) {
   var page = (req.param('page') > 0 ? req.param('page') : 1) - 1;
   var perPage = req.param('perPage') > 0 ? req.param('perPage') : 10;
+  var criteria = {
+    '$where': function() {
+      return this.comments.length > 0 && true;
+    }
+  };
   var options = {
     page: page,
     perPage: perPage,
-    criteria: {
-      '$where': function() {
-        return this.comments.length > 0 && true;
-      }
-    }
+    criteria: criteria
   };
   Article.listAll(options, function(err, articles) {
-    Article.count().exec(function(err, count) {
+    Article.count(criteria, function(err, count) {
       res.send({
         articles: articles,
         count: count,
         page: page + 1,
         perPage: perPage,
         pages: Math.ceil(count / perPage)
-      })
-    })
-  });
+      })}
+    )
+  })
 }

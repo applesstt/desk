@@ -35,18 +35,26 @@ function HomeStarsCtrl($scope) {
 
 }
 
-function ArticleCtrl($scope, $http, superFactory) {
-  $http.get('/super/articles').
-    success(function(data, status, headers, config) {
-      $scope.articles = data.articles;
-    });
+function ArticleCtrl($scope, SuperArticles, superFactory) {
+  $scope.wrapData = SuperArticles.get({});
+  $scope.maxSize = 5;
+  $scope.pageChanged = function() {
+    $scope.wrapData = SuperArticles.get({
+      page: $scope.wrapData.page,
+      perPage: $scope.wrapData.perPage
+    })
+  }
   $scope.hasBriefImg = superFactory.hasBriefImg;
 }
 
-function CommentCtrl($scope, $http, superFactory) {
-  $http.get('/super/comments').
-    success(function(data, status, headers, config) {
-      $scope.articles = data.articles;
+function CommentCtrl($scope, SuperComments, superFactory) {
+  $scope.wrapData = SuperComments.get({});
+  $scope.maxSize = 5;
+  $scope.pageChanged = function() {
+    $scope.wrapData = SuperComments.get({
+      page: $scope.wrapData.page,
+      perPage: $scope.wrapData.perPage
     })
+  }
   $scope.hasBriefImg = superFactory.hasBriefImg;
 }
