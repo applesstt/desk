@@ -7,15 +7,13 @@
         th 操作
     tbody
       tr(ng-repeat='user in wrapData.users')
-        td.col-md-3
+        td.col-md-4
           include include/user-detail
         td
           include include/user-articles
-        td.admin-links.col-md-4
-          .row
-            a.col-md-6(href='javascript:{}') 提升为管理员
-            a.col-md-6(href='javascript:{}') 提升为超级管理员
-          .row
-            a.col-md-6(href='javascript:{}') 设置为明星用户
-            a.col-md-6(href='javascript:{}') 删除该用户
+        td.admin-links.col-md-2
+          a(href='javascript:{}') 提升为管理员
+          a(href='javascript:{}') 提升为超管
+          a(href='javascript:{}') 设置为明星
+          a(href='javascript:{}') 删除该用户
   include include/pagination
