@@ -46,6 +46,29 @@ exports.getUsers = function(req, res) {
   _fetchUsers(req, res, options);
 }
 
+exports.getUser = function(req, res) {
+  var userId = req.param('userId');
+  if(typeof userId === 'undefined' || userId === '') {
+    return res.send({
+      message: 'You should input user id'
+    })
+  }
+  var options = {
+    criteria: {
+      '_id': userId
+    }
+  };
+  User.load(options, function (err, user) {
+    if (!user || err) {
+      message = err ? err : 'Failed to load User ' + userId;
+      return res.send({
+        message: message
+      });
+    }
+    res.send(user);
+  });
+}
+
 exports.getAdmins = function(req, res) {
   var options = {
     criteria: {
@@ -65,7 +88,6 @@ exports.getArticles = function(req, res) {
     perPage: perPage,
     criteria: {}
   };
-  console.log(req.param('userId'));
   var userId = req.param('userId');
   if(typeof userId !== 'undefined' && userId !== '') {
     options.criteria.user = req.param('userId');

@@ -2,10 +2,10 @@
 
 var _basePaginations = function(scope, resource, success) {
   success = typeof success === 'function' ? success : function() {};
-  scope.wrapData = resource.get({}, success);
+  scope.wrapData = resource.query(success);
   scope.maxSize = 5;
   scope.pageChanged = function() {
-    scope.wrapData = resource.get({
+    scope.wrapData = resource.query({
       page: scope.wrapData.page,
       perPage: scope.wrapData.perPage
     }, success);
@@ -33,9 +33,14 @@ var _toggleRootNav = function(rootScope, name) {
 }
 /* Controllers */
 
-function UserCtrl($scope, $rootScope, SuperUsers, SuperArticles) {
-  _basePaginations($scope, SuperUsers, _userArticles($scope, SuperArticles));
+function UserCtrl($scope, $rootScope, SuperUser, SuperArticles) {
+  _basePaginations($scope, SuperUser, _userArticles($scope, SuperArticles));
   _toggleRootNav($rootScope, 'Users');
+
+  $scope.setAdmin = function(index) {
+    var user = $scope.wrapData.users[index];
+    SuperUser.save(user);
+  }
 }
 
 function AdminCtrl($scope, $rootScope, SuperAdmins, SuperArticles) {

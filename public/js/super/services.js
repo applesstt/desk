@@ -1,10 +1,10 @@
 /**
  * super users services
  */
-angular.module('superUsersServices', ['ngResource']).factory('SuperUsers', ['$resource',
+angular.module('superUserServices', ['ngResource']).factory('SuperUser', ['$resource',
   function($resource){
-    return $resource('/super/users', {}, {
-      query: {method: 'GET', params: {}, isArray: true}
+    return $resource('/super/user/:userId', {userId:'@_id'}, {
+      query: {method: 'GET', isArray: false}
     });
   }]);
 
@@ -14,7 +14,7 @@ angular.module('superUsersServices', ['ngResource']).factory('SuperUsers', ['$re
 angular.module('superAdminsServices', ['ngResource']).factory('SuperAdmins', ['$resource',
   function($resource) {
     return $resource('/super/admins', {}, {
-      query: {method: 'GET', params: {}, isArray: true}
+      query: {method: 'GET', isArray: false}
     })
   }])
 
@@ -24,7 +24,7 @@ angular.module('superAdminsServices', ['ngResource']).factory('SuperAdmins', ['$
 angular.module('superArticlesServices', ['ngResource']).factory('SuperArticles', ['$resource',
   function($resource) {
     return $resource('/super/articles', {}, {
-      query: {method: 'GET', params: {}, isArray: true}
+      query: {method: 'GET', isArray: false}
     })
   }])
 
@@ -34,6 +34,6 @@ angular.module('superArticlesServices', ['ngResource']).factory('SuperArticles',
 angular.module('superCommentsServices', ['ngResource']).factory('SuperComments', ['$resource',
   function($resource) {
     return $resource('/super/comments', {}, {
-      query: {method: 'GET', params: {}, isArray: true}
+      query: {method: 'GET', isArray: false}
     })
   }])

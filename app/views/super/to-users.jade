@@ -12,8 +12,7 @@
         td
           include include/user-articles
         td.admin-links.col-md-2
-          a(href='javascript:{}') 提升为管理员
-          a(href='javascript:{}') 提升为超管
-          a(href='javascript:{}') 设置为明星
-          a(href='javascript:{}') 删除该用户
+          a(href='javascript:{}', ng-click='setAdmin($index)', ng-show='!user.isAdmin && !user.isSuperAdmin') 提升为管理员
+          a(href='javascript:{}', ng-show='!user.isStar') 设置为明星
+          a(href='javascript:{}', ng-show='!user.isDel') 删除该用户
   include include/pagination

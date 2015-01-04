@@ -26,8 +26,10 @@ var UserSchema = new Schema({
   city: { type: String, default: '' },
   website: { type: String, default: '' },
   des: { type: String, default: '' },
-  isSuperAdmin: { type: Boolean, default: false },
-  isAdmin: { type: Boolean, default: false },
+  isSuperAdmin: { type: Boolean, default: false }, //超级管理员
+  isAdmin: { type: Boolean, default: false }, //普通管理员
+  isStar: { type: Boolean, default: false }, //明星用户
+  isDel: { type: Boolean, default: false }, //是否逻辑删除
   hashed_password: { type: String, default: '' },
   salt: { type: String, default: '' },
   authToken: { type: String, default: '' },
