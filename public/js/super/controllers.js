@@ -86,14 +86,6 @@ function AdminCtrl($scope, $rootScope, SuperAdmin, SuperArticle) {
   }
 }
 
-function HomeArticlesCtrl($scope, $rootScope) {
-  _toggleRootNav($rootScope, 'HomeArticles');
-}
-
-function HomeStarsCtrl($scope, $rootScope) {
-  _toggleRootNav($rootScope, 'HomeStars');
-}
-
 function ArticleCtrl($scope, $rootScope, SuperArticle, superFactory) {
   _basePaginations($scope, SuperArticle);
   $scope.hasBriefImg = superFactory.hasBriefImg;
@@ -126,4 +118,13 @@ function CommentCtrl($scope, $rootScope, SuperComment, superFactory) {
       $scope.wrapData.articles[index] = data.article;
     })
   }
+}
+
+function HomeArticleCtrl($scope, $rootScope, SuperHomeArticle) {
+  _toggleRootNav($rootScope, 'HomeArticles');
+  $scope.wrapData = SuperHomeArticle.query();
+}
+
+function HomeStarCtrl($scope, $rootScope) {
+  _toggleRootNav($rootScope, 'HomeStars');
 }

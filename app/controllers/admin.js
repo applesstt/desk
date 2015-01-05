@@ -6,6 +6,7 @@
 var mongoose = require('mongoose');
 var Article = mongoose.model('Article');
 var User = mongoose.model('User');
+var HomeArticle = mongoose.model('HomeArticle');
 var utils = require('../../lib/utils');
 var extend = require('util')._extend;
 
@@ -189,6 +190,39 @@ exports.updateComment = function(req, res) {
     }
     res.send({
       article: article
+    })
+  })
+}
+
+var _fillHomeArticles = function(list) {
+  var retList = []
+  for(var i = 0; i < 10; i++) {
+    var tempObj = {
+      index: i + 1,
+      isNull: true
+    };
+    for(var j = 0; j < list.length; j++) {
+      if(list[j]['index'] === i + 1) {
+        tempObj = list[j];
+        break;
+      }
+    }
+    retList.push(tempObj);
+  }
+  return retList;
+}
+
+exports.getHomeArticles = function(req, res) {
+  var options = {};
+  HomeArticle.list(options, function(err, list) {
+    if(err) {
+      return res.send({
+        message: 'Load home articles error!'
+      })
+    }
+    list = _fillHomeArticles(list);
+    res.send({
+      homeArticles: list
     })
   })
 }

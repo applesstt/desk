@@ -149,6 +149,9 @@ module.exports = function (app, passport) {
 
   app.get('/super/user', admin.getUsers);
   app.put('/super/user/:userId', admin.updateUser);
+
+  app.get('/super/homeArticle', admin.getHomeArticles);
+
   app.get('/super/:superSub', admin.superSub);
 
   app.param('userId', admin.loadUser);

@@ -2,16 +2,17 @@
   table.table.table-striped
     thead
       tr
-        th 首页位置
+        th 位置
         th 文章
         th 操作
     tbody
-      tr
-        td 1
+      tr(ng-repeat='article in wrapData.homeArticles')
+        td.col-md-1 {{article.index}}
         td
-          p
-            img.avatar-min(src='/avatar/applesstt@163.com')
-            a(href='javascript:{}')   applesstt
-          p testtesttesttesttesttesttesttesttest
-        td
+          div(ng-hide='article.isNull')
+            p
+              img.avatar-min(src='/avatar/{{article.user.email}}')
+              a(href='javascript:{}')   {{article.user.name}}
+            include include/article-short
+        td.col-md-2
           a(href='javascript:{}') 更改文章
