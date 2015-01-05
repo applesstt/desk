@@ -37,9 +37,26 @@ function UserCtrl($scope, $rootScope, SuperUser, SuperArticles) {
   _basePaginations($scope, SuperUser, _userArticles($scope, SuperArticles));
   _toggleRootNav($rootScope, 'Users');
 
-  $scope.setAdmin = function(index) {
+  var _setProperty = function(index, property, flag) {
+    flag = flag && true;
     var user = $scope.wrapData.users[index];
-    SuperUser.save(user);
+    user[property] = flag;
+    user._csrf = $scope._csrf;
+    SuperUser.update(user, function(data) {
+      $scope.wrapData.users[index] = data.user;
+    });
+  }
+
+  $scope.setAdmin = function(index, flag) {
+    _setProperty(index, 'isAdmin', flag);
+  }
+
+  $scope.setStar = function(index, flag) {
+    _setProperty(index, 'isStar', flag);
+  }
+
+  $scope.delUser = function(index, flag) {
+    _setProperty(index, 'isDel', flag);
   }
 }
 

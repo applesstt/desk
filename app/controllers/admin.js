@@ -46,27 +46,38 @@ exports.getUsers = function(req, res) {
   _fetchUsers(req, res, options);
 }
 
-exports.getUser = function(req, res) {
-  var userId = req.param('userId');
-  if(typeof userId === 'undefined' || userId === '') {
-    return res.send({
-      message: 'You should input user id'
-    })
-  }
+/**
+ * Load temp user for next
+ */
+exports.loadUser = function(req, res, next, userId) {
   var options = {
-    criteria: {
-      '_id': userId
-    }
+    criteria: { _id : userId }
   };
   User.load(options, function (err, user) {
-    if (!user || err) {
-      message = err ? err : 'Failed to load User ' + userId;
+    if (err) return next(err);
+    if (!user) return next(new Error('Failed to load User ' + userName));
+    req.tempUser = user;
+    next();
+  });
+}
+
+exports.updateUser = function(req, res) {
+  var user = req.tempUser;
+  var wrapData = user.wrapData;
+  delete user.wrapData;
+  delete user._csrf;
+  user = extend(user, req.body);
+  user.save(function(err) {
+    if(err) {
       return res.send({
-        message: message
+        message: 'Update user error!'
       });
     }
-    res.send(user);
-  });
+    user.wrapData = wrapData;
+    res.send({
+      user: user
+    });
+  })
 }
 
 exports.getAdmins = function(req, res) {

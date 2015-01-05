@@ -4,7 +4,8 @@
 angular.module('superUserServices', ['ngResource']).factory('SuperUser', ['$resource',
   function($resource){
     return $resource('/super/user/:userId', {userId:'@_id'}, {
-      query: {method: 'GET', isArray: false}
+      query: {method: 'GET', isArray: false},
+      update: {method: 'PUT'}
     });
   }]);
 
