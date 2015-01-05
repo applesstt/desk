@@ -252,14 +252,9 @@ exports.updateHomeArticles = function(req, res) {
           message: 'Update home article error!'
         })
       }
-      User.populate(article, {
-          path: 'article.user'
-        }, function(err, article) {
-          res.send({
-            homeArticle: article
-          })
-        }
-      )
+      res.send({
+        homeArticle: article
+      })
     })
   });
 }
