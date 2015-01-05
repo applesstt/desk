@@ -61,6 +61,18 @@ exports.loadUser = function(req, res, next, userId) {
   });
 }
 
+/**
+ * Load temp article for next
+ */
+exports.loadArticle = function(req, res, next, articleId) {
+  Article.load(articleId, function (err, article) {
+    if (err) return next(err);
+    if (!article) return next(new Error('not found'));
+    req.tempArticle = article;
+    next();
+  });
+}
+
 exports.updateUser = function(req, res) {
   var user = req.tempUser;
   var wrapData = user.wrapData;
@@ -114,6 +126,24 @@ exports.getArticles = function(req, res) {
       })
     })
   });
+}
+
+exports.updateArticle = function(req, res) {
+  var article = req.tempArticle;
+  delete req.body._csrf;
+  delete req.body.tags;
+  delete req.body.comments;
+  article = extend(article, req.body);
+  article.save(function(err) {
+    if(err) {
+      return res.send({
+        message: 'Update article error!'
+      });
+    }
+    res.send({
+      article: article
+    });
+  })
 }
 
 exports.getComments = function(req, res) {

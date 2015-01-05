@@ -12,10 +12,10 @@ angular.module('superUserServices', ['ngResource']).factory('SuperUser', ['$reso
 /**
  * super admins services
  */
-angular.module('superAdminsServices', ['ngResource']).factory('SuperAdmins', ['$resource',
+angular.module('superAdminServices', ['ngResource']).factory('SuperAdmin', ['$resource',
   function($resource) {
     return $resource('/super/user/:userId', {userId: '@_id'}, {
-      query: {method: 'GET', isArray: false, url: '/super/admins'},
+      query: {method: 'GET', isArray: false, url: '/super/admin'},
       update: {method: 'PUT'}
     })
   }])
@@ -23,10 +23,11 @@ angular.module('superAdminsServices', ['ngResource']).factory('SuperAdmins', ['$
 /**
  * super articles services
  */
-angular.module('superArticlesServices', ['ngResource']).factory('SuperArticles', ['$resource',
+angular.module('superArticleServices', ['ngResource']).factory('SuperArticle', ['$resource',
   function($resource) {
-    return $resource('/super/articles', {}, {
-      query: {method: 'GET', isArray: false}
+    return $resource('/super/article/:articleId', {articleId: '@_id'}, {
+      query: {method: 'GET', isArray: false},
+      update: {method: 'PUT'}
     })
   }])
 

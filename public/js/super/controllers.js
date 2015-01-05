@@ -33,8 +33,8 @@ var _toggleRootNav = function(rootScope, name) {
 }
 /* Controllers */
 
-function UserCtrl($scope, $rootScope, SuperUser, SuperArticles) {
-  _basePaginations($scope, SuperUser, _userArticles($scope, SuperArticles));
+function UserCtrl($scope, $rootScope, SuperUser, SuperArticle) {
+  _basePaginations($scope, SuperUser, _userArticles($scope, SuperArticle));
   _toggleRootNav($rootScope, 'Users');
 
   var _setProperty = function(index, property, flag) {
@@ -60,8 +60,8 @@ function UserCtrl($scope, $rootScope, SuperUser, SuperArticles) {
   }
 }
 
-function AdminCtrl($scope, $rootScope, SuperAdmins, SuperArticles) {
-  _basePaginations($scope, SuperAdmins, _userArticles($scope, SuperArticles));
+function AdminCtrl($scope, $rootScope, SuperAdmin, SuperArticle) {
+  _basePaginations($scope, SuperAdmin, _userArticles($scope, SuperArticle));
   _toggleRootNav($rootScope, 'Admins');
 
   var _setProperty = function(index, property, flag) {
@@ -69,7 +69,7 @@ function AdminCtrl($scope, $rootScope, SuperAdmins, SuperArticles) {
     var user = $scope.wrapData.users[index];
     user[property] = flag;
     user._csrf = $scope._csrf;
-    SuperAdmins.update(user, function(data) {
+    SuperAdmin.update(user, function(data) {
       $scope.wrapData.users[index] = data.user;
       if(property === 'isAdmin' && !flag) {
         $scope.wrapData.users.splice(index, 1);
@@ -94,10 +94,20 @@ function HomeStarsCtrl($scope, $rootScope) {
   _toggleRootNav($rootScope, 'HomeStars');
 }
 
-function ArticleCtrl($scope, $rootScope, SuperArticles, superFactory) {
-  _basePaginations($scope, SuperArticles);
+function ArticleCtrl($scope, $rootScope, SuperArticle, superFactory) {
+  _basePaginations($scope, SuperArticle);
   $scope.hasBriefImg = superFactory.hasBriefImg;
   _toggleRootNav($rootScope, 'Articles');
+
+  $scope.setShow = function(index, flag) {
+    var article = $scope.wrapData.articles[index];
+    article._csrf = $scope._csrf;
+    article.checked = true;
+    article.show = flag;
+    SuperArticle.update(article, function(data) {
+      $scope.wrapData.articles[index] = data.article;
+    })
+  };
 }
 
 function CommentCtrl($scope, $rootScope, SuperComments, superFactory) {

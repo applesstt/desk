@@ -139,17 +139,22 @@ module.exports = function (app, passport) {
   // admin routes
   app.all('/super', auth.user.hasSuperAdminAuthorization);
   app.get('/super', admin.superIndex);
-  app.get('/super/admins', admin.getAdmins);
-  app.get('/super/articles', admin.getArticles);
+  app.get('/super/admin', admin.getAdmins);
   app.get('/super/comments', admin.getComments);
+
+  app.get('/super/article', admin.getArticles);
+  app.route('/super/article/:articleId').
+    put(admin.updateArticle);
+
   app.get('/super/user', admin.getUsers);
   app.route('/super/user/:userId').
     put(admin.updateUser);
   app.get('/super/:superSub', admin.superSub);
 
   app.param('userId', admin.loadUser);
+  app.param('articleId', admin.loadArticle);
 
-  app.get('/admin', auth.user.hasAdminAuthorization, admin.index);
+  //app.get('/admin', auth.user.hasAdminAuthorization, admin.index);
 
 
   /**

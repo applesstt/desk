@@ -10,10 +10,10 @@ block content-main
         .list-group
           a#usersLink.list-group-item(href='#/', ng-class='{active: navUsersSel}') 用户管理
           a#adminsLink.list-group-item(href='#/toAdmins', ng-class='{active: navAdminsSel}') 管理员管理
-          a#adminsLink.list-group-item(href='#/toHomeArticles', ng-class='{active: navHomeArticlesSel}') 首页文章
-          a#adminsLink.list-group-item(href='#/toHomeStars', ng-class='{active: navHomeStarsSel}') 首页明星
           a#articlesLink.list-group-item(href='#/toArticles', ng-class='{active: navArticlesSel}') 文章审核
           a#commentsLink.list-group-item(href='#/toComments', ng-class='{active: navCommentsSel}') 评论审核
+          a#adminsLink.list-group-item(href='#/toHomeArticles', ng-class='{active: navHomeArticlesSel}') 首页文章
+          a#adminsLink.list-group-item(href='#/toHomeStars', ng-class='{active: navHomeStarsSel}') 首页明星
       .col-md-10
           div(ng-view)
 append js_content

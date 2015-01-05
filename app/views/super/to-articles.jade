@@ -1,3 +1,4 @@
+include include/csrf
 .table-responsive
   table.table.table-striped
     thead
@@ -12,8 +13,11 @@
           a(href='javascript:{}')   {{article.user.name}}
         td
           include include/article-short
-        td.admin-links.col-md-2
-          a(href='javascript:{}') 通过
-          a(href='javascript:{}') 未通过
-          a(href='javascript:{}') 编辑文章
+        td.col-md-2
+          p(ng-show='article.checked')
+            span.text-success(ng-show='article.show') 已通过
+            span.text-danger(ng-show='!article.show') 未通过
+          div(ng-show='!article.checked')
+            p: a.btn.btn-success.btn-sm(href='javascript:{}', ng-click='setShow($index, true)') 这篇文章很不错
+            p: a.btn.btn-danger.btn-sm(href='javascript:{}', ng-click='setShow($index, false)') 这篇文章不合格
   include include/pagination

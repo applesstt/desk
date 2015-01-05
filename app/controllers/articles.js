@@ -65,7 +65,9 @@ exports.index = function (req, res){
   var options = {
     perPage: perPage,
     page: page,
-    criteria: {}
+    criteria: {
+      show: true
+    }
   };
 
   if(typeof category !== 'undefined' && category !== '') {

@@ -44,6 +44,8 @@ var ArticleSchema = new Schema({
   }],
   category: {type: String, default: '', trim: true},
   tags: {type: [], get: getTags, set: setTags},
+  show: {type: Boolean, default: true}, // true - user can see it  false - otherwise
+  checked: {type: Boolean, default: false}, // true - has checked  false - wait checked
   brief: {
     img: {type: String, default: '', trim: true},
     text: {type: String, default: '', trim: true}
