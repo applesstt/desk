@@ -34,9 +34,10 @@ angular.module('superArticleServices', ['ngResource']).factory('SuperArticle', [
 /**
  * super comments services
  */
-angular.module('superCommentsServices', ['ngResource']).factory('SuperComments', ['$resource',
+angular.module('superCommentServices', ['ngResource']).factory('SuperComment', ['$resource',
   function($resource) {
-    return $resource('/super/comments', {}, {
-      query: {method: 'GET', isArray: false}
+    return $resource('/super/commentsInArticle/:articleId', {articleId: '@_id'}, {
+      query: {method: 'GET', isArray: false},
+      update: {method: 'PUT'}
     })
   }])

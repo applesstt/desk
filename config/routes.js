@@ -140,15 +140,15 @@ module.exports = function (app, passport) {
   app.all('/super', auth.user.hasSuperAdminAuthorization);
   app.get('/super', admin.superIndex);
   app.get('/super/admin', admin.getAdmins);
-  app.get('/super/comments', admin.getComments);
+
+  app.get('/super/commentsInArticle', admin.getComments);
+  app.put('/super/commentsInArticle/:articleId', admin.updateComment);
 
   app.get('/super/article', admin.getArticles);
-  app.route('/super/article/:articleId').
-    put(admin.updateArticle);
+  app.put('/super/article/:articleId', admin.updateArticle);
 
   app.get('/super/user', admin.getUsers);
-  app.route('/super/user/:userId').
-    put(admin.updateUser);
+  app.put('/super/user/:userId', admin.updateUser);
   app.get('/super/:superSub', admin.superSub);
 
   app.param('userId', admin.loadUser);

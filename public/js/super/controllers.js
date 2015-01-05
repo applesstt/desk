@@ -110,8 +110,20 @@ function ArticleCtrl($scope, $rootScope, SuperArticle, superFactory) {
   };
 }
 
-function CommentCtrl($scope, $rootScope, SuperComments, superFactory) {
-  _basePaginations($scope, SuperComments);
+function CommentCtrl($scope, $rootScope, SuperComment, superFactory) {
+  _basePaginations($scope, SuperComment);
   $scope.hasBriefImg = superFactory.hasBriefImg;
   _toggleRootNav($rootScope, 'Comments');
+
+  $scope.setShow = function(index, commentId, flag) {
+    var article = $scope.wrapData.articles[index];
+    SuperComment.update({
+      _id: article._id,
+      commentId: commentId,
+      flag: flag,
+      _csrf: $scope._csrf
+    }, function(data) {
+      $scope.wrapData.articles[index] = data.article;
+    })
+  }
 }

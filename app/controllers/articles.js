@@ -8,6 +8,15 @@ var Article = mongoose.model('Article')
 var utils = require('../../lib/utils')
 var extend = require('util')._extend
 
+var _filterCommentCanShow = function(article) {
+  var comments = article.comments;
+  for(var i = 0; i < comments.length; i++) {
+    if(!comments[i].show) {
+      comments.splice(i, 1);
+      i--;
+    }
+  }
+}
 /**
  * Load
  */
@@ -18,7 +27,9 @@ exports.load = function (req, res, next, id){
   Article.load(id, function (err, article) {
     if (err) return next(err);
     if (!article) return next(new Error('not found'));
+    _filterCommentCanShow(article);
     req.article = article;
+
     next();
   });
 };

@@ -40,6 +40,8 @@ var ArticleSchema = new Schema({
   comments: [{
     body: {type: String, default: ''},
     user: {type: Schema.ObjectId, ref: 'User'},
+    show: {type: Boolean, default: true},
+    checked: {type: Boolean, default: false},
     createdAt: {type: Date, default: Date.now}
   }],
   category: {type: String, default: '', trim: true},
@@ -179,6 +181,19 @@ ArticleSchema.methods = {
     // - by applesstt
     var index = utils.indexof(this.comments, { id: commentId });
     if (~index) this.comments.splice(index, 1);
+    else return cb('not found');
+    this.save(cb);
+  },
+
+  /**
+   * Update comment
+   */
+  checkComment: function(commentId, flag, cb) {
+    var index = utils.indexof(this.comments, { id: commentId });
+    if (~index) {
+      this.comments[index].checked = true;
+      this.comments[index].show = flag;
+    }
     else return cb('not found');
     this.save(cb);
   }

@@ -171,3 +171,24 @@ exports.getComments = function(req, res) {
     )
   })
 }
+
+exports.updateComment = function(req, res) {
+  var article = req.tempArticle;
+  var commentId = req.body.commentId;
+  var flag = req.body.flag && true;
+  if(typeof commentId === 'undefined' || commentId === '') {
+    return res.send({
+      message: 'You should input comment id!'
+    });
+  }
+  article.checkComment(commentId, flag, function(err, article) {
+    if(err) {
+      return res.send({
+        message: 'Check comment failure!'
+      });
+    }
+    res.send({
+      article: article
+    })
+  })
+}
