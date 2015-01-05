@@ -12,12 +12,15 @@ input(type='hidden', ng-model='_csrf', ng-init='_csrf="#{csrf_token}"', value='#
           include include/user-detail
         td
           include include/user-articles
-        td.admin-links.col-md-2
-          a(href='javascript:{}', ng-click='setAdmin($index, true)', ng-show='!user.isAdmin && !user.isSuperAdmin') 提升为管理员
-          a(href='javascript:{}', ng-click='setStar($index, !user.isStar)')
-            span(ng-show='!user.isStar') 设置为明星
-            span(ng-show='user.isStar') 取消明星
-          a(href='javascript:{}', ng-click='delUser($index, !user.isDel)')
+        td.col-md-2
+          .admin-links
+            a(href='javascript:{}', ng-click='setStar($index, !user.isStar)')
+              span(ng-show='!user.isStar') 设置为明星
+              span(ng-show='user.isStar') 取消明星
+            a(href='javascript:{}', ng-click='setAdmin($index, !user.isAdmin && !user.isSuperAdmin)', ng-hide='user.isSuperAdmin')
+              span(ng-show='!user.isAdmin && !user.isSuperAdmin') 提升为管理员
+              span(ng-show='user.isAdmin') 降为普通用户
+          a(href='javascript:{}', class='btn btn-danger btn-sm', ng-click='delUser($index, !user.isDel)')
             span(ng-show='!user.isDel') 删除该用户
             span(ng-show='user.isDel') (已删除)恢复用户
   include include/pagination
