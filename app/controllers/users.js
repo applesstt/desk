@@ -88,6 +88,7 @@ exports.show = function (req, res) {
     perPage: perPage,
     page: page,
     criteria: {
+      show: true,
       user: user._id
     }
   };

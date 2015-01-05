@@ -7,7 +7,7 @@ block content-main
     input(type='hidden', name='_csrf', value='#{csrf_token}')
     input(type='hidden', name='_method',value='put')
     .form-group
-      input.form-control(disabled=true, value='#{user.name}')
+      input#person-email.form-control(disabled=true, name='email', value='#{user.email}', placeholder='邮箱')
     .form-group
       .edit-user-img
         img#user-avatar-show.avatar-middle(src='/avatar/#{user.email}')
@@ -29,7 +29,7 @@ block content-main
               button.btn.btn-default(type='button', data-dismiss='modal') 关闭
               button#crop-image.btn.btn-primary(type='button') 保存
     .form-group
-      input#person-email.form-control(name='email', value='#{user.email}', placeholder='邮箱')
+      input.form-control(name='name', value='#{user.name}', placeholder='昵称')
     .form-group
       input#person-city.form-control(name='city', value='#{user.city}', placeholder='城市')
     .form-group
