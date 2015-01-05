@@ -20,7 +20,7 @@ input(type='hidden', ng-model='_csrf', ng-init='_csrf="#{csrf_token}"', value='#
             a(href='javascript:{}', ng-click='setAdmin($index, !user.isAdmin && !user.isSuperAdmin)', ng-hide='user.isSuperAdmin')
               span(ng-show='!user.isAdmin && !user.isSuperAdmin') 提升为管理员
               span(ng-show='user.isAdmin') 降为普通用户
-          a(href='javascript:{}', class='btn btn-danger btn-sm', ng-click='delUser($index, !user.isDel)')
+          a(href='javascript:{}', class='btn btn-danger btn-sm', ng-click='delUser($index, !user.isDel)', ng-hide='user.isAdmin || user.isSuperAdmin')
             span(ng-show='!user.isDel') 删除该用户
-            span(ng-show='user.isDel') (已删除)恢复用户
+            span(ng-show='user.isDel') 恢复该用户
   include include/pagination

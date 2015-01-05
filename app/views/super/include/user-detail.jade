@@ -2,6 +2,7 @@
   .col-md-2
     img.avatar-min(ng-src='/avatar/{{user.email}}')
   .col-md-10
+    b(class='text-danger', ng-show='user.isSuperAdmin') 超级管理员
     p {{user.name}}
     p {{user.email}}
     p {{user.city}}

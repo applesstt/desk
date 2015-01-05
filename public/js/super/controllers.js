@@ -63,6 +63,27 @@ function UserCtrl($scope, $rootScope, SuperUser, SuperArticles) {
 function AdminCtrl($scope, $rootScope, SuperAdmins, SuperArticles) {
   _basePaginations($scope, SuperAdmins, _userArticles($scope, SuperArticles));
   _toggleRootNav($rootScope, 'Admins');
+
+  var _setProperty = function(index, property, flag) {
+    flag = flag && true;
+    var user = $scope.wrapData.users[index];
+    user[property] = flag;
+    user._csrf = $scope._csrf;
+    SuperAdmins.update(user, function(data) {
+      $scope.wrapData.users[index] = data.user;
+      if(property === 'isAdmin' && !flag) {
+        $scope.wrapData.users.splice(index, 1);
+      }
+    });
+  }
+
+  $scope.setSuper = function(index, flag) {
+    _setProperty(index, 'isSuperAdmin', flag);
+  }
+
+  $scope.setNormalUser = function(index) {
+    _setProperty(index, 'isAdmin', false);
+  }
 }
 
 function HomeArticlesCtrl($scope, $rootScope) {

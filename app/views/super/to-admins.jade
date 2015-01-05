@@ -1,3 +1,4 @@
+input(type='hidden', ng-model='_csrf', ng-init='_csrf="#{csrf_token}"', value='#{csrf_token}')
 .table-responsive
   table.table.table-striped
     thead
@@ -12,6 +13,7 @@
         td
           include include/user-articles
         td.admin-links.col-md-2
-          a(href='javascript:{}') 提升为超管
-          a(href='javascript:{}') 降为普通用户
+          a(href='javascript:{}', ng-click='setSuper($index, !user.isSuperAdmin)', ng-show='!user.isSuperAdmin') 提升为超管
+            //span(ng-show='user.isSuperAdmin') 降为管理员
+          a(href='javascript:{}', ng-click='setNormalUser($index)', ng-show='user.isAdmin && !user.isSuperAdmin') 降为普通用户
   include include/pagination

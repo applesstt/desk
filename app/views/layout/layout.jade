@@ -5,14 +5,14 @@ html
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     title #{title ? title + ' - ' : ''} 桌边兽
-    link(rel='stylesheet', media='screen', href='http://cdn.staticfile.org/twitter-bootstrap/3.1.1/css/bootstrap.min.css')
+    link(rel='stylesheet', media='screen', href='/lib/bootstrap/dist/css/bootstrap.min.css')
     link(rel='stylesheet', href='/css/bootstrap-desk.css')
     //[if lt IE 9]>
       <script src='http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js'></script>
       <script src='http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js'></script><![endif]
     //put other css files in css_content
     block css_content
-    script(src='http://libs.useso.com/js/modernizr/2.8.2/modernizr.min.js')
+    script(src='/lib/modernizr/modernizr.js')
   body
     header.navbar.navbar-inverse.navbar-fixed-top(role='navigation')
       .container
@@ -103,11 +103,11 @@ html
           .glyphicon.glyphicon-heart
           |  Inspired by
           a.footer-power(href='http://github.com/applesstt') applesstt
-    script(src='http://cdn.staticfile.org/jquery/1.11.0/jquery.min.js')
-    script(src='http://cdn.staticfile.org/twitter-bootstrap/3.1.1/js/bootstrap.min.js')
-    script(src='http://cdn.staticfile.org/jquery.pjax/1.8.0/jquery.pjax.min.js')
+    script(src='/lib/jquery/dist/jquery.min.js')
+    script(src='/lib/bootstrap/dist/js/bootstrap.min.js')
+    //script(src='http://cdn.staticfile.org/jquery.pjax/1.8.0/jquery.pjax.min.js')
     script(src='/js/common.js')
-    script.
+    //script.
       $(function() {
         // error: $('a.pjax').pjax('#main', {fragment:'#main'})
         //$(document).pjax('a.pjax-main', '#main', {fragment: '#main'});

@@ -3,7 +3,7 @@
  */
 angular.module('superUserServices', ['ngResource']).factory('SuperUser', ['$resource',
   function($resource){
-    return $resource('/super/user/:userId', {userId:'@_id'}, {
+    return $resource('/super/user/:userId', {userId: '@_id'}, {
       query: {method: 'GET', isArray: false},
       update: {method: 'PUT'}
     });
@@ -14,8 +14,9 @@ angular.module('superUserServices', ['ngResource']).factory('SuperUser', ['$reso
  */
 angular.module('superAdminsServices', ['ngResource']).factory('SuperAdmins', ['$resource',
   function($resource) {
-    return $resource('/super/admins', {}, {
-      query: {method: 'GET', isArray: false}
+    return $resource('/super/user/:userId', {userId: '@_id'}, {
+      query: {method: 'GET', isArray: false, url: '/super/admins'},
+      update: {method: 'PUT'}
     })
   }])
 

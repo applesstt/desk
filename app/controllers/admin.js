@@ -84,7 +84,7 @@ exports.getAdmins = function(req, res) {
   var options = {
     criteria: {
       '$where': function() {
-        return this.isAdmin === true && !(this.isSuperAdmin || false);
+        return this.isAdmin || this.isSuperAdmin;
       }
     }
   };
