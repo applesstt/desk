@@ -120,9 +120,50 @@ function CommentCtrl($scope, $rootScope, SuperComment, superFactory) {
   }
 }
 
-function HomeArticleCtrl($scope, $rootScope, SuperHomeArticle) {
+function SelArticlesInstanceCtrl($scope, $modalInstance, SuperArticle, superFactory, SuperHomeArticle, index) {
+  _basePaginations($scope, SuperArticle);
+  $scope.hasBriefImg = superFactory.hasBriefImg;
+  $scope.select = function(selIndex) {
+    var article = $scope.wrapData.articles[selIndex];
+    var homeArticle = {
+      index: index,
+      article: article,
+      _csrf: $scope._csrf
+    };
+    SuperHomeArticle.update(homeArticle, function(retData) {
+      $modalInstance.close(retData.homeArticle);
+    });
+  }
+
+  $scope.cancel = function () {
+    $modalInstance.dismiss('cancel');
+  };
+}
+
+function HomeArticleCtrl($scope, $rootScope, SuperHomeArticle, $modal, superFactory) {
   _toggleRootNav($rootScope, 'HomeArticles');
+  $scope.hasBriefImg = superFactory.hasBriefImg;
+
   $scope.wrapData = SuperHomeArticle.query();
+
+  $scope.open = function(size, index) {
+    var articlesInstance = $modal.open({
+      templateUrl: '/super/to-sel-articles',
+      controller: SelArticlesInstanceCtrl,
+      size: size,
+      resolve: {
+        index: function() {
+          return index;
+        }
+      }
+    });
+
+    articlesInstance.result.then(function (selectedArticle) {
+      $scope.wrapData.homeArticles[index] = selectedArticle;
+    }, function () {
+      console.log('Modal dismissed at: ' + new Date());
+    });
+  };
 }
 
 function HomeStarCtrl($scope, $rootScope) {

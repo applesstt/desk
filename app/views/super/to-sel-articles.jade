@@ -1,0 +1,22 @@
+include include/csrf
+.modal-header
+  h3.modal-title 请选择首页的文章
+  .modal-body
+    .table-responsive
+      .admin-modal-table
+        table.table.table-striped
+          thead
+            tr
+              th 作者
+              th 文章
+          tbody
+            tr(ng-repeat='article in wrapData.articles')
+              td.col-md-2
+                img.avatar-min(ng-src='/avatar/{{article.user.email}}')
+                a(href='javascript:{}')   {{article.user.name}}
+              td
+                include include/article-short
+                button.btn.btn-success.btn-sm(ng-click='select($index)') 选择这篇文章
+      include include/pagination
+  .modal-footer
+    button.btn.btn-warning(ng-click='cancel()') 关闭窗口

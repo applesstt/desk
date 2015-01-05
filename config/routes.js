@@ -151,6 +151,7 @@ module.exports = function (app, passport) {
   app.put('/super/user/:userId', admin.updateUser);
 
   app.get('/super/homeArticle', admin.getHomeArticles);
+  app.put('/super/homeArticle/:index', admin.updateHomeArticles);
 
   app.get('/super/:superSub', admin.superSub);
 

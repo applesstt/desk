@@ -198,11 +198,11 @@ var _fillHomeArticles = function(list) {
   var retList = []
   for(var i = 0; i < 10; i++) {
     var tempObj = {
-      index: i + 1,
+      index: i,
       isNull: true
     };
     for(var j = 0; j < list.length; j++) {
-      if(list[j]['index'] === i + 1) {
+      if(list[j]['index'] === i) {
         tempObj = list[j];
         break;
       }
@@ -220,9 +220,46 @@ exports.getHomeArticles = function(req, res) {
         message: 'Load home articles error!'
       })
     }
-    list = _fillHomeArticles(list);
-    res.send({
-      homeArticles: list
-    })
+    User.populate(list, {
+      path: 'article.user'
+    }, function(err, list) {
+      list = _fillHomeArticles(list);
+      res.send({
+        homeArticles: list
+      })
+    });
+
   })
+}
+
+exports.updateHomeArticles = function(req, res) {
+  HomeArticle.findByIndex({
+    criteria: {
+      index: req.body.index
+    }
+  }, function(err, homeArticle) {
+    homeArticle.article = req.body.article;
+    if(err) {
+      return res.send({
+        err: err,
+        message: 'Update home article error!'
+      })
+    }
+    homeArticle.save(function(err, article) {
+      if(err) {
+        return res.send({
+          err: err,
+          message: 'Update home article error!'
+        })
+      }
+      User.populate(article, {
+          path: 'article.user'
+        }, function(err, article) {
+          res.send({
+            homeArticle: article
+          })
+        }
+      )
+    })
+  });
 }

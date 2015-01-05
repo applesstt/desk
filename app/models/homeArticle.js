@@ -22,25 +22,20 @@ var HomeArticleSchema = new Schema({
  * Methods
  */
 
-HomeArticleSchema.methods = {
-
-  /**
-   * Remove comment
-   */
-
-  removeComment: function (commentId, cb) {
-    var index = utils.indexof(this.comments, { id: commentId });
-    if (~index) this.comments.splice(index, 1);
-    else return cb('not found');
-    this.save(cb);
-  }
-}
+HomeArticleSchema.methods = {}
 
 /**
  * Statics
  */
 
 HomeArticleSchema.statics = {
+
+  findByIndex: function(options, cb) {
+    var criteria = options.criteria || {};
+    this.findOne(criteria)
+      .populate('article')
+      .exec(cb);
+  },
 
   /**
    * List home articles
@@ -51,6 +46,7 @@ HomeArticleSchema.statics = {
     var sort = options.sort || {'index': 1};
     this.find(criteria)
       .sort(sort)
+      .populate('article')
       .exec(cb);
   }
 }

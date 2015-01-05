@@ -6,13 +6,13 @@
         th 文章
         th 操作
     tbody
-      tr(ng-repeat='article in wrapData.homeArticles')
-        td.col-md-1 {{article.index}}
+      tr(ng-repeat='homeArticle in wrapData.homeArticles')
+        td.col-md-1 {{homeArticle.article.index + 1}}
         td
-          div(ng-hide='article.isNull')
+          div(ng-hide='homeArticle.isNull')
             p
-              img.avatar-min(src='/avatar/{{article.user.email}}')
-              a(href='javascript:{}')   {{article.user.name}}
-            include include/article-short
+              img.avatar-min(src='/avatar/{{homeArticle.article.user.email}}')
+              a(href='javascript:{}')   {{homeArticle.article.user.name}}
+            include include/home-article-short
         td.col-md-2
-          a(href='javascript:{}') 更改文章
+          a(href='javascript:{}', ng-click='open("lg", $index)') 更改文章

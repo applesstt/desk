@@ -47,7 +47,7 @@ angular.module('superCommentServices', ['ngResource']).factory('SuperComment', [
  */
 angular.module('superHomeArticleServices', ['ngResource']).factory('SuperHomeArticle', ['$resource',
   function($resource) {
-    return $resource('/super/homeArticle/:index', {}, {
+    return $resource('/super/homeArticle/:index', {index: '@index'}, {
       query: {method: 'GET', isArray: false},
       update: {method: 'PUT'}
     })

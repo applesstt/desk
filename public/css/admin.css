@@ -9,3 +9,7 @@
 .admin-pagination {
   float: right;
 }
+.admin-modal-table {
+  max-height: 400px;
+  overflow-y: auto;
+}
