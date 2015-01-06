@@ -7,6 +7,7 @@ var mongoose = require('mongoose');
 var Article = mongoose.model('Article');
 var User = mongoose.model('User');
 var HomeArticle = mongoose.model('HomeArticle');
+var HomeStar = mongoose.model('HomeStar');
 var utils = require('../../lib/utils');
 var extend = require('util')._extend;
 
@@ -26,6 +27,24 @@ var _fillHomeArticles = function(homeArticles) {
   }
   return retArticles;
 }
+
+var _fillHomeStars = function(homeStars) {
+  var retStars = [];
+  for(var i = 0; i < 10; i++) {
+    var tempStars = {
+      index: i
+    };
+    for(var j = 0; j < homeStars.length; j++) {
+      if(i === homeStars[j].index) {
+        tempStars = homeStars[j];
+        break;
+      }
+    }
+    retStars.push(tempStars);
+  }
+  return retStars;
+}
+
 
 exports.index = function(req, res) {
   var options = {
@@ -47,11 +66,12 @@ exports.index = function(req, res) {
       path: 'article.user'
     }, function(err, homeArticles) {
       homeArticles = _fillHomeArticles(homeArticles);
-      User.list(userOptions, function(err, users) {
+      HomeStar.list(userOptions, function(err, homeStars) {
+        homeStars = _fillHomeStars(homeStars);
         res.render('demo/index', {
           title: 'Home',
           homeArticles: homeArticles,
-          users: users,
+          homeStars: homeStars,
           isHome: true
         });
       });
