@@ -1,10 +1,11 @@
-- var article = articles[articleIndex]
-.thumbnail.article-brief
-  a(href='/articles/#{article._id}')
-    img.article-brief-img(src='#{article.brief.img}.square.png')
-  .article-brief-info
-    a.article-brief-author(href='/users/#{article.user.email}')
-      img.article-brief-author-avatar(src='/avatar/#{article.user.email}')
-      | #{article.user.name}
-    a.article-brief-title(href='/articles/#{article._id}') #{article.title}
+- var article = homeArticles[articleIndex].article
+- if(article)
+  .thumbnail.article-brief
+    a(href='/articles/#{article._id}')
+      img.article-brief-img(src='#{article.brief.img}.square.png')
+    .article-brief-info
+      a.article-brief-author(href='/users/#{article.user.email}')
+        img.article-brief-author-avatar(src='/avatar/#{article.user.email}')
+        | #{article.user.name}
+      a.article-brief-title(href='/articles/#{article._id}') #{article.title}
 - articleIndex++

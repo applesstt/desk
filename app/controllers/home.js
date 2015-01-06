@@ -6,20 +6,33 @@
 var mongoose = require('mongoose');
 var Article = mongoose.model('Article');
 var User = mongoose.model('User');
+var HomeArticle = mongoose.model('HomeArticle');
 var utils = require('../../lib/utils');
 var extend = require('util')._extend;
+
+var _fillHomeArticles = function(homeArticles) {
+  var retArticles = [];
+  for(var i = 0; i < 10; i++) {
+    var tempArticles = {
+      index: i
+    };
+    for(var j = 0; j < homeArticles.length; j++) {
+      if(i === homeArticles[j].index) {
+        tempArticles = homeArticles[j];
+        break;
+      }
+    }
+    retArticles.push(tempArticles);
+  }
+  return retArticles;
+}
 
 exports.index = function(req, res) {
   var options = {
     perPage: 10,
     page: 0,
-    criteria: {
-      '$where': function() {
-        return this.brief.img !== '';
-      }
-    },
     sort: {
-      'createdAt': 1
+      'index': 1
     }
   };
 
@@ -28,12 +41,13 @@ exports.index = function(req, res) {
     page: 0
   };
 
-  Article.list(options, function (err, articles) {
+  HomeArticle.list(options, function (err, homeArticles) {
     if (err) return res.render('500');
+    homeArticles = _fillHomeArticles(homeArticles);
     User.list(userOptions, function(err, users) {
       res.render('demo/index', {
         title: 'Home',
-        articles: articles,
+        homeArticles: homeArticles,
         users: users,
         isHome: true
       });
