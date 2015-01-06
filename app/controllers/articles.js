@@ -27,7 +27,7 @@ exports.load = function (req, res, next, id){
   Article.load(id, function (err, article) {
     if (err) return next(err);
     if (!article) return next(new Error('not found'));
-    _filterCommentCanShow(article);
+
     req.article = article;
 
     next();

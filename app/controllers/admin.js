@@ -238,22 +238,29 @@ exports.updateHomeArticles = function(req, res) {
       index: req.body.index
     }
   }, function(err, homeArticle) {
-    homeArticle.article = req.body.article;
-    if(err) {
-      return res.send({
-        err: err,
-        message: 'Update home article error!'
-      })
+    if(homeArticle) {
+      homeArticle.article = req.body.article;
+    } else {
+      homeArticle = new HomeArticle({
+        index: req.body.index,
+        article: req.body.article._id
+      });
     }
-    homeArticle.save(function(err, article) {
+    homeArticle.save(function(err, homeArticle) {
       if(err) {
         return res.send({
           err: err,
           message: 'Update home article error!'
         })
       }
-      res.send({
-        homeArticle: article
+      HomeArticle.findByIndex({
+        criteria: {
+          _id: homeArticle._id
+        }
+      }, function(err, homeArticle) {
+        res.send({
+          homeArticle: homeArticle
+        })
       })
     })
   });
