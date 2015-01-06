@@ -153,6 +153,9 @@ module.exports = function (app, passport) {
   app.get('/super/homeArticle', admin.getHomeArticles);
   app.put('/super/homeArticle/:index', admin.updateHomeArticles);
 
+  app.get('/super/homeStar', admin.getHomeStars);
+  app.put('/super/homeStar/:index', admin.updateHomeStars);
+
   app.get('/super/:superSub', admin.superSub);
 
   app.param('userId', admin.loadUser);

@@ -52,3 +52,14 @@ angular.module('superHomeArticleServices', ['ngResource']).factory('SuperHomeArt
       update: {method: 'PUT'}
     })
   }])
+
+/**
+ * super home stars
+ */
+angular.module('superHomeStarServices', ['ngResource']).factory('SuperHomeStar', ['$resource',
+  function($resource) {
+    return $resource('/super/homeStar/:index', {index: '@index'}, {
+      query: {method: 'GET', isArray: false},
+      update: {method: 'PUT'}
+    })
+  }])

@@ -7,6 +7,7 @@ var mongoose = require('mongoose');
 var Article = mongoose.model('Article');
 var User = mongoose.model('User');
 var HomeArticle = mongoose.model('HomeArticle');
+var HomeStar = mongoose.model('HomeStar');
 var utils = require('../../lib/utils');
 var extend = require('util')._extend;
 
@@ -259,6 +260,74 @@ exports.updateHomeArticles = function(req, res) {
       }, function(err, homeArticle) {
         res.send({
           homeArticle: homeArticle
+        })
+      })
+    })
+  });
+}
+
+var _fillHomeStar = function(list) {
+  var retList = []
+  for(var i = 0; i < 6; i++) {
+    var tempObj = {
+      index: i,
+      isNull: true
+    };
+    for(var j = 0; j < list.length; j++) {
+      if(list[j]['index'] === i) {
+        tempObj = list[j];
+        break;
+      }
+    }
+    retList.push(tempObj);
+  }
+  return retList;
+}
+
+
+exports.getHomeStars = function(req, res) {
+  var options = {};
+  HomeStar.list(options, function(err, list) {
+    if(err) {
+      return res.send({
+        message: 'Load home stars error!'
+      })
+    }
+    list = _fillHomeStar(list);
+    res.send({
+      homeStars: list
+    })
+  })
+}
+
+exports.updateHomeStars = function(req, res) {
+  HomeStar.findByIndex({
+    criteria: {
+      index: req.body.index
+    }
+  }, function(err, homeStar) {
+    if(homeStar) {
+      homeStar.user = req.body.user;
+    } else {
+      homeStar = new HomeStar({
+        index: req.body.index,
+        user: req.body.user._id
+      });
+    }
+    homeStar.save(function(err, homeStar) {
+      if(err) {
+        return res.send({
+          err: err,
+          message: 'Update home star error!'
+        })
+      }
+      HomeStar.findByIndex({
+        criteria: {
+          _id: homeStar._id
+        }
+      }, function(err, homeStar) {
+        res.send({
+          homeStar: homeStar
         })
       })
     })

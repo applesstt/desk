@@ -166,6 +166,49 @@ function HomeArticleCtrl($scope, $rootScope, SuperHomeArticle, $modal, superFact
   };
 }
 
-function HomeStarCtrl($scope, $rootScope) {
+function SelStarsInstanceCtrl($scope, $modalInstance, SuperUser, superFactory, SuperHomeStar, index) {
+  _basePaginations($scope, SuperUser);
+  $scope.hasBriefImg = superFactory.hasBriefImg;
+  $scope.select = function(selIndex) {
+    var user = $scope.wrapData.users[selIndex];
+    var homeStar = {
+      index: index,
+      user: user,
+      _csrf: $scope._csrf
+    };
+    SuperHomeStar.update(homeStar, function(retData) {
+      $modalInstance.close(retData.homeStar);
+    });
+  }
+
+  $scope.cancel = function () {
+    $modalInstance.dismiss('cancel');
+  };
+}
+
+
+function HomeStarCtrl($scope, $rootScope, SuperHomeStar, $modal, superFactory) {
   _toggleRootNav($rootScope, 'HomeStars');
+  $scope.hasBriefImg = superFactory.hasBriefImg;
+
+  $scope.wrapData = SuperHomeStar.query();
+
+  $scope.open = function(size, index) {
+    var starsInstance = $modal.open({
+      templateUrl: '/super/to-sel-stars',
+      controller: SelStarsInstanceCtrl,
+      size: size,
+      resolve: {
+        index: function() {
+          return index;
+        }
+      }
+    });
+
+    starsInstance.result.then(function (selectedStar) {
+      $scope.wrapData.homeStars[index] = selectedStar;
+    }, function () {
+      console.log('Modal dismissed at: ' + new Date());
+    });
+  };
 }

@@ -2,15 +2,20 @@
   table.table.table-striped
     thead
       tr
-        th 首页位置
+        th 位置
         th 用户
         th 操作
     tbody
-      tr
-        td 1
+      tr(ng-repeat='homeStar in wrapData.homeStars')
+        td.col-md-1 {{homeStar.index + 1}}
         td
-          p
-            img.avatar-min(src='/avatar/applesstt@163.com')
-            a(href='javascript:{}')   applesstt
-        td
-          a(href='javascript:{}') 更改用户
+          div(ng-hide='homeStar.isNull')
+            p
+              a(href='javascript:{}')
+                img.avatar-min(ng-src='/avatar/{{homeStar.user.email}}')
+                |   {{homeStar.user.name}}
+            p {{homeStar.user.email}}
+            p {{homeStar.user.city}}
+            p {{homeStar.user.website}}
+        td.col-md-2
+          a(href='javascript:{}', ng-click='open("", $index)') 更改用户
