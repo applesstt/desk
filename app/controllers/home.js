@@ -43,13 +43,17 @@ exports.index = function(req, res) {
 
   HomeArticle.list(options, function (err, homeArticles) {
     if (err) return res.render('500');
-    homeArticles = _fillHomeArticles(homeArticles);
-    User.list(userOptions, function(err, users) {
-      res.render('demo/index', {
-        title: 'Home',
-        homeArticles: homeArticles,
-        users: users,
-        isHome: true
+    User.populate(homeArticles, {
+      path: 'article.user'
+    }, function(err, homeArticles) {
+      homeArticles = _fillHomeArticles(homeArticles);
+      User.list(userOptions, function(err, users) {
+        res.render('demo/index', {
+          title: 'Home',
+          homeArticles: homeArticles,
+          users: users,
+          isHome: true
+        });
       });
     });
   });

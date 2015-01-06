@@ -228,7 +228,6 @@ exports.getHomeArticles = function(req, res) {
         homeArticles: list
       })
     });
-
   })
 }
 
