@@ -4,7 +4,7 @@
       tr
         th 位置
         th 用户
-        th 操作
+        th.text-center 操作
     tbody
       tr(ng-repeat='homeStar in wrapData.homeStars')
         td.col-md-1 {{homeStar.index + 1}}
@@ -17,5 +17,5 @@
             p {{homeStar.user.email}}
             p {{homeStar.user.city}}
             p {{homeStar.user.website}}
-        td.col-md-2
+        td.col-md-2.text-center
           a(href='javascript:{}', ng-click='open("", $index)') 更改用户

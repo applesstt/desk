@@ -5,7 +5,7 @@ include include/csrf
       tr
         th 作者
         th 文章
-        th 操作
+        th.text-center 操作
     tbody
       tr(ng-repeat='article in wrapData.articles')
         td.col-md-2
@@ -13,7 +13,7 @@ include include/csrf
           a(href='javascript:{}')   {{article.user.name}}
         td
           include include/article-short
-        td.col-md-2
+        td.col-md-2.text-center
           p(ng-show='article.checked')
             span.text-success(ng-show='article.show') 已通过
             span.text-danger(ng-show='!article.show') 未通过

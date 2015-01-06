@@ -5,14 +5,14 @@ include include/csrf
       tr
         th 详情
         th 文章列表
-        th 操作
+        th.text-center 操作
     tbody
       tr(ng-repeat='user in wrapData.users')
         td.col-md-4
           include include/user-detail
         td
           include include/user-articles
-        td.admin-links.col-md-2
+        td.admin-links.col-md-2.text-center
           a(href='javascript:{}', ng-click='setSuper($index, !user.isSuperAdmin)', ng-show='!user.isSuperAdmin') 提升为超管
             //span(ng-show='user.isSuperAdmin') 降为管理员
           a(href='javascript:{}', ng-click='setNormalUser($index)', ng-show='user.isAdmin && !user.isSuperAdmin') 降为普通用户
