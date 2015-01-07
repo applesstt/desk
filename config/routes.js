@@ -161,7 +161,8 @@ module.exports = function (app, passport) {
   app.param('userId', admin.loadUser);
   app.param('articleId', admin.loadArticle);
 
-  //app.get('/admin', auth.user.hasAdminAuthorization, admin.index);
+  app.all('/admin', auth.user.hasAdminAuthorization);
+  app.get('/admin', admin.index);
 
 
   /**

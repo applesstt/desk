@@ -20,10 +20,6 @@ exports.superSub = function(req, res) {
   res.render('super/' + sub);
 }
 
-exports.index = function(req, res) {
-
-}
-
 var _fetchUsers = function(req, res, options) {
   var page = (req.param('page') > 0 ? req.param('page') : 1) - 1;
   var perPage = req.param('perPage') > 0 ? req.param('perPage') : 10;
@@ -332,4 +328,10 @@ exports.updateHomeStars = function(req, res) {
       })
     })
   });
+}
+
+// about admin manage
+
+exports.index = function(req, res) {
+  res.render('admin/index');
 }

@@ -87,7 +87,7 @@ exports.index = function (req, res){
 
   Article.list(options, function (err, articles) {
     if (err) return res.render('500');
-    Article.count().exec(function (err, count) {
+    Article.count(options.criteria, function (err, count) {
       res.render('articles/index', {
         title: 'Articles',
         articles: articles,
