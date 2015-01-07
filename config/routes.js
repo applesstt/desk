@@ -137,7 +137,7 @@ module.exports = function (app, passport) {
   app.get('/tags/:tag', tags.index);
 
   // admin routes
-  app.all('/super', auth.user.hasSuperAdminAuthorization);
+  app.all('/super*', auth.user.hasSuperAdminAuthorization);
   app.get('/super', admin.superIndex);
   app.get('/super/admin', admin.getAdmins);
 
@@ -161,7 +161,7 @@ module.exports = function (app, passport) {
   app.param('userId', admin.loadUser);
   app.param('articleId', admin.loadArticle);
 
-  app.all('/admin', auth.user.hasAdminAuthorization);
+  app.all('/admin*', auth.user.hasAdminAuthorization);
   app.get('/admin', admin.index);
 
 
