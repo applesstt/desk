@@ -23,6 +23,17 @@ Then visit [http://localhost:3000/](http://localhost:3000/)
 $ npm test
 ```
 
+
+## To run admin manage portal, you should run below
+
+```sh
+$ npm install browserify -g
+$ npm install uglify-js -g
+$ cd public/js/admin
+$ npm install
+$ npm start
+```
+
 ## License
 
 MIT
