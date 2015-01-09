@@ -163,6 +163,7 @@ module.exports = function (app, passport) {
 
   app.all('/admin*', auth.user.hasAdminAuthorization);
   app.get('/admin', admin.index);
+  app.get('/admin/article', admin.getArticles);
 
 
   /**
