@@ -30,7 +30,7 @@ var Articles = React.createClass({
   },
 
   _onChange: function() {
-    this.setState(loadArticlesState());
+    this.setState(loadArticlesState(this));
   },
 
   render: function(){

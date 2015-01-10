@@ -4,6 +4,7 @@ append css_content
   link(rel='stylesheet', href='/css/admin.css')
 
 block content
+  input(type='hidden', id='admin_csrf', value='#{csrf_token}')
   #adminapp
 
 append js_content

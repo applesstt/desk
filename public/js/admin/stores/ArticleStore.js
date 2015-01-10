@@ -8,6 +8,8 @@ var CHANGE_EVENT = 'change';
 
 var _articles = [];
 
+var _csrf = $('#admin_csrf').val();
+
 var ArticleStore = assign({}, EventEmitter.prototype, {
 
   /**
@@ -44,17 +46,27 @@ var ArticleStore = assign({}, EventEmitter.prototype, {
   }
 });
 
+var updateCheck = function(article, flag) {
+  article.checked = true;
+  article.show = flag && true;
+  article._csrf = _csrf;
+  $.ajax({
+    url: '/admin/article/' + article._id,
+    method: 'PUT',
+    data: article,
+    success: function(result) {
+      ArticleStore.emitChange();
+    }
+  })
+}
+
 // Register callback to handle all updates
 AdminDispatcher.register(function(action) {
-  var text;
+  var articleId, flag;
 
   switch(action.actionType) {
-    case AdminConstants.TODO_CREATE:
-      text = action.text.trim();
-      if (text !== '') {
-        create(text);
-      }
-      ArticleStore.emitChange();
+    case AdminConstants.ARTICLE_CHECK:
+      updateCheck(action.article, action.flag);
       break;
 
     default:
