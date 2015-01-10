@@ -173,7 +173,11 @@ exports.getComments = function(req, res) {
 exports.updateComment = function(req, res) {
   var article = req.tempArticle;
   var commentId = req.body.commentId;
-  var flag = req.body.flag && true;
+  var flag = req.body.flag;
+  if(typeof flag === 'string') {
+    flag = flag === 'true' && true;
+  }
+  flag = flag && true;
   if(typeof commentId === 'undefined' || commentId === '') {
     return res.send({
       message: 'You should input comment id!'

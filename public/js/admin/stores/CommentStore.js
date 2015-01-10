@@ -16,13 +16,16 @@ var CommentStore = assign({}, EventEmitter.prototype, {
    * Get the entire collection of TODOs.
    * @return {object}
    */
-  getArticles: function(callback) {
+  getArticles: function(page, callback) {
+    var page = typeof page === 'undefined' ? 1 : page;
     $.ajax({
       url: '/admin/commentsInArticle',
       method: 'GET',
+      data: {
+        page: page
+      },
       success: function(result) {
-        _articles = result.articles;
-        callback(_articles);
+        callback(result);
       }
     })
   },
@@ -46,11 +49,27 @@ var CommentStore = assign({}, EventEmitter.prototype, {
   }
 });
 
+var updateCheck = function(article, comment, flag) {
+  $.ajax({
+    url: '/admin/commentsInArticle/' + article._id,
+    method: 'PUT',
+    data: {
+      commentId: comment._id,
+      _csrf: _csrf,
+      flag: flag
+    },
+    success: function(result) {
+      CommentStore.emitChange();
+    }
+  })
+}
+
+
 // Register callback to handle all updates
 AdminDispatcher.register(function(action) {
   switch(action.actionType) {
-    case AdminConstants.ARTICLE_CHECK:
-      updateCheck(action.article, action.flag);
+    case AdminConstants.COMMENT_CHECK:
+      updateCheck(action.article, action.comment, action.flag);
       break;
 
     default:
