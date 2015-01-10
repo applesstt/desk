@@ -166,6 +166,8 @@ module.exports = function (app, passport) {
   app.get('/admin/article', admin.getArticles);
   app.put('/admin/article/:articleId', admin.updateArticle);
 
+  app.get('/admin/commentsInArticle', admin.getComments);
+
 
   /**
    * Error handling

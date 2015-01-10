@@ -11,7 +11,9 @@ var ArticleShow = React.createClass({
         </a>
         <div className="post-short">
           <div className="post-short-right">
-            <img src={article.brief.img + ".200.square.png"} />
+            {article.brief.img !== '' ?
+              <img src={article.brief.img + ".200.square.png"} /> :
+              null}
           </div>
           {article.brief.text}
         </div>

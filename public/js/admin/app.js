@@ -17,6 +17,8 @@ var App = React.createClass({
             <div className="list-group">
               <Link className="list-group-item" to="articles">文章审核</Link>
               <Link className="list-group-item" to="comments">评论审核</Link>
+              <a className="list-group-item" href="javascript:{}">首页文章</a>
+              <a className="list-group-item" href="javascript:{}">首页明星</a>
             </div>
           </div>
           <div className="col-md-10">

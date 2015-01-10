@@ -62,8 +62,6 @@ var updateCheck = function(article, flag) {
 
 // Register callback to handle all updates
 AdminDispatcher.register(function(action) {
-  var articleId, flag;
-
   switch(action.actionType) {
     case AdminConstants.ARTICLE_CHECK:
       updateCheck(action.article, action.flag);
