@@ -16,13 +16,16 @@ var ArticleStore = assign({}, EventEmitter.prototype, {
    * Get the entire collection of TODOs.
    * @return {object}
    */
-  getAll: function(callback) {
+  getAll: function(page, callback) {
+    var page = typeof page === 'undefined' ? 1 : page;
     $.ajax({
       url: '/admin/article',
       method: 'GET',
+      data: {
+        page: page
+      },
       success: function(result) {
-        _articles = result.articles;
-        callback(_articles);
+        callback(result);
       }
     })
   },
