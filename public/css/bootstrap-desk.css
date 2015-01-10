@@ -289,6 +289,9 @@ a.cate-brief {
   top: 0;
   right: 0;
 }
+.article-title-brief {
+  margin-top: 10px;
+}
 .article-title-edit {
   margin-left: 10px;
 }
