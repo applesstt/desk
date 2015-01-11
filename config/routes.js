@@ -166,6 +166,8 @@ module.exports = function (app, passport) {
   app.get('/admin/commentsInArticle', admin.getComments);
   app.put('/admin/commentsInArticle/:articleId', admin.updateComment);
 
+  app.get('/admin/home', admin.home);
+
   app.param('userId', admin.loadUser);
   app.param('articleId', admin.loadArticle);
 

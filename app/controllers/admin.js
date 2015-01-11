@@ -339,3 +339,7 @@ exports.updateHomeStars = function(req, res) {
 exports.index = function(req, res) {
   res.render('admin/index');
 }
+
+exports.home = function(req, res) {
+  res.render('admin/home');
+}

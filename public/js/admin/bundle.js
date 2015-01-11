@@ -25012,8 +25012,8 @@ var App = React.createClass({displayName: "App",
             React.createElement("div", {className: "list-group"}, 
               React.createElement(Link, {className: "list-group-item", to: "articles"}, "文章审核"), 
               React.createElement(Link, {className: "list-group-item", to: "comments"}, "评论审核"), 
-              React.createElement("a", {className: "list-group-item", href: "javascript:{}"}, "首页文章"), 
-              React.createElement("a", {className: "list-group-item", href: "javascript:{}"}, "首页明星")
+              React.createElement("a", {className: "list-group-item", href: "/admin/home"}, "首页文章"), 
+              React.createElement("a", {className: "list-group-item", href: "/admin/home"}, "首页明星")
             )
           ), 
           React.createElement("div", {className: "col-md-10"}, 

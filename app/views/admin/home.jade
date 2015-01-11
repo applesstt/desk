@@ -1,0 +1,16 @@
+extends ../layout/layout
+
+append css_content
+  link(rel='stylesheet', href='/css/admin.css')
+
+block content
+
+  script(src='/lib/webcomponentsjs/webcomponents.min.js')
+
+  link(rel='import', href='/js/admin/polymer/home-articles.html')
+
+  input(type='hidden', id='admin_csrf', value='#{csrf_token}')
+
+  home-articles
+
+append js_content
