@@ -10,7 +10,7 @@ p
               a(href='/users/#{article.comments[i].user.email}')
                 img.avatar-min(src='/avatar/#{article.comments[i].user.email}')
                 |  #{article.comments[i].user.name}
-              - if(req.user.email === article.comments[i].user.email)
+              - if(req.isAuthenticated() && req.user.email === article.comments[i].user.email)
                 button.close(type='submit') ×
           p #{article.comments[i]['body']}
   - if(req.isAuthenticated())
